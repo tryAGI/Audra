@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Nuget">
+    <Description>C# SDK for the Audra Voice API -- text-to-speech, batch speech jobs, voices, and usage.</Description>
+    <PackageTags>csharp;dotnet;sdk;ai;autosdk;openapi;audra;text-to-speech</PackageTags>
+  </PropertyGroup>
+
+</Project>

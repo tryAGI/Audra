@@ -1,0 +1,573 @@
+openapi: 3.1.0
+info:
+  title: Audra Voice API v2
+  version: 2.0.0
+  description: |
+    Audra-native text-to-speech API with credit-based billing.
+
+    **Model:** `audra-core` — standard tier, voice mixing, SSML subset, designed voices.
+
+    **Commercial use:** Free trial is evaluation-only. After purchasing credits, send
+    `X-Audra-Commercial-Use: true` on production renders. Paid accounts receive
+    `X-Commercial-Allowed: true` on successful speech responses.
+
+    **Legacy v1:** `/v1/*` remains available with `Deprecation` and `Sunset` headers until sunset.
+    See `/docs/v2` and `docs/MIGRATION_V1_V2.md`.
+  contact:
+    name: Audra
+    url: https://audratalks.com/docs
+
+servers:
+  - url: https://audratalks.com
+    description: Production
+  - url: http://localhost:3000
+    description: Local gateway
+
+tags:
+  - name: Auth
+  - name: Speech
+  - name: Billing
+  - name: Meta
+
+paths:
+  /health:
+    get:
+      tags: [Meta]
+      summary: Health check
+      responses:
+        '200':
+          description: Gateway healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  tts:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: healthy
+                      engine:
+                        type: string
+                        example: audra-core
+                      voices:
+                        type: integer
+                      g2p:
+                        type: object
+                        properties:
+                          engine:
+                            type: string
+                            enum: [audra-phonetics, standard]
+                          version:
+                            type: string
+                            example: v1
+                          ready:
+                            type: boolean
+                  version:
+                    type: string
+
+  /v2/accounts:
+    post:
+      tags: [Auth]
+      summary: Create account and API key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: API key issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupResponse'
+        '400':
+          description: Invalid email
+        '409':
+          description: Email already registered
+        '429':
+          description: Signup rate limit (per IP)
+
+  /v2/accounts/verify:
+    get:
+      tags: [Auth]
+      summary: Verify email from signup link
+      parameters:
+        - in: query
+          name: token
+          required: true
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to dashboard with verified=1
+
+  /v2/accounts/verify/resend:
+    post:
+      tags: [Auth]
+      summary: Resend verification email
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Email sent or already verified
+        '401':
+          description: Unauthorized
+        '429':
+          description: Resend rate limit
+
+  /v2/models:
+    get:
+      tags: [Meta]
+      summary: List available models
+      responses:
+        '200':
+          description: Model list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: string
+                    example: list
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: audra-core
+                        tier:
+                          type: string
+                          example: standard
+                        features:
+                          type: array
+                          items:
+                            type: string
+
+  /v2/voices:
+    get:
+      tags: [Meta]
+      summary: List available voices (slug IDs)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Voice list with capabilities
+        '401':
+          description: Missing or invalid API key
+
+  /v2/usage:
+    get:
+      tags: [Billing]
+      summary: Account usage and balance
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Usage snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResponse'
+        '401':
+          description: Unauthorized
+
+  /v2/billing/checkout:
+    post:
+      tags: [Billing]
+      summary: Create Stripe Checkout session for credit pack
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pack:
+                  type: string
+                  enum: [credits_5, credits_20, credits_100]
+      responses:
+        '200':
+          description: Checkout URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+
+  /v2/speech:
+    post:
+      tags: [Speech]
+      summary: Synthesize speech
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          schema:
+            type: string
+        - in: header
+          name: X-Audra-Commercial-Use
+          schema:
+            type: string
+            enum: ['true', '1', 'yes']
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpeechRequest'
+      responses:
+        '200':
+          description: Audio stream
+          headers:
+            X-Chars-Processed:
+              schema:
+                type: integer
+            X-Audra-Model:
+              schema:
+                type: string
+                example: audra-core
+            X-Audra-Voice:
+              schema:
+                type: string
+                example: june
+            X-Commercial-Allowed:
+              schema:
+                type: string
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+        '402':
+          description: Insufficient credits or commercial use blocked
+        '403':
+          description: Premium voicepack requires paid account
+        '413':
+          description: Text exceeds sync character limit
+        '422':
+          description: Render failed
+        '202':
+          description: Auto-queued as background job when text exceeds ~1500 characters (unless X-Audra-Sync true)
+
+  /v2/speech/jobs:
+    post:
+      tags: [Speech]
+      summary: Queue batch speech job
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/SpeechRequest'
+                - type: object
+                  properties:
+                    webhook_url:
+                      type: string
+                      format: uri
+                      description: Optional HTTPS callback on completion or failure
+      responses:
+        '202':
+          description: Job queued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum: [queued]
+                  status_url:
+                    type: string
+                    format: uri
+                  audio_url:
+                    type: string
+                    format: uri
+        '402':
+          description: Insufficient credits
+        '400':
+          description: Invalid request
+
+  /v2/speech/jobs/{id}:
+    get:
+      tags: [Speech]
+      summary: Get batch job status
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Job status
+        '404':
+          description: Job not found
+
+  /v2/speech/jobs/{id}/audio:
+    get:
+      tags: [Speech]
+      summary: Download completed job audio
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Audio stream
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+        '409':
+          description: Job not ready
+
+  /v2/keys:
+    get:
+      tags: [Auth]
+      summary: List API keys for account
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Key list with limits
+        '401':
+          description: Unauthorized
+    post:
+      tags: [Auth]
+      summary: Create named API key
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 64
+      responses:
+        '200':
+          description: Key created (secret shown once)
+        '400':
+          description: Key limit reached
+        '401':
+          description: Unauthorized
+        '429':
+          description: Rate limit
+
+  /v2/keys/{id}/rotate:
+    post:
+      tags: [Auth]
+      summary: Rotate API key in place
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: New secret shown once
+        '404':
+          description: Key not found
+        '429':
+          description: Rate limit
+
+  /v2/keys/{id}:
+    delete:
+      tags: [Auth]
+      summary: Revoke API key
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Revoked
+        '404':
+          description: Key not found
+
+  /v2/auth/google:
+    post:
+      tags: [Auth]
+      summary: Google sign-in (dashboard)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [credential]
+              properties:
+                credential:
+                  type: string
+      responses:
+        '200':
+          description: New account or dashboard session
+
+  /v2/auth/logout:
+    post:
+      tags: [Auth]
+      summary: Clear dashboard session
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Signed out
+
+  /v2/accounts/key-recovery:
+    post:
+      tags: [Auth]
+      summary: Request account recovery email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Generic success message
+
+  /v2/accounts/key-recovery/confirm:
+    post:
+      tags: [Auth]
+      summary: Confirm recovery token and issue new key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: New API key issued
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from POST /v2/accounts
+
+  schemas:
+    SignupResponse:
+      type: object
+      properties:
+        api_key:
+          type: string
+        credits_chars:
+          type: integer
+        email_verified:
+          type: boolean
+        message:
+          type: string
+
+    UsageResponse:
+      type: object
+      properties:
+        credits_chars:
+          type: integer
+        lifetime_chars:
+          type: integer
+        monthly_chars:
+          type: integer
+        price_per_1k_chars:
+          type: number
+        price_per_1m_chars:
+          type: number
+        commercial:
+          type: boolean
+        email_verified:
+          type: boolean
+        upgrade_url:
+          type: string
+          nullable: true
+        stripe_mode:
+          type: string
+          nullable: true
+        premium_voicepacks_enabled:
+          type: boolean
+
+    SpeechRequest:
+      type: object
+      required: [text]
+      properties:
+        model:
+          type: string
+          default: audra-core
+        text:
+          type: string
+          maxLength: 500000
+          description: |
+            Plain text or SSML. Sync requests above 50,000 characters return 413.
+            Client HTTP timeout should be at least 3600 seconds for long sync jobs.
+        voice:
+          type: string
+          default: june
+          description: |
+            Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.
+            Premium packs use product slugs (e.g. aurora-lead) when enabled.
+        speed:
+          type: number
+          default: 1.0
+          minimum: 0.5
+          maximum: 2.0
+        format:
+          type: string
+          enum: [mp3, wav]
+          default: mp3
