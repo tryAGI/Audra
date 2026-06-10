@@ -17,7 +17,19 @@ public partial class Tests
 
         var usage = await client.Billing.GetUsageAsync();
 
-        usage.CreditsChars.Should().BeGreaterThanOrEqualTo(0);
+        var isUnlimited =
+            usage.AdditionalProperties.TryGetValue("unlimited", out var unlimited) &&
+            unlimited is System.Text.Json.JsonElement { ValueKind: System.Text.Json.JsonValueKind.True };
+
+        if (isUnlimited)
+        {
+            usage.CreditsChars.Should().BeNull();
+        }
+        else
+        {
+            usage.CreditsChars.Should().BeGreaterThanOrEqualTo(0);
+        }
+
         usage.MonthlyChars.Should().BeGreaterThanOrEqualTo(0);
     }
 }
