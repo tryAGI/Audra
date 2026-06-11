@@ -69,6 +69,18 @@ namespace Audra
         public bool? PremiumVoicepacksEnabled { get; set; }
 
         /// <summary>
+        /// Prefix of the API key used for this request.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("api_key_prefix")]
+        public string? ApiKeyPrefix { get; set; }
+
+        /// <summary>
+        /// Whether the account has unlimited character credits.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("unlimited")]
+        public bool? Unlimited { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -87,6 +99,12 @@ namespace Audra
         /// <param name="upgradeUrl"></param>
         /// <param name="stripeMode"></param>
         /// <param name="premiumVoicepacksEnabled"></param>
+        /// <param name="apiKeyPrefix">
+        /// Prefix of the API key used for this request.
+        /// </param>
+        /// <param name="unlimited">
+        /// Whether the account has unlimited character credits.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -100,7 +118,9 @@ namespace Audra
             bool? emailVerified,
             string? upgradeUrl,
             string? stripeMode,
-            bool? premiumVoicepacksEnabled)
+            bool? premiumVoicepacksEnabled,
+            string? apiKeyPrefix,
+            bool? unlimited)
         {
             this.CreditsChars = creditsChars;
             this.LifetimeChars = lifetimeChars;
@@ -112,6 +132,8 @@ namespace Audra
             this.UpgradeUrl = upgradeUrl;
             this.StripeMode = stripeMode;
             this.PremiumVoicepacksEnabled = premiumVoicepacksEnabled;
+            this.ApiKeyPrefix = apiKeyPrefix;
+            this.Unlimited = unlimited;
         }
 
         /// <summary>

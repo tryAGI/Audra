@@ -522,6 +522,7 @@ components:
       properties:
         credits_chars:
           type: integer
+          nullable: true
         lifetime_chars:
           type: integer
         monthly_chars:
@@ -542,6 +543,12 @@ components:
           nullable: true
         premium_voicepacks_enabled:
           type: boolean
+        api_key_prefix:
+          type: string
+          description: Prefix of the API key used for this request.
+        unlimited:
+          type: boolean
+          description: Whether the account has unlimited character credits.
 
     SpeechRequest:
       type: object

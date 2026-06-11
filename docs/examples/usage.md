@@ -1,6 +1,8 @@
 # Usage
 
 Basic example showing how to inspect account usage and credit balance.
+Commercial or unlimited accounts can return `null` for `CreditsChars`; check
+`Unlimited` before treating credits as a finite balance.
 
 This example assumes `using Audra;` is in scope and `apiKey` contains your Audra API key.
 
@@ -8,4 +10,6 @@ This example assumes `using Audra;` is in scope and `apiKey` contains your Audra
 using var client = new AudraClient(apiKey);
 
 var usage = await client.Billing.GetUsageAsync();
+
+var finiteCredits = usage.Unlimited is true ? null : usage.CreditsChars;
 ```
