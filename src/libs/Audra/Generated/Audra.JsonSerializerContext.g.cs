@@ -17,6 +17,10 @@ namespace Audra
 
             typeof(global::Audra.JsonConverters.SpeechRequestFormatNullableJsonConverter),
 
+            typeof(global::Audra.JsonConverters.SpeechRequestRenderModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechRequestRenderModeNullableJsonConverter),
+
             typeof(global::Audra.JsonConverters.CreateBillingCheckoutRequestPackJsonConverter),
 
             typeof(global::Audra.JsonConverters.CreateBillingCheckoutRequestPackNullableJsonConverter),
@@ -46,6 +50,7 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestFormat), TypeInfoPropertyName = "SpeechRequestFormat2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestRenderMode), TypeInfoPropertyName = "SpeechRequestRenderMode2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateAccountsRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateBillingCheckoutRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateBillingCheckoutRequestPack), TypeInfoPropertyName = "CreateBillingCheckoutRequestPack2")]

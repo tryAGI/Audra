@@ -44,6 +44,14 @@ namespace Audra
         public global::Audra.SpeechRequestFormat? Format { get; set; }
 
         /// <summary>
+        /// fast (GPU) = lower latency for longer text. standard (CPU) = lower cost for short lines.<br/>
+        /// Default Value: fast
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("render_mode")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechRequestRenderModeJsonConverter))]
+        public global::Audra.SpeechRequestRenderMode? RenderMode { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -70,6 +78,10 @@ namespace Audra
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
+        /// <param name="renderMode">
+        /// fast (GPU) = lower latency for longer text. standard (CPU) = lower cost for short lines.<br/>
+        /// Default Value: fast
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -78,13 +90,15 @@ namespace Audra
             string? model,
             string? voice,
             double? speed,
-            global::Audra.SpeechRequestFormat? format)
+            global::Audra.SpeechRequestFormat? format,
+            global::Audra.SpeechRequestRenderMode? renderMode)
         {
             this.Model = model;
             this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
             this.Voice = voice;
             this.Speed = speed;
             this.Format = format;
+            this.RenderMode = renderMode;
         }
 
         /// <summary>
