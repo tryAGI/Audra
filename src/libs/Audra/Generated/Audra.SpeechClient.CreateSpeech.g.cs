@@ -1096,6 +1096,10 @@ namespace Audra
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
+        /// <param name="renderMode">
+        /// fast (GPU) = lower latency for longer text. standard (CPU) = lower cost for short lines.<br/>
+        /// Default Value: fast
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -1107,6 +1111,7 @@ namespace Audra
             string? voice = default,
             double? speed = default,
             global::Audra.SpeechRequestFormat? format = default,
+            global::Audra.SpeechRequestRenderMode? renderMode = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -1117,6 +1122,7 @@ namespace Audra
                 Voice = voice,
                 Speed = speed,
                 Format = format,
+                RenderMode = renderMode,
             };
 
             return await CreateSpeechAsync(

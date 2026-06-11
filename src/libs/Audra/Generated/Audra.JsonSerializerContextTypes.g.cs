@@ -60,95 +60,99 @@ namespace Audra
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateAccountsRequest? Type8 { get; set; }
+        public global::Audra.SpeechRequestRenderMode? Type8 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateBillingCheckoutRequest? Type9 { get; set; }
+        public global::Audra.CreateAccountsRequest? Type9 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateBillingCheckoutRequestPack? Type10 { get; set; }
+        public global::Audra.CreateBillingCheckoutRequest? Type10 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.AllOf<global::Audra.SpeechRequest, global::Audra.CreateSpeechJobsRequest2>? Type11 { get; set; }
+        public global::Audra.CreateBillingCheckoutRequestPack? Type11 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechJobsRequest2? Type12 { get; set; }
+        public global::Audra.AllOf<global::Audra.SpeechRequest, global::Audra.CreateSpeechJobsRequest2>? Type12 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateKeysRequest? Type13 { get; set; }
+        public global::Audra.CreateSpeechJobsRequest2? Type13 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateAuthGoogleRequest? Type14 { get; set; }
+        public global::Audra.CreateKeysRequest? Type14 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateAccountsKeyRecoveryRequest? Type15 { get; set; }
+        public global::Audra.CreateAuthGoogleRequest? Type15 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateAccountsKeyRecoveryConfirmRequest? Type16 { get; set; }
+        public global::Audra.CreateAccountsKeyRecoveryRequest? Type16 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechXAudraCommercialUse? Type17 { get; set; }
+        public global::Audra.CreateAccountsKeyRecoveryConfirmRequest? Type17 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Guid? Type18 { get; set; }
+        public global::Audra.CreateSpeechXAudraCommercialUse? Type18 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetHealthResponse? Type19 { get; set; }
+        public global::System.Guid? Type19 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetHealthResponseTts? Type20 { get; set; }
+        public global::Audra.GetHealthResponse? Type20 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetHealthResponseTtsG2p? Type21 { get; set; }
+        public global::Audra.GetHealthResponseTts? Type21 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetHealthResponseTtsG2pEngine? Type22 { get; set; }
+        public global::Audra.GetHealthResponseTtsG2p? Type22 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetModelsResponse? Type23 { get; set; }
+        public global::Audra.GetHealthResponseTtsG2pEngine? Type23 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Audra.GetModelsResponseDataItem>? Type24 { get; set; }
+        public global::Audra.GetModelsResponse? Type24 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetModelsResponseDataItem? Type25 { get; set; }
+        public global::System.Collections.Generic.IList<global::Audra.GetModelsResponseDataItem>? Type25 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<string>? Type26 { get; set; }
+        public global::Audra.GetModelsResponseDataItem? Type26 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateBillingCheckoutResponse? Type27 { get; set; }
+        public global::System.Collections.Generic.IList<string>? Type27 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public byte[]? Type28 { get; set; }
+        public global::Audra.CreateBillingCheckoutResponse? Type28 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechJobsResponse? Type29 { get; set; }
+        public byte[]? Type29 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechJobsResponseStatus? Type30 { get; set; }
+        public global::Audra.CreateSpeechJobsResponse? Type30 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Audra.CreateSpeechJobsResponseStatus? Type31 { get; set; }
 
         /// <summary>
         /// 
