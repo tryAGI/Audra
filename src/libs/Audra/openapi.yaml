@@ -186,6 +186,21 @@ paths:
         '401':
           description: Unauthorized
 
+  /v2/stats/public:
+    get:
+      tags: [Meta]
+      summary: Public signup and usage counters
+      description: |
+        Aggregate account count and lifetime characters rendered for marketing trust strips.
+        Real-user counts exclude internal and automation test emails.
+      responses:
+        '200':
+          description: Public stats snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicStats'
+
   /v2/billing/checkout:
     post:
       tags: [Billing]
@@ -516,6 +531,22 @@ components:
           type: boolean
         message:
           type: string
+
+    PublicStats:
+      type: object
+      properties:
+        accounts:
+          type: integer
+          description: Real-user account count (excludes test/automation emails)
+        chars_rendered:
+          type: integer
+          description: Lifetime characters rendered by real-user accounts
+        accounts_all:
+          type: integer
+          description: All non-internal accounts including test signups
+        chars_rendered_all:
+          type: integer
+          description: Lifetime characters including test/automation traffic
 
     UsageResponse:
       type: object

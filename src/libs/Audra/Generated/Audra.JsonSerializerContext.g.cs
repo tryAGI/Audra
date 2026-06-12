@@ -46,6 +46,7 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PublicStats))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.UsageResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequest))]
