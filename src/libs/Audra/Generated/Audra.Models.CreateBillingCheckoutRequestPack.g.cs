@@ -20,6 +20,10 @@ namespace Audra
         /// 
         /// </summary>
         Credits5,
+        /// <summary>
+        /// 
+        /// </summary>
+        Credits50,
     }
 
     /// <summary>
@@ -37,6 +41,7 @@ namespace Audra
                 CreateBillingCheckoutRequestPack.Credits100 => "credits_100",
                 CreateBillingCheckoutRequestPack.Credits20 => "credits_20",
                 CreateBillingCheckoutRequestPack.Credits5 => "credits_5",
+                CreateBillingCheckoutRequestPack.Credits50 => "credits_50",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -50,6 +55,7 @@ namespace Audra
                 "credits_100" => CreateBillingCheckoutRequestPack.Credits100,
                 "credits_20" => CreateBillingCheckoutRequestPack.Credits20,
                 "credits_5" => CreateBillingCheckoutRequestPack.Credits5,
+                "credits_50" => CreateBillingCheckoutRequestPack.Credits50,
                 _ => null,
             };
         }
