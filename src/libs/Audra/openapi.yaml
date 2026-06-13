@@ -215,7 +215,13 @@ paths:
               properties:
                 pack:
                   type: string
-                  enum: [credits_5, credits_20, credits_100]
+                  enum: [credits_5, credits_20, credits_50, credits_100]
+                amount_usd:
+                  type: number
+                  description: Custom prepaid amount in USD ($5–$500). Mutually exclusive with pack.
+                promo_code:
+                  type: string
+                  description: WELCOME20 — 50% off your first pack on this account.
       responses:
         '200':
           description: Checkout URL
