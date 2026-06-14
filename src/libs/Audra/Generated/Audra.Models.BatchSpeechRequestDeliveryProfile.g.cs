@@ -6,38 +6,44 @@ namespace Audra
     /// <summary>
     /// 
     /// </summary>
-    public enum CreateSpeechJobsResponseStatus
+    public enum BatchSpeechRequestDeliveryProfile
     {
         /// <summary>
         /// 
         /// </summary>
-        Queued,
+        Legacy,
+        /// <summary>
+        /// 
+        /// </summary>
+        PodcastV2,
     }
 
     /// <summary>
     /// Enum extensions to do fast conversions without the reflection.
     /// </summary>
-    public static class CreateSpeechJobsResponseStatusExtensions
+    public static class BatchSpeechRequestDeliveryProfileExtensions
     {
         /// <summary>
         /// Converts an enum to a string.
         /// </summary>
-        public static string ToValueString(this CreateSpeechJobsResponseStatus value)
+        public static string ToValueString(this BatchSpeechRequestDeliveryProfile value)
         {
             return value switch
             {
-                CreateSpeechJobsResponseStatus.Queued => "queued",
+                BatchSpeechRequestDeliveryProfile.Legacy => "legacy",
+                BatchSpeechRequestDeliveryProfile.PodcastV2 => "podcast_v2",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
         /// <summary>
         /// Converts an string to a enum.
         /// </summary>
-        public static CreateSpeechJobsResponseStatus? ToEnum(string value)
+        public static BatchSpeechRequestDeliveryProfile? ToEnum(string value)
         {
             return value switch
             {
-                "queued" => CreateSpeechJobsResponseStatus.Queued,
+                "legacy" => BatchSpeechRequestDeliveryProfile.Legacy,
+                "podcast_v2" => BatchSpeechRequestDeliveryProfile.PodcastV2,
                 _ => null,
             };
         }

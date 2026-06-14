@@ -1082,8 +1082,7 @@ namespace Audra
         /// Default Value: audra-core
         /// </param>
         /// <param name="text">
-        /// Plain text or SSML. Sync requests above 50,000 characters return 413.<br/>
-        /// Client HTTP timeout should be at least 3600 seconds for long sync jobs.
+        /// Plain text or SSML
         /// </param>
         /// <param name="voice">
         /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
@@ -1096,9 +1095,8 @@ namespace Audra
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
-        /// <param name="renderMode">
-        /// fast (GPU) = lower latency for longer text. standard (CPU) = lower cost for short lines.<br/>
-        /// Default Value: fast
+        /// <param name="deliveryProfile">
+        /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
         /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -1111,7 +1109,7 @@ namespace Audra
             string? voice = default,
             double? speed = default,
             global::Audra.SpeechRequestFormat? format = default,
-            global::Audra.SpeechRequestRenderMode? renderMode = default,
+            global::Audra.SpeechRequestDeliveryProfile? deliveryProfile = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -1122,7 +1120,7 @@ namespace Audra
                 Voice = voice,
                 Speed = speed,
                 Format = format,
-                RenderMode = renderMode,
+                DeliveryProfile = deliveryProfile,
             };
 
             return await CreateSpeechAsync(

@@ -3,10 +3,10 @@
 namespace Audra.JsonConverters
 {
     /// <inheritdoc />
-    public sealed class SpeechRequestRenderModeJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Audra.SpeechRequestRenderMode>
+    public sealed class BatchSpeechRequestFormatNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Audra.BatchSpeechRequestFormat?>
     {
         /// <inheritdoc />
-        public override global::Audra.SpeechRequestRenderMode Read(
+        public override global::Audra.BatchSpeechRequestFormat? Read(
             ref global::System.Text.Json.Utf8JsonReader reader,
             global::System.Type typeToConvert,
             global::System.Text.Json.JsonSerializerOptions options)
@@ -18,7 +18,7 @@ namespace Audra.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Audra.SpeechRequestRenderModeExtensions.ToEnum(stringValue) ?? default;
+                        return global::Audra.BatchSpeechRequestFormatExtensions.ToEnum(stringValue);
                     }
                     
                     break;
@@ -26,11 +26,11 @@ namespace Audra.JsonConverters
                 case global::System.Text.Json.JsonTokenType.Number:
                 {
                     var numValue = reader.GetInt32();
-                    return (global::Audra.SpeechRequestRenderMode)numValue;
+                    return (global::Audra.BatchSpeechRequestFormat)numValue;
                 }
                 case global::System.Text.Json.JsonTokenType.Null:
                 {
-                    return default(global::Audra.SpeechRequestRenderMode);
+                    return default(global::Audra.BatchSpeechRequestFormat?);
                 }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
@@ -42,12 +42,19 @@ namespace Audra.JsonConverters
         /// <inheritdoc />
         public override void Write(
             global::System.Text.Json.Utf8JsonWriter writer,
-            global::Audra.SpeechRequestRenderMode value,
+            global::Audra.BatchSpeechRequestFormat? value,
             global::System.Text.Json.JsonSerializerOptions options)
         {
             writer = writer ?? throw new global::System.ArgumentNullException(nameof(writer));
 
-            writer.WriteStringValue(global::Audra.SpeechRequestRenderModeExtensions.ToValueString(value));
+            if (value == null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                writer.WriteStringValue(global::Audra.BatchSpeechRequestFormatExtensions.ToValueString(value.Value));
+            }
         }
     }
 }

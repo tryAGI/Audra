@@ -9,25 +9,25 @@ namespace Audra
     public sealed partial class PublicStats
     {
         /// <summary>
-        /// Real-user account count (excludes test/automation emails)
+        /// Real user accounts (excludes test/automation emails)
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("accounts")]
         public int? Accounts { get; set; }
 
         /// <summary>
-        /// Lifetime characters rendered by real-user accounts
+        /// Lifetime chars rendered by real users
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("chars_rendered")]
         public int? CharsRendered { get; set; }
 
         /// <summary>
-        /// All non-internal accounts including test signups
+        /// All accounts except @audra.dev smoke signups
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("accounts_all")]
         public int? AccountsAll { get; set; }
 
         /// <summary>
-        /// Lifetime characters including test/automation traffic
+        /// Lifetime chars including test traffic
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("chars_rendered_all")]
         public int? CharsRenderedAll { get; set; }
@@ -42,16 +42,16 @@ namespace Audra
         /// Initializes a new instance of the <see cref="PublicStats" /> class.
         /// </summary>
         /// <param name="accounts">
-        /// Real-user account count (excludes test/automation emails)
+        /// Real user accounts (excludes test/automation emails)
         /// </param>
         /// <param name="charsRendered">
-        /// Lifetime characters rendered by real-user accounts
+        /// Lifetime chars rendered by real users
         /// </param>
         /// <param name="accountsAll">
-        /// All non-internal accounts including test signups
+        /// All accounts except @audra.dev smoke signups
         /// </param>
         /// <param name="charsRenderedAll">
-        /// Lifetime characters including test/automation traffic
+        /// Lifetime chars including test traffic
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

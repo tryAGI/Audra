@@ -6,50 +6,50 @@ namespace Audra
     /// <summary>
     /// 
     /// </summary>
-    public enum CreateBillingCheckoutRequestPack
+    public enum CreateSpeechBatchXAudraCommercialUse
     {
         /// <summary>
         /// 
         /// </summary>
-        Credits100,
+        x1,
         /// <summary>
         /// 
         /// </summary>
-        Credits20,
+        True,
         /// <summary>
         /// 
         /// </summary>
-        Credits5,
+        Yes,
     }
 
     /// <summary>
     /// Enum extensions to do fast conversions without the reflection.
     /// </summary>
-    public static class CreateBillingCheckoutRequestPackExtensions
+    public static class CreateSpeechBatchXAudraCommercialUseExtensions
     {
         /// <summary>
         /// Converts an enum to a string.
         /// </summary>
-        public static string ToValueString(this CreateBillingCheckoutRequestPack value)
+        public static string ToValueString(this CreateSpeechBatchXAudraCommercialUse value)
         {
             return value switch
             {
-                CreateBillingCheckoutRequestPack.Credits100 => "credits_100",
-                CreateBillingCheckoutRequestPack.Credits20 => "credits_20",
-                CreateBillingCheckoutRequestPack.Credits5 => "credits_5",
+                CreateSpeechBatchXAudraCommercialUse.x1 => "1",
+                CreateSpeechBatchXAudraCommercialUse.True => "true",
+                CreateSpeechBatchXAudraCommercialUse.Yes => "yes",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
         /// <summary>
         /// Converts an string to a enum.
         /// </summary>
-        public static CreateBillingCheckoutRequestPack? ToEnum(string value)
+        public static CreateSpeechBatchXAudraCommercialUse? ToEnum(string value)
         {
             return value switch
             {
-                "credits_100" => CreateBillingCheckoutRequestPack.Credits100,
-                "credits_20" => CreateBillingCheckoutRequestPack.Credits20,
-                "credits_5" => CreateBillingCheckoutRequestPack.Credits5,
+                "1" => CreateSpeechBatchXAudraCommercialUse.x1,
+                "true" => CreateSpeechBatchXAudraCommercialUse.True,
+                "yes" => CreateSpeechBatchXAudraCommercialUse.Yes,
                 _ => null,
             };
         }

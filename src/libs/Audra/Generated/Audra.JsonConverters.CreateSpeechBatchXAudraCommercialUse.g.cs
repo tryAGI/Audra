@@ -3,10 +3,10 @@
 namespace Audra.JsonConverters
 {
     /// <inheritdoc />
-    public sealed class GetHealthResponseTtsG2pEngineNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Audra.GetHealthResponseTtsG2pEngine?>
+    public sealed class CreateSpeechBatchXAudraCommercialUseJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Audra.CreateSpeechBatchXAudraCommercialUse>
     {
         /// <inheritdoc />
-        public override global::Audra.GetHealthResponseTtsG2pEngine? Read(
+        public override global::Audra.CreateSpeechBatchXAudraCommercialUse Read(
             ref global::System.Text.Json.Utf8JsonReader reader,
             global::System.Type typeToConvert,
             global::System.Text.Json.JsonSerializerOptions options)
@@ -18,7 +18,7 @@ namespace Audra.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Audra.GetHealthResponseTtsG2pEngineExtensions.ToEnum(stringValue);
+                        return global::Audra.CreateSpeechBatchXAudraCommercialUseExtensions.ToEnum(stringValue) ?? default;
                     }
                     
                     break;
@@ -26,11 +26,11 @@ namespace Audra.JsonConverters
                 case global::System.Text.Json.JsonTokenType.Number:
                 {
                     var numValue = reader.GetInt32();
-                    return (global::Audra.GetHealthResponseTtsG2pEngine)numValue;
+                    return (global::Audra.CreateSpeechBatchXAudraCommercialUse)numValue;
                 }
                 case global::System.Text.Json.JsonTokenType.Null:
                 {
-                    return default(global::Audra.GetHealthResponseTtsG2pEngine?);
+                    return default(global::Audra.CreateSpeechBatchXAudraCommercialUse);
                 }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
@@ -42,19 +42,12 @@ namespace Audra.JsonConverters
         /// <inheritdoc />
         public override void Write(
             global::System.Text.Json.Utf8JsonWriter writer,
-            global::Audra.GetHealthResponseTtsG2pEngine? value,
+            global::Audra.CreateSpeechBatchXAudraCommercialUse value,
             global::System.Text.Json.JsonSerializerOptions options)
         {
             writer = writer ?? throw new global::System.ArgumentNullException(nameof(writer));
 
-            if (value == null)
-            {
-                writer.WriteNullValue();
-            }
-            else
-            {
-                writer.WriteStringValue(global::Audra.GetHealthResponseTtsG2pEngineExtensions.ToValueString(value.Value));
-            }
+            writer.WriteStringValue(global::Audra.CreateSpeechBatchXAudraCommercialUseExtensions.ToValueString(value));
         }
     }
 }

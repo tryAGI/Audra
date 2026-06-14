@@ -5,7 +5,7 @@ namespace Audra
     public partial interface ISpeechClient
     {
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech from pre-chunked segments
         /// </summary>
         /// <param name="idempotencyKey">
         /// Optional idempotency key. When omitted, the SDK generates one for this request.
@@ -15,15 +15,15 @@ namespace Audra
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> CreateSpeechAsync(
+        global::System.Threading.Tasks.Task<byte[]> CreateSpeechBatchAsync(
 
-            global::Audra.SpeechRequest request,
+            global::Audra.BatchSpeechRequest request,
             string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CreateSpeechBatchXAudraCommercialUse? xAudraCommercialUse = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech from pre-chunked segments
         /// </summary>
         /// <param name="idempotencyKey">
         /// Optional idempotency key. When omitted, the SDK generates one for this request.
@@ -33,15 +33,15 @@ namespace Audra
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::System.IO.Stream> CreateSpeechAsStreamAsync(
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> CreateSpeechBatchAsStreamAsync(
 
-            global::Audra.SpeechRequest request,
+            global::Audra.BatchSpeechRequest request,
             string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CreateSpeechBatchXAudraCommercialUse? xAudraCommercialUse = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech from pre-chunked segments
         /// </summary>
         /// <param name="idempotencyKey">
         /// Optional idempotency key. When omitted, the SDK generates one for this request.
@@ -51,15 +51,15 @@ namespace Audra
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<byte[]>> CreateSpeechAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<byte[]>> CreateSpeechBatchAsResponseAsync(
 
-            global::Audra.SpeechRequest request,
+            global::Audra.BatchSpeechRequest request,
             string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CreateSpeechBatchXAudraCommercialUse? xAudraCommercialUse = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech from pre-chunked segments
         /// </summary>
         /// <param name="idempotencyKey">
         /// Optional idempotency key. When omitted, the SDK generates one for this request.
@@ -68,12 +68,7 @@ namespace Audra
         /// <param name="model">
         /// Default Value: audra-core
         /// </param>
-        /// <param name="text">
-        /// Plain text or SSML
-        /// </param>
         /// <param name="voice">
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
-        /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
         /// Default Value: june
         /// </param>
         /// <param name="speed">
@@ -82,21 +77,20 @@ namespace Audra
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
-        /// <param name="deliveryProfile">
-        /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
-        /// </param>
+        /// <param name="deliveryProfile"></param>
+        /// <param name="segments"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> CreateSpeechAsync(
-            string text,
+        global::System.Threading.Tasks.Task<byte[]> CreateSpeechBatchAsync(
+            global::System.Collections.Generic.IList<global::Audra.BatchSegment> segments,
             string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CreateSpeechBatchXAudraCommercialUse? xAudraCommercialUse = default,
             string? model = default,
             string? voice = default,
             double? speed = default,
-            global::Audra.SpeechRequestFormat? format = default,
-            global::Audra.SpeechRequestDeliveryProfile? deliveryProfile = default,
+            global::Audra.BatchSpeechRequestFormat? format = default,
+            global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
