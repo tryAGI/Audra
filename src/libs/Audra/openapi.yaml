@@ -47,26 +47,6 @@ paths:
                     example: ok
                   tts:
                     type: object
-                    properties:
-                      status:
-                        type: string
-                        example: healthy
-                      engine:
-                        type: string
-                        example: audra-core
-                      voices:
-                        type: integer
-                      g2p:
-                        type: object
-                        properties:
-                          engine:
-                            type: string
-                            enum: [audra-phonetics, standard]
-                          version:
-                            type: string
-                            example: v1
-                          ready:
-                            type: boolean
                   version:
                     type: string
 
@@ -158,6 +138,22 @@ paths:
                           items:
                             type: string
 
+  /v2/stats/public:
+    get:
+      tags: [Meta]
+      summary: Public signup and usage counters
+      description: |
+        Marketing-trust metrics for the landing page and agent crawlers.
+        `accounts` and `chars_rendered` exclude automated test signups.
+        `accounts_all` and `chars_rendered_all` include non-`@audra.dev` totals.
+      responses:
+        '200':
+          description: Public stats
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicStats'
+
   /v2/voices:
     get:
       tags: [Meta]
@@ -186,21 +182,6 @@ paths:
         '401':
           description: Unauthorized
 
-  /v2/stats/public:
-    get:
-      tags: [Meta]
-      summary: Public signup and usage counters
-      description: |
-        Aggregate account count and lifetime characters rendered for marketing trust strips.
-        Real-user counts exclude internal and automation test emails.
-      responses:
-        '200':
-          description: Public stats snapshot
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicStats'
-
   /v2/billing/checkout:
     post:
       tags: [Billing]
@@ -215,13 +196,7 @@ paths:
               properties:
                 pack:
                   type: string
-                  enum: [credits_5, credits_20, credits_50, credits_100]
-                amount_usd:
-                  type: number
-                  description: Custom prepaid amount in USD ($5–$500). Mutually exclusive with pack.
-                promo_code:
-                  type: string
-                  description: WELCOME20 — 50% off your first pack on this account.
+                  enum: [credits_5, credits_20, credits_100]
       responses:
         '200':
           description: Checkout URL
@@ -291,232 +266,53 @@ paths:
           description: Text exceeds sync character limit
         '422':
           description: Render failed
-        '202':
-          description: Auto-queued as background job when text exceeds ~8000 characters (unless X-Audra-Sync true)
 
-  /v2/speech/jobs:
+  /v2/speech/batch:
     post:
       tags: [Speech]
-      summary: Queue batch speech job
+      summary: Synthesize speech from pre-chunked segments
       security:
         - bearerAuth: []
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          schema:
+            type: string
+        - in: header
+          name: X-Audra-Commercial-Use
+          schema:
+            type: string
+            enum: ['true', '1', 'yes']
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: '#/components/schemas/SpeechRequest'
-                - type: object
-                  properties:
-                    webhook_url:
-                      type: string
-                      format: uri
-                      description: Optional HTTPS callback on completion or failure
-      responses:
-        '202':
-          description: Job queued
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  job_id:
-                    type: string
-                    format: uuid
-                  status:
-                    type: string
-                    enum: [queued]
-                  status_url:
-                    type: string
-                    format: uri
-                  audio_url:
-                    type: string
-                    format: uri
-        '402':
-          description: Insufficient credits
-        '400':
-          description: Invalid request
-
-  /v2/speech/jobs/{id}:
-    get:
-      tags: [Speech]
-      summary: Get batch job status
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Job status
-        '404':
-          description: Job not found
-
-  /v2/speech/jobs/{id}/audio:
-    get:
-      tags: [Speech]
-      summary: Download completed job audio
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-            format: uuid
+              $ref: '#/components/schemas/BatchSpeechRequest'
       responses:
         '200':
           description: Audio stream
+          headers:
+            X-Chars-Processed:
+              schema:
+                type: integer
+            X-Batch-Segments:
+              schema:
+                type: integer
+            X-Delivery-Profile:
+              schema:
+                type: string
           content:
             audio/mpeg:
               schema:
                 type: string
                 format: binary
-        '409':
-          description: Job not ready
-
-  /v2/keys:
-    get:
-      tags: [Auth]
-      summary: List API keys for account
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Key list with limits
-        '401':
-          description: Unauthorized
-    post:
-      tags: [Auth]
-      summary: Create named API key
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  maxLength: 64
-      responses:
-        '200':
-          description: Key created (secret shown once)
-        '400':
-          description: Key limit reached
-        '401':
-          description: Unauthorized
-        '429':
-          description: Rate limit
-
-  /v2/keys/{id}/rotate:
-    post:
-      tags: [Auth]
-      summary: Rotate API key in place
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: New secret shown once
-        '404':
-          description: Key not found
-        '429':
-          description: Rate limit
-
-  /v2/keys/{id}:
-    delete:
-      tags: [Auth]
-      summary: Revoke API key
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Revoked
-        '404':
-          description: Key not found
-
-  /v2/auth/google:
-    post:
-      tags: [Auth]
-      summary: Google sign-in (dashboard)
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [credential]
-              properties:
-                credential:
-                  type: string
-      responses:
-        '200':
-          description: New account or dashboard session
-
-  /v2/auth/logout:
-    post:
-      tags: [Auth]
-      summary: Clear dashboard session
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Signed out
-
-  /v2/accounts/key-recovery:
-    post:
-      tags: [Auth]
-      summary: Request account recovery email
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [email]
-              properties:
-                email:
-                  type: string
-                  format: email
-      responses:
-        '200':
-          description: Generic success message
-
-  /v2/accounts/key-recovery/confirm:
-    post:
-      tags: [Auth]
-      summary: Confirm recovery token and issue new key
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [token]
-              properties:
-                token:
-                  type: string
-      responses:
-        '200':
-          description: New API key issued
+        '402':
+          description: Insufficient credits
+        '413':
+          description: Batch exceeds sync character limit
+        '422':
+          description: Render failed
 
 components:
   securitySchemes:
@@ -537,22 +333,6 @@ components:
           type: boolean
         message:
           type: string
-
-    PublicStats:
-      type: object
-      properties:
-        accounts:
-          type: integer
-          description: Real-user account count (excludes test/automation emails)
-        chars_rendered:
-          type: integer
-          description: Lifetime characters rendered by real-user accounts
-        accounts_all:
-          type: integer
-          description: All non-internal accounts including test signups
-        chars_rendered_all:
-          type: integer
-          description: Lifetime characters including test/automation traffic
 
     UsageResponse:
       type: object
@@ -597,9 +377,7 @@ components:
         text:
           type: string
           maxLength: 500000
-          description: |
-            Plain text or SSML. Sync requests above 50,000 characters return 413.
-            Client HTTP timeout should be at least 3600 seconds for long sync jobs.
+          description: Plain text or SSML
         voice:
           type: string
           default: june
@@ -615,9 +393,69 @@ components:
           type: string
           enum: [mp3, wav]
           default: mp3
-        render_mode:
+        delivery_profile:
           type: string
-          enum: [fast, standard, gpu, cpu]
-          default: fast
-          description: |
-            fast (GPU) = lower latency for longer text. standard (CPU) = lower cost for short lines.
+          enum: [legacy, podcast_v2]
+          description: Podcast pacing profile (slower speed + paragraph/sentence pauses)
+
+    BatchSegment:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          maxLength: 4000
+        speed:
+          type: number
+          minimum: 0.5
+          maximum: 2.0
+        pause_after_ms:
+          type: integer
+          minimum: 0
+          maximum: 5000
+          default: 0
+
+    BatchSpeechRequest:
+      type: object
+      required: [segments]
+      properties:
+        model:
+          type: string
+          default: audra-core
+        voice:
+          type: string
+          default: june
+        speed:
+          type: number
+          default: 1.0
+          minimum: 0.5
+          maximum: 2.0
+        format:
+          type: string
+          enum: [mp3, wav]
+          default: mp3
+        delivery_profile:
+          type: string
+          enum: [legacy, podcast_v2]
+        segments:
+          type: array
+          minItems: 1
+          maxItems: 64
+          items:
+            $ref: '#/components/schemas/BatchSegment'
+
+    PublicStats:
+      type: object
+      properties:
+        accounts:
+          type: integer
+          description: Real user accounts (excludes test/automation emails)
+        chars_rendered:
+          type: integer
+          description: Lifetime chars rendered by real users
+        accounts_all:
+          type: integer
+          description: All accounts except @audra.dev smoke signups
+        chars_rendered_all:
+          type: integer
+          description: Lifetime chars including test traffic

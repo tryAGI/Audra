@@ -6,7 +6,7 @@ namespace Audra
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class SpeechRequest
+    public sealed partial class BatchSpeechRequest
     {
         /// <summary>
         /// Default Value: audra-core
@@ -15,15 +15,6 @@ namespace Audra
         public string? Model { get; set; }
 
         /// <summary>
-        /// Plain text or SSML
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("text")]
-        [global::System.Text.Json.Serialization.JsonRequired]
-        public required string Text { get; set; }
-
-        /// <summary>
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
-        /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
         /// Default Value: june
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("voice")]
@@ -39,15 +30,22 @@ namespace Audra
         /// Default Value: mp3
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("format")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechRequestFormatJsonConverter))]
-        public global::Audra.SpeechRequestFormat? Format { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatJsonConverter))]
+        public global::Audra.BatchSpeechRequestFormat? Format { get; set; }
 
         /// <summary>
-        /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delivery_profile")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechRequestDeliveryProfileJsonConverter))]
-        public global::Audra.SpeechRequestDeliveryProfile? DeliveryProfile { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.BatchSpeechRequestDeliveryProfileJsonConverter))]
+        public global::Audra.BatchSpeechRequestDeliveryProfile? DeliveryProfile { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("segments")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required global::System.Collections.Generic.IList<global::Audra.BatchSegment> Segments { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -56,17 +54,13 @@ namespace Audra
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeechRequest" /> class.
+        /// Initializes a new instance of the <see cref="BatchSpeechRequest" /> class.
         /// </summary>
-        /// <param name="text">
-        /// Plain text or SSML
-        /// </param>
+        /// <param name="segments"></param>
         /// <param name="model">
         /// Default Value: audra-core
         /// </param>
         /// <param name="voice">
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
-        /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
         /// Default Value: june
         /// </param>
         /// <param name="speed">
@@ -75,32 +69,30 @@ namespace Audra
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
-        /// <param name="deliveryProfile">
-        /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
-        /// </param>
+        /// <param name="deliveryProfile"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public SpeechRequest(
-            string text,
+        public BatchSpeechRequest(
+            global::System.Collections.Generic.IList<global::Audra.BatchSegment> segments,
             string? model,
             string? voice,
             double? speed,
-            global::Audra.SpeechRequestFormat? format,
-            global::Audra.SpeechRequestDeliveryProfile? deliveryProfile)
+            global::Audra.BatchSpeechRequestFormat? format,
+            global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile)
         {
             this.Model = model;
-            this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
             this.Voice = voice;
             this.Speed = speed;
             this.Format = format;
             this.DeliveryProfile = deliveryProfile;
+            this.Segments = segments ?? throw new global::System.ArgumentNullException(nameof(segments));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeechRequest" /> class.
+        /// Initializes a new instance of the <see cref="BatchSpeechRequest" /> class.
         /// </summary>
-        public SpeechRequest()
+        public BatchSpeechRequest()
         {
         }
 

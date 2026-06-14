@@ -54,8 +54,9 @@ namespace Audra
 
         /// <summary>
         /// Public signup and usage counters<br/>
-        /// Aggregate account count and lifetime characters rendered for marketing trust strips.<br/>
-        /// Real-user counts exclude internal and automation test emails.
+        /// Marketing-trust metrics for the landing page and agent crawlers.<br/>
+        /// `accounts` and `chars_rendered` exclude automated test signups.<br/>
+        /// `accounts_all` and `chars_rendered_all` include non-`@audra.dev` totals.
         /// </summary>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -73,8 +74,9 @@ namespace Audra
         }
         /// <summary>
         /// Public signup and usage counters<br/>
-        /// Aggregate account count and lifetime characters rendered for marketing trust strips.<br/>
-        /// Real-user counts exclude internal and automation test emails.
+        /// Marketing-trust metrics for the landing page and agent crawlers.<br/>
+        /// `accounts` and `chars_rendered` exclude automated test signups.<br/>
+        /// `accounts_all` and `chars_rendered_all` include non-`@audra.dev` totals.
         /// </summary>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>

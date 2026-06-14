@@ -16,18 +16,6 @@ namespace Audra
         public global::Audra.CreateBillingCheckoutRequestPack? Pack { get; set; }
 
         /// <summary>
-        /// Custom prepaid amount in USD ($5–$500). Mutually exclusive with pack.
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("amount_usd")]
-        public double? AmountUsd { get; set; }
-
-        /// <summary>
-        /// WELCOME20 — 50% off your first pack on this account.
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("promo_code")]
-        public string? PromoCode { get; set; }
-
-        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -37,23 +25,13 @@ namespace Audra
         /// Initializes a new instance of the <see cref="CreateBillingCheckoutRequest" /> class.
         /// </summary>
         /// <param name="pack"></param>
-        /// <param name="amountUsd">
-        /// Custom prepaid amount in USD ($5–$500). Mutually exclusive with pack.
-        /// </param>
-        /// <param name="promoCode">
-        /// WELCOME20 — 50% off your first pack on this account.
-        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public CreateBillingCheckoutRequest(
-            global::Audra.CreateBillingCheckoutRequestPack? pack,
-            double? amountUsd,
-            string? promoCode)
+            global::Audra.CreateBillingCheckoutRequestPack? pack)
         {
             this.Pack = pack;
-            this.AmountUsd = amountUsd;
-            this.PromoCode = promoCode;
         }
 
         /// <summary>

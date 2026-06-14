@@ -19,7 +19,7 @@ namespace Audra
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tts")]
-        public global::Audra.GetHealthResponseTts? Tts { get; set; }
+        public object? Tts { get; set; }
 
         /// <summary>
         /// 
@@ -46,7 +46,7 @@ namespace Audra
 #endif
         public GetHealthResponse(
             string? status,
-            global::Audra.GetHealthResponseTts? tts,
+            object? tts,
             string? version)
         {
             this.Status = status;

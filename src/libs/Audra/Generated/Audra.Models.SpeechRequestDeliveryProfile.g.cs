@@ -4,46 +4,46 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
     /// </summary>
-    public enum GetHealthResponseTtsG2pEngine
+    public enum SpeechRequestDeliveryProfile
     {
         /// <summary>
         /// 
         /// </summary>
-        AudraPhonetics,
+        Legacy,
         /// <summary>
         /// 
         /// </summary>
-        Standard,
+        PodcastV2,
     }
 
     /// <summary>
     /// Enum extensions to do fast conversions without the reflection.
     /// </summary>
-    public static class GetHealthResponseTtsG2pEngineExtensions
+    public static class SpeechRequestDeliveryProfileExtensions
     {
         /// <summary>
         /// Converts an enum to a string.
         /// </summary>
-        public static string ToValueString(this GetHealthResponseTtsG2pEngine value)
+        public static string ToValueString(this SpeechRequestDeliveryProfile value)
         {
             return value switch
             {
-                GetHealthResponseTtsG2pEngine.AudraPhonetics => "audra-phonetics",
-                GetHealthResponseTtsG2pEngine.Standard => "standard",
+                SpeechRequestDeliveryProfile.Legacy => "legacy",
+                SpeechRequestDeliveryProfile.PodcastV2 => "podcast_v2",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
         /// <summary>
         /// Converts an string to a enum.
         /// </summary>
-        public static GetHealthResponseTtsG2pEngine? ToEnum(string value)
+        public static SpeechRequestDeliveryProfile? ToEnum(string value)
         {
             return value switch
             {
-                "audra-phonetics" => GetHealthResponseTtsG2pEngine.AudraPhonetics,
-                "standard" => GetHealthResponseTtsG2pEngine.Standard,
+                "legacy" => SpeechRequestDeliveryProfile.Legacy,
+                "podcast_v2" => SpeechRequestDeliveryProfile.PodcastV2,
                 _ => null,
             };
         }

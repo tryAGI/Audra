@@ -3,10 +3,10 @@
 namespace Audra.JsonConverters
 {
     /// <inheritdoc />
-    public sealed class CreateSpeechJobsResponseStatusNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Audra.CreateSpeechJobsResponseStatus?>
+    public sealed class BatchSpeechRequestDeliveryProfileNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Audra.BatchSpeechRequestDeliveryProfile?>
     {
         /// <inheritdoc />
-        public override global::Audra.CreateSpeechJobsResponseStatus? Read(
+        public override global::Audra.BatchSpeechRequestDeliveryProfile? Read(
             ref global::System.Text.Json.Utf8JsonReader reader,
             global::System.Type typeToConvert,
             global::System.Text.Json.JsonSerializerOptions options)
@@ -18,7 +18,7 @@ namespace Audra.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Audra.CreateSpeechJobsResponseStatusExtensions.ToEnum(stringValue);
+                        return global::Audra.BatchSpeechRequestDeliveryProfileExtensions.ToEnum(stringValue);
                     }
                     
                     break;
@@ -26,11 +26,11 @@ namespace Audra.JsonConverters
                 case global::System.Text.Json.JsonTokenType.Number:
                 {
                     var numValue = reader.GetInt32();
-                    return (global::Audra.CreateSpeechJobsResponseStatus)numValue;
+                    return (global::Audra.BatchSpeechRequestDeliveryProfile)numValue;
                 }
                 case global::System.Text.Json.JsonTokenType.Null:
                 {
-                    return default(global::Audra.CreateSpeechJobsResponseStatus?);
+                    return default(global::Audra.BatchSpeechRequestDeliveryProfile?);
                 }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
@@ -42,7 +42,7 @@ namespace Audra.JsonConverters
         /// <inheritdoc />
         public override void Write(
             global::System.Text.Json.Utf8JsonWriter writer,
-            global::Audra.CreateSpeechJobsResponseStatus? value,
+            global::Audra.BatchSpeechRequestDeliveryProfile? value,
             global::System.Text.Json.JsonSerializerOptions options)
         {
             writer = writer ?? throw new global::System.ArgumentNullException(nameof(writer));
@@ -53,7 +53,7 @@ namespace Audra.JsonConverters
             }
             else
             {
-                writer.WriteStringValue(global::Audra.CreateSpeechJobsResponseStatusExtensions.ToValueString(value.Value));
+                writer.WriteStringValue(global::Audra.BatchSpeechRequestDeliveryProfileExtensions.ToValueString(value.Value));
             }
         }
     }
