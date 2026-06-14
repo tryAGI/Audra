@@ -16,6 +16,10 @@ namespace Audra
         /// 
         /// </summary>
         PodcastV2,
+        /// <summary>
+        /// 
+        /// </summary>
+        PodcastV3,
     }
 
     /// <summary>
@@ -32,6 +36,7 @@ namespace Audra
             {
                 BatchSpeechRequestDeliveryProfile.Legacy => "legacy",
                 BatchSpeechRequestDeliveryProfile.PodcastV2 => "podcast_v2",
+                BatchSpeechRequestDeliveryProfile.PodcastV3 => "podcast_v3",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -44,6 +49,7 @@ namespace Audra
             {
                 "legacy" => BatchSpeechRequestDeliveryProfile.Legacy,
                 "podcast_v2" => BatchSpeechRequestDeliveryProfile.PodcastV2,
+                "podcast_v3" => BatchSpeechRequestDeliveryProfile.PodcastV3,
                 _ => null,
             };
         }
