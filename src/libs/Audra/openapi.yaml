@@ -395,7 +395,7 @@ components:
           default: mp3
         delivery_profile:
           type: string
-          enum: [legacy, podcast_v2]
+          enum: [legacy, podcast_v2, podcast_v3]
           description: Podcast pacing profile (slower speed + paragraph/sentence pauses)
 
     BatchSegment:
@@ -436,7 +436,7 @@ components:
           default: mp3
         delivery_profile:
           type: string
-          enum: [legacy, podcast_v2]
+          enum: [legacy, podcast_v2, podcast_v3]
         segments:
           type: array
           minItems: 1
