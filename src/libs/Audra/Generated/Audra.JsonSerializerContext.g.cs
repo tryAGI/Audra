@@ -21,6 +21,26 @@ namespace Audra
 
             typeof(global::Audra.JsonConverters.SpeechRequestDeliveryProfileNullableJsonConverter),
 
+            typeof(global::Audra.JsonConverters.SpeechRequestRenderModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechRequestRenderModeNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CaptionedSpeechRequestFormatJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CaptionedSpeechRequestFormatNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CaptionedSpeechRequestDeliveryProfileJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CaptionedSpeechRequestDeliveryProfileNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CaptionedSpeechRequestRenderModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CaptionedSpeechRequestRenderModeNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.PhonemizeRequestRenderModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.PhonemizeRequestRenderModeNullableJsonConverter),
+
             typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatJsonConverter),
 
             typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatNullableJsonConverter),
@@ -36,6 +56,10 @@ namespace Audra
             typeof(global::Audra.JsonConverters.CreateSpeechXAudraCommercialUseJsonConverter),
 
             typeof(global::Audra.JsonConverters.CreateSpeechXAudraCommercialUseNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CreateSpeechCaptionedXAudraCommercialUseJsonConverter),
+
+            typeof(global::Audra.JsonConverters.CreateSpeechCaptionedXAudraCommercialUseNullableJsonConverter),
 
             typeof(global::Audra.JsonConverters.CreateSpeechBatchXAudraCommercialUseJsonConverter),
 
@@ -53,6 +77,17 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestFormat), TypeInfoPropertyName = "SpeechRequestFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestDeliveryProfile), TypeInfoPropertyName = "SpeechRequestDeliveryProfile2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestRenderMode), TypeInfoPropertyName = "SpeechRequestRenderMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequestFormat), TypeInfoPropertyName = "CaptionedSpeechRequestFormat2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequestDeliveryProfile), TypeInfoPropertyName = "CaptionedSpeechRequestDeliveryProfile2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequestRenderMode), TypeInfoPropertyName = "CaptionedSpeechRequestRenderMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeRequestRenderMode), TypeInfoPropertyName = "PhonemizeRequestRenderMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.WordTimestamp))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionsPayload))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Audra.WordTimestamp>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSegment))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequestFormat), TypeInfoPropertyName = "BatchSpeechRequestFormat2")]
@@ -63,6 +98,7 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateBillingCheckoutRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateBillingCheckoutRequestPack), TypeInfoPropertyName = "CreateBillingCheckoutRequestPack2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateSpeechXAudraCommercialUse), TypeInfoPropertyName = "CreateSpeechXAudraCommercialUse2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateSpeechCaptionedXAudraCommercialUse), TypeInfoPropertyName = "CreateSpeechCaptionedXAudraCommercialUse2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateSpeechBatchXAudraCommercialUse), TypeInfoPropertyName = "CreateSpeechBatchXAudraCommercialUse2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.GetHealthResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(object))]
@@ -72,6 +108,7 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<string>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CreateBillingCheckoutResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Audra.WordTimestamp>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Audra.BatchSegment>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Audra.GetModelsResponseDataItem>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]

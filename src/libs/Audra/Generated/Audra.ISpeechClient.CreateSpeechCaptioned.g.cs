@@ -5,76 +5,64 @@ namespace Audra
     public partial interface ISpeechClient
     {
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech with word-level caption timestamps<br/>
+        /// Returns MP3/WAV plus estimated word timestamps in the `X-Captions-Json` response header.<br/>
+        /// Timestamps are duration-weighted estimates (not forced alignment). Max **50,000** characters.
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> CreateSpeechAsync(
+        global::System.Threading.Tasks.Task<byte[]> CreateSpeechCaptionedAsync(
 
-            global::Audra.SpeechRequest request,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CaptionedSpeechRequest request,
+            global::Audra.CreateSpeechCaptionedXAudraCommercialUse? xAudraCommercialUse = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech with word-level caption timestamps<br/>
+        /// Returns MP3/WAV plus estimated word timestamps in the `X-Captions-Json` response header.<br/>
+        /// Timestamps are duration-weighted estimates (not forced alignment). Max **50,000** characters.
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::System.IO.Stream> CreateSpeechAsStreamAsync(
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> CreateSpeechCaptionedAsStreamAsync(
 
-            global::Audra.SpeechRequest request,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CaptionedSpeechRequest request,
+            global::Audra.CreateSpeechCaptionedXAudraCommercialUse? xAudraCommercialUse = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech with word-level caption timestamps<br/>
+        /// Returns MP3/WAV plus estimated word timestamps in the `X-Captions-Json` response header.<br/>
+        /// Timestamps are duration-weighted estimates (not forced alignment). Max **50,000** characters.
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<byte[]>> CreateSpeechAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<byte[]>> CreateSpeechCaptionedAsResponseAsync(
 
-            global::Audra.SpeechRequest request,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CaptionedSpeechRequest request,
+            global::Audra.CreateSpeechCaptionedXAudraCommercialUse? xAudraCommercialUse = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Synthesize speech
+        /// Synthesize speech with word-level caption timestamps<br/>
+        /// Returns MP3/WAV plus estimated word timestamps in the `X-Captions-Json` response header.<br/>
+        /// Timestamps are duration-weighted estimates (not forced alignment). Max **50,000** characters.
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="model">
         /// Default Value: audra-core
         /// </param>
-        /// <param name="text">
-        /// Plain text, SSML subset, Kokoro-style pause tags (`[pause:1.5s]`),<br/>
-        /// or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
-        /// </param>
+        /// <param name="text"></param>
         /// <param name="voice">
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
-        /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
         /// Default Value: june
         /// </param>
         /// <param name="speed">
@@ -83,32 +71,24 @@ namespace Audra
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
-        /// <param name="deliveryProfile">
-        /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
-        /// </param>
+        /// <param name="deliveryProfile"></param>
         /// <param name="normalize">
-        /// When true (default), normalize URLs, emails, currency, and percent signs before synthesis.<br/>
-        /// Set false to pass text through unchanged (except pronunciation lexicon).<br/>
         /// Default Value: true
         /// </param>
-        /// <param name="renderMode">
-        /// `fast` (default) = Modal GPU. `standard` = Modal CPU.<br/>
-        /// Aliases `gpu` / `cpu` accepted.
-        /// </param>
+        /// <param name="renderMode"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> CreateSpeechAsync(
+        global::System.Threading.Tasks.Task<byte[]> CreateSpeechCaptionedAsync(
             string text,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+            global::Audra.CreateSpeechCaptionedXAudraCommercialUse? xAudraCommercialUse = default,
             string? model = default,
             string? voice = default,
             double? speed = default,
-            global::Audra.SpeechRequestFormat? format = default,
-            global::Audra.SpeechRequestDeliveryProfile? deliveryProfile = default,
+            global::Audra.CaptionedSpeechRequestFormat? format = default,
+            global::Audra.CaptionedSpeechRequestDeliveryProfile? deliveryProfile = default,
             bool? normalize = default,
-            global::Audra.SpeechRequestRenderMode? renderMode = default,
+            global::Audra.CaptionedSpeechRequestRenderMode? renderMode = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

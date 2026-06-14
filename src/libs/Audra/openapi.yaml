@@ -267,6 +267,88 @@ paths:
         '422':
           description: Render failed
 
+  /v2/speech/captioned:
+    post:
+      tags: [Speech]
+      summary: Synthesize speech with word-level caption timestamps
+      description: |
+        Returns MP3/WAV plus estimated word timestamps in the `X-Captions-Json` response header.
+        Timestamps are duration-weighted estimates (not forced alignment). Max **50,000** characters.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: X-Audra-Commercial-Use
+          schema:
+            type: string
+            enum: ['true', '1', 'yes']
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaptionedSpeechRequest'
+      responses:
+        '200':
+          description: Audio stream with caption metadata in headers
+          headers:
+            X-Chars-Processed:
+              schema:
+                type: integer
+            X-Caption-Words:
+              schema:
+                type: integer
+            X-Captions-Json:
+              schema:
+                type: string
+              description: JSON object with `words`, `duration_seconds`, `voice`, `g2p_backend`
+            X-Delivery-Profile:
+              schema:
+                type: string
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Text exceeds 50k captioned limit
+        '402':
+          description: Insufficient credits
+        '422':
+          description: Render failed
+
+  /v2/phonemize:
+    post:
+      tags: [Speech]
+      summary: Preview phoneme output for text (debug / tuning)
+      description: |
+        Returns the phoneme string Audra would feed Kokoro for the given voice.
+        Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
+        Max **10,000** characters. Does not consume credits.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhonemizeRequest'
+      responses:
+        '200':
+          description: Phonemization result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhonemizeResponse'
+        '400':
+          description: Invalid voice or text too long
+        '502':
+          description: TTS worker unavailable
+
   /v2/speech/batch:
     post:
       tags: [Speech]
@@ -377,7 +459,9 @@ components:
         text:
           type: string
           maxLength: 500000
-          description: Plain text or SSML
+          description: |
+            Plain text, SSML subset, Kokoro-style pause tags (`[pause:1.5s]`),
+            or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         voice:
           type: string
           default: june
@@ -397,6 +481,120 @@ components:
           type: string
           enum: [legacy, podcast_v2, podcast_v3]
           description: Podcast pacing profile (slower speed + paragraph/sentence pauses)
+        normalize:
+          type: boolean
+          default: true
+          description: |
+            When true (default), normalize URLs, emails, currency, and percent signs before synthesis.
+            Set false to pass text through unchanged (except pronunciation lexicon).
+        render_mode:
+          type: string
+          enum: [fast, standard, gpu, cpu]
+          description: |
+            `fast` (default) = Modal GPU. `standard` = Modal CPU.
+            Aliases `gpu` / `cpu` accepted.
+
+    CaptionedSpeechRequest:
+      type: object
+      required: [text]
+      properties:
+        model:
+          type: string
+          default: audra-core
+        text:
+          type: string
+          maxLength: 50000
+        voice:
+          type: string
+          default: june
+        speed:
+          type: number
+          default: 1.0
+          minimum: 0.5
+          maximum: 2.0
+        format:
+          type: string
+          enum: [mp3, wav]
+          default: mp3
+        delivery_profile:
+          type: string
+          enum: [legacy, podcast_v2, podcast_v3]
+        normalize:
+          type: boolean
+          default: true
+        render_mode:
+          type: string
+          enum: [fast, standard, gpu, cpu]
+
+    PhonemizeRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          maxLength: 10000
+        voice:
+          type: string
+          default: june
+        render_mode:
+          type: string
+          enum: [fast, standard, gpu, cpu]
+
+    WordTimestamp:
+      type: object
+      properties:
+        word:
+          type: string
+        start:
+          type: number
+          description: Start time in seconds
+        end:
+          type: number
+          description: End time in seconds
+
+    CaptionsPayload:
+      type: object
+      properties:
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/WordTimestamp'
+        duration_seconds:
+          type: number
+        voice:
+          type: string
+        delivery_profile:
+          type: string
+          nullable: true
+        g2p_backend:
+          type: string
+        alignment:
+          type: string
+          example: duration-weighted
+        alignment_note:
+          type: string
+
+    PhonemizeResponse:
+      type: object
+      properties:
+        input:
+          type: string
+          description: Text after normalization and pronunciation lexicon
+        phonemes:
+          type: string
+          nullable: true
+        is_phonemes:
+          type: boolean
+        backend:
+          type: string
+          description: Active G2P backend (e.g. misaki or espeak)
+        british:
+          type: boolean
+        voice_key:
+          type: string
+          nullable: true
+        supports_ipa_markup:
+          type: boolean
 
     BatchSegment:
       type: object
