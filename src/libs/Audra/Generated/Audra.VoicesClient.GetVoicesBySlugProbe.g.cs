@@ -3,10 +3,10 @@
 
 namespace Audra
 {
-    public partial class SpeechClient
+    public partial class VoicesClient
     {
 
-        private static readonly global::Audra.AutoSDKServer[] s_CreatePhonemizeServers = new global::Audra.AutoSDKServer[]
+        private static readonly global::Audra.AutoSDKServer[] s_GetVoicesBySlugProbeServers = new global::Audra.AutoSDKServer[]
         {            new global::Audra.AutoSDKServer(
                 id: "https-audratalks-com",
                 name: "Production",
@@ -20,7 +20,7 @@ namespace Audra
         };
 
 
-        private static readonly global::Audra.EndPointSecurityRequirement s_CreatePhonemizeSecurityRequirement0 =
+        private static readonly global::Audra.EndPointSecurityRequirement s_GetVoicesBySlugProbeSecurityRequirement0 =
             new global::Audra.EndPointSecurityRequirement
             {
                 Authorizations = new global::Audra.EndPointAuthorizationRequirement[]
@@ -34,45 +34,41 @@ namespace Audra
                     },
                 },
             };
-        private static readonly global::Audra.EndPointSecurityRequirement[] s_CreatePhonemizeSecurityRequirements =
+        private static readonly global::Audra.EndPointSecurityRequirement[] s_GetVoicesBySlugProbeSecurityRequirements =
             new global::Audra.EndPointSecurityRequirement[]
-            {                s_CreatePhonemizeSecurityRequirement0,
+            {                s_GetVoicesBySlugProbeSecurityRequirement0,
             };
-        partial void PrepareCreatePhonemizeArguments(
+        partial void PrepareGetVoicesBySlugProbeArguments(
             global::System.Net.Http.HttpClient httpClient,
-            global::Audra.PhonemizeRequest request);
-        partial void PrepareCreatePhonemizeRequest(
+            ref string slug);
+        partial void PrepareGetVoicesBySlugProbeRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            global::Audra.PhonemizeRequest request);
-        partial void ProcessCreatePhonemizeResponse(
+            string slug);
+        partial void ProcessGetVoicesBySlugProbeResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessCreatePhonemizeResponseContent(
+        partial void ProcessGetVoicesBySlugProbeResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref string content);
 
         /// <summary>
-        /// Preview phoneme output for text (debug / tuning)<br/>
-        /// Returns the phoneme string Audra Phonetics would use for the given voice.<br/>
-        /// Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.<br/>
-        /// Max **10,000** characters. Does not consume credits.
+        /// Rate-limited voice health sample (no credits charged)<br/>
+        /// Renders a 50-character sample via CPU worker. Limited to 10 probes per account per day.
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="slug"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Audra.PhonemizeResponse> CreatePhonemizeAsync(
-
-            global::Audra.PhonemizeRequest request,
+        public async global::System.Threading.Tasks.Task<global::Audra.VoiceProbeResponse> GetVoicesBySlugProbeAsync(
+            string slug,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await CreatePhonemizeAsResponseAsync(
-
-                request: request,
+            var __response = await GetVoicesBySlugProbeAsResponseAsync(
+                slug: slug,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -80,34 +76,29 @@ namespace Audra
             return __response.Body;
         }
         /// <summary>
-        /// Preview phoneme output for text (debug / tuning)<br/>
-        /// Returns the phoneme string Audra Phonetics would use for the given voice.<br/>
-        /// Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.<br/>
-        /// Max **10,000** characters. Does not consume credits.
+        /// Rate-limited voice health sample (no credits charged)<br/>
+        /// Renders a 50-character sample via CPU worker. Limited to 10 probes per account per day.
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="slug"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<global::Audra.PhonemizeResponse>> CreatePhonemizeAsResponseAsync(
-
-            global::Audra.PhonemizeRequest request,
+        public async global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<global::Audra.VoiceProbeResponse>> GetVoicesBySlugProbeAsResponseAsync(
+            string slug,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            request = request ?? throw new global::System.ArgumentNullException(nameof(request));
-
             PrepareArguments(
                 client: HttpClient);
-            PrepareCreatePhonemizeArguments(
+            PrepareGetVoicesBySlugProbeArguments(
                 httpClient: HttpClient,
-                request: request);
+                slug: ref slug);
 
 
             var __authorizations = global::Audra.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_CreatePhonemizeSecurityRequirements,
-                operationName: "CreatePhonemizeAsync");
+                securityRequirements: s_GetVoicesBySlugProbeSecurityRequirements,
+                operationName: "GetVoicesBySlugProbeAsync");
 
             using var __timeoutCancellationTokenSource = global::Audra.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -127,9 +118,9 @@ namespace Audra
             {
 
                             var __pathBuilder = new global::Audra.PathBuilder(
-                                path: "/v2/phonemize",
+                                path: $"/v2/voices/{slug}/probe",
                                 baseUri: ResolveBaseUri(
-                                servers: s_CreatePhonemizeServers,
+                                servers: s_GetVoicesBySlugProbeServers,
                                 defaultBaseUrl: "https://audratalks.com/"));
                             var __path = __pathBuilder.ToString();
                 __path = global::Audra.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -137,7 +128,7 @@ namespace Audra
                     clientParameters: Options.QueryParameters,
                     requestParameters: requestOptions?.QueryParameters);
                 var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
-                    method: global::System.Net.Http.HttpMethod.Post,
+                    method: global::System.Net.Http.HttpMethod.Get,
                     requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
 #if NET6_0_OR_GREATER
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
@@ -160,12 +151,6 @@ namespace Audra
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
-                            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
-                            var __httpRequestContent = new global::System.Net.Http.StringContent(
-                                content: __httpRequestContentBody,
-                                encoding: global::System.Text.Encoding.UTF8,
-                                mediaType: "application/json");
-                            __httpRequest.Content = __httpRequestContent;
                 global::Audra.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
                     clientHeaders: Options.Headers,
@@ -174,10 +159,10 @@ namespace Audra
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareCreatePhonemizeRequest(
+                PrepareGetVoicesBySlugProbeRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    request: request);
+                    slug: slug!);
 
                 return __httpRequest;
             }
@@ -194,10 +179,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createPhonemize",
-                                methodName: "CreatePhonemizeAsync",
-                                pathTemplate: "\"/v2/phonemize\"",
-                                httpMethod: "POST",
+                                operationId: "getVoicesBySlugProbe",
+                                methodName: "GetVoicesBySlugProbeAsync",
+                                pathTemplate: "$\"/v2/voices/{slug}/probe\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -228,10 +213,10 @@ namespace Audra
                         await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createPhonemize",
-                                methodName: "CreatePhonemizeAsync",
-                                pathTemplate: "\"/v2/phonemize\"",
-                                httpMethod: "POST",
+                                operationId: "getVoicesBySlugProbe",
+                                methodName: "GetVoicesBySlugProbeAsync",
+                                pathTemplate: "$\"/v2/voices/{slug}/probe\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -269,10 +254,10 @@ namespace Audra
                         await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createPhonemize",
-                                methodName: "CreatePhonemizeAsync",
-                                pathTemplate: "\"/v2/phonemize\"",
-                                httpMethod: "POST",
+                                operationId: "getVoicesBySlugProbe",
+                                methodName: "GetVoicesBySlugProbeAsync",
+                                pathTemplate: "$\"/v2/voices/{slug}/probe\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -309,7 +294,7 @@ namespace Audra
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessCreatePhonemizeResponse(
+                ProcessGetVoicesBySlugProbeResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -317,10 +302,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createPhonemize",
-                                methodName: "CreatePhonemizeAsync",
-                                pathTemplate: "\"/v2/phonemize\"",
-                                httpMethod: "POST",
+                                operationId: "getVoicesBySlugProbe",
+                                methodName: "GetVoicesBySlugProbeAsync",
+                                pathTemplate: "$\"/v2/voices/{slug}/probe\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -339,10 +324,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createPhonemize",
-                                methodName: "CreatePhonemizeAsync",
-                                pathTemplate: "\"/v2/phonemize\"",
-                                httpMethod: "POST",
+                                operationId: "getVoicesBySlugProbe",
+                                methodName: "GetVoicesBySlugProbeAsync",
+                                pathTemplate: "$\"/v2/voices/{slug}/probe\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -383,6 +368,70 @@ namespace Audra
                                     message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_400,
                                     responseBody: __content_400,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+                            // 
+                            if ((int)__response.StatusCode == 429)
+                            {
+                                string? __content_429 = null;
+                                global::System.Exception? __exception_429 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_429 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                    else
+                                    {
+                                        __content_429 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_429 = __ex;
+                                }
+
+
+                                throw global::Audra.ApiException.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_429 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_429,
+                                    responseBody: __content_429,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+                            // 
+                            if ((int)__response.StatusCode == 422)
+                            {
+                                string? __content_422 = null;
+                                global::System.Exception? __exception_422 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                    else
+                                    {
+                                        __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_422 = __ex;
+                                }
+
+
+                                throw global::Audra.ApiException.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_422 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_422,
+                                    responseBody: __content_422,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -433,7 +482,7 @@ namespace Audra
                                     client: HttpClient,
                                     response: __response,
                                     content: ref __content);
-                                ProcessCreatePhonemizeResponseContent(
+                                ProcessGetVoicesBySlugProbeResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -442,9 +491,9 @@ namespace Audra
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    var __value = global::Audra.PhonemizeResponse.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::Audra.VoiceProbeResponse.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
-                                    return new global::Audra.AutoSDKHttpResponse<global::Audra.PhonemizeResponse>(
+                                    return new global::Audra.AutoSDKHttpResponse<global::Audra.VoiceProbeResponse>(
                                         statusCode: __response.StatusCode,
                                         headers: global::Audra.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
@@ -474,9 +523,9 @@ namespace Audra
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    var __value = await global::Audra.PhonemizeResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::Audra.VoiceProbeResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
-                                    return new global::Audra.AutoSDKHttpResponse<global::Audra.PhonemizeResponse>(
+                                    return new global::Audra.AutoSDKHttpResponse<global::Audra.VoiceProbeResponse>(
                                         statusCode: __response.StatusCode,
                                         headers: global::Audra.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
@@ -515,39 +564,6 @@ namespace Audra
             {
                 __httpRequest?.Dispose();
             }
-        }
-        /// <summary>
-        /// Preview phoneme output for text (debug / tuning)<br/>
-        /// Returns the phoneme string Audra Phonetics would use for the given voice.<br/>
-        /// Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.<br/>
-        /// Max **10,000** characters. Does not consume credits.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="voice">
-        /// Default Value: june
-        /// </param>
-        /// <param name="renderMode"></param>
-        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
-        /// <param name="cancellationToken">The token to cancel the operation with</param>
-        /// <exception cref="global::System.InvalidOperationException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Audra.PhonemizeResponse> CreatePhonemizeAsync(
-            string text,
-            string? voice = default,
-            global::Audra.PhonemizeRequestRenderMode? renderMode = default,
-            global::Audra.AutoSDKRequestOptions? requestOptions = default,
-            global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            var __request = new global::Audra.PhonemizeRequest
-            {
-                Text = text,
-                Voice = voice,
-                RenderMode = renderMode,
-            };
-
-            return await CreatePhonemizeAsync(
-                request: __request,
-                requestOptions: requestOptions,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }

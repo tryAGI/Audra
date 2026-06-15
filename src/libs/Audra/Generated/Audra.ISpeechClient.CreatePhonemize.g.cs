@@ -6,7 +6,7 @@ namespace Audra
     {
         /// <summary>
         /// Preview phoneme output for text (debug / tuning)<br/>
-        /// Returns the phoneme string Audra would feed Kokoro for the given voice.<br/>
+        /// Returns the phoneme string Audra Phonetics would use for the given voice.<br/>
         /// Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.<br/>
         /// Max **10,000** characters. Does not consume credits.
         /// </summary>
@@ -21,7 +21,7 @@ namespace Audra
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Preview phoneme output for text (debug / tuning)<br/>
-        /// Returns the phoneme string Audra would feed Kokoro for the given voice.<br/>
+        /// Returns the phoneme string Audra Phonetics would use for the given voice.<br/>
         /// Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.<br/>
         /// Max **10,000** characters. Does not consume credits.
         /// </summary>
@@ -36,7 +36,7 @@ namespace Audra
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Preview phoneme output for text (debug / tuning)<br/>
-        /// Returns the phoneme string Audra would feed Kokoro for the given voice.<br/>
+        /// Returns the phoneme string Audra Phonetics would use for the given voice.<br/>
         /// Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.<br/>
         /// Max **10,000** characters. Does not consume credits.
         /// </summary>

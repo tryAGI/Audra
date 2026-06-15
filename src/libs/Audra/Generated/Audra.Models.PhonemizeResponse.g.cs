@@ -27,7 +27,7 @@ namespace Audra
         public bool? IsPhonemes { get; set; }
 
         /// <summary>
-        /// Active G2P backend (e.g. misaki or espeak)
+        /// Active G2P backend (e.g. audra-phonetics)
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("backend")]
         public string? Backend { get; set; }
@@ -65,7 +65,7 @@ namespace Audra
         /// <param name="phonemes"></param>
         /// <param name="isPhonemes"></param>
         /// <param name="backend">
-        /// Active G2P backend (e.g. misaki or espeak)
+        /// Active G2P backend (e.g. audra-phonetics)
         /// </param>
         /// <param name="british"></param>
         /// <param name="voiceKey"></param>

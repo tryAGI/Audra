@@ -4,17 +4,10 @@
 namespace Audra
 {
     /// <summary>
-    /// Audra-native text-to-speech API with credit-based billing.<br/>
-    /// **Model:** `audra-core` — standard tier, voice mixing, SSML subset, designed voices.<br/>
-    /// **Commercial use:** Free trial is evaluation-only. After purchasing credits, send<br/>
-    /// `X-Audra-Commercial-Use: true` on production renders. Paid accounts receive<br/>
-    /// `X-Commercial-Allowed: true` on successful speech responses.<br/>
-    /// **Legacy v1:** `/v1/*` remains available with `Deprecation` and `Sunset` headers until sunset.<br/>
-    /// See `/docs/v2` and `docs/MIGRATION_V1_V2.md`.<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
-    public partial interface IAudraClient : global::System.IDisposable
+    public partial interface IVoicesClient : global::System.IDisposable
     {
         /// <summary>
         /// The HttpClient instance.
@@ -75,36 +68,6 @@ namespace Audra
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public AuthClient Auth { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BillingClient Billing { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LexiconClient Lexicon { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public MetaClient Meta { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public SpeechClient Speech { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public VoicesClient Voices { get; }
 
     }
 }
