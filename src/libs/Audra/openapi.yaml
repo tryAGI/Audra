@@ -326,7 +326,7 @@ paths:
       tags: [Speech]
       summary: Preview phoneme output for text (debug / tuning)
       description: |
-        Returns the phoneme string Audra would feed Kokoro for the given voice.
+        Returns the phoneme string Audra Phonetics would use for the given voice.
         Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         Max **10,000** characters. Does not consume credits.
       security:
@@ -346,6 +346,92 @@ paths:
                 $ref: '#/components/schemas/PhonemizeResponse'
         '400':
           description: Invalid voice or text too long
+        '502':
+          description: TTS worker unavailable
+
+  /v2/lexicon:
+    get:
+      tags: [Lexicon]
+      summary: List per-account pronunciation overrides
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lexicon entries for the authenticated account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LexiconResponse'
+    put:
+      tags: [Lexicon]
+      summary: Replace per-account pronunciation overrides
+      description: Max 100 entries per account. Applied before shared finance lexicon on all speech renders.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LexiconPutRequest'
+      responses:
+        '200':
+          description: Saved lexicon
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LexiconResponse'
+        '400':
+          description: Validation error or limit exceeded
+
+  /v2/lexicon/{term}:
+    delete:
+      tags: [Lexicon]
+      summary: Delete one pronunciation override by term
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: term
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Term removed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LexiconResponse'
+        '404':
+          description: Term not found
+
+  /v2/voices/{slug}/probe:
+    get:
+      tags: [Voices]
+      summary: Rate-limited voice health sample (no credits charged)
+      description: Renders a 50-character sample via CPU worker. Limited to 10 probes per account per day.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Probe result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceProbeResponse'
+        '400':
+          description: Invalid voice slug
+        '429':
+          description: Daily probe limit exceeded
+        '422':
+          description: QA check failed
         '502':
           description: TTS worker unavailable
 
@@ -460,7 +546,7 @@ components:
           type: string
           maxLength: 500000
           description: |
-            Plain text, SSML subset, Kokoro-style pause tags (`[pause:1.5s]`),
+            Plain text, SSML subset, Audra pause tags (`[pause:1.5s]`),
             or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         voice:
           type: string
@@ -587,7 +673,7 @@ components:
           type: boolean
         backend:
           type: string
-          description: Active G2P backend (e.g. misaki or espeak)
+          description: Active G2P backend (e.g. audra-phonetics)
         british:
           type: boolean
         voice_key:
@@ -628,6 +714,14 @@ components:
           default: 1.0
           minimum: 0.5
           maximum: 2.0
+        crossfade_ms:
+          type: integer
+          default: 50
+          minimum: 0
+          maximum: 200
+          description: >
+            Crossfade duration between segments (ms). Pauses under 300ms use crossfade
+            instead of inserted silence for smoother podcast beats.
         format:
           type: string
           enum: [mp3, wav]
@@ -641,6 +735,59 @@ components:
           maxItems: 64
           items:
             $ref: '#/components/schemas/BatchSegment'
+
+    LexiconEntry:
+      type: object
+      required: [term, spoken]
+      properties:
+        term:
+          type: string
+          maxLength: 64
+          description: Word or phrase to match (case-insensitive word boundary)
+        spoken:
+          type: string
+          maxLength: 120
+          description: Speakable replacement text
+
+    LexiconPutRequest:
+      type: object
+      required: [entries]
+      properties:
+        entries:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/LexiconEntry'
+
+    LexiconResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/LexiconEntry'
+        max_entries:
+          type: integer
+          example: 100
+
+    VoiceProbeResponse:
+      type: object
+      properties:
+        slug:
+          type: string
+        ok:
+          type: boolean
+        duration_ms:
+          type: integer
+        qa_passed:
+          type: boolean
+          nullable: true
+        render_backend:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
 
     PublicStats:
       type: object

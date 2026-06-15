@@ -1023,6 +1023,10 @@ namespace Audra
         /// <param name="speed">
         /// Default Value: 1.0
         /// </param>
+        /// <param name="crossfadeMs">
+        /// Crossfade duration between segments (ms). Pauses under 300ms use crossfade instead of inserted silence for smoother podcast beats.<br/>
+        /// Default Value: 50
+        /// </param>
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
@@ -1038,6 +1042,7 @@ namespace Audra
             string? model = default,
             string? voice = default,
             double? speed = default,
+            int? crossfadeMs = default,
             global::Audra.BatchSpeechRequestFormat? format = default,
             global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
@@ -1048,6 +1053,7 @@ namespace Audra
                 Model = model,
                 Voice = voice,
                 Speed = speed,
+                CrossfadeMs = crossfadeMs,
                 Format = format,
                 DeliveryProfile = deliveryProfile,
                 Segments = segments,

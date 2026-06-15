@@ -15,7 +15,7 @@ namespace Audra
         public string? Model { get; set; }
 
         /// <summary>
-        /// Plain text, SSML subset, Kokoro-style pause tags (`[pause:1.5s]`),<br/>
+        /// Plain text, SSML subset, Audra pause tags (`[pause:1.5s]`),<br/>
         /// or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("text")]
@@ -76,7 +76,7 @@ namespace Audra
         /// Initializes a new instance of the <see cref="SpeechRequest" /> class.
         /// </summary>
         /// <param name="text">
-        /// Plain text, SSML subset, Kokoro-style pause tags (`[pause:1.5s]`),<br/>
+        /// Plain text, SSML subset, Audra pause tags (`[pause:1.5s]`),<br/>
         /// or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         /// </param>
         /// <param name="model">

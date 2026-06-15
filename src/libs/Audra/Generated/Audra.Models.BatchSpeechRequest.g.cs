@@ -27,6 +27,13 @@ namespace Audra
         public double? Speed { get; set; }
 
         /// <summary>
+        /// Crossfade duration between segments (ms). Pauses under 300ms use crossfade instead of inserted silence for smoother podcast beats.<br/>
+        /// Default Value: 50
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("crossfade_ms")]
+        public int? CrossfadeMs { get; set; }
+
+        /// <summary>
         /// Default Value: mp3
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("format")]
@@ -66,6 +73,10 @@ namespace Audra
         /// <param name="speed">
         /// Default Value: 1.0
         /// </param>
+        /// <param name="crossfadeMs">
+        /// Crossfade duration between segments (ms). Pauses under 300ms use crossfade instead of inserted silence for smoother podcast beats.<br/>
+        /// Default Value: 50
+        /// </param>
         /// <param name="format">
         /// Default Value: mp3
         /// </param>
@@ -78,12 +89,14 @@ namespace Audra
             string? model,
             string? voice,
             double? speed,
+            int? crossfadeMs,
             global::Audra.BatchSpeechRequestFormat? format,
             global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile)
         {
             this.Model = model;
             this.Voice = voice;
             this.Speed = speed;
+            this.CrossfadeMs = crossfadeMs;
             this.Format = format;
             this.DeliveryProfile = deliveryProfile;
             this.Segments = segments ?? throw new global::System.ArgumentNullException(nameof(segments));

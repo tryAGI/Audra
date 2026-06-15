@@ -4,17 +4,10 @@
 namespace Audra
 {
     /// <summary>
-    /// Audra-native text-to-speech API with credit-based billing.<br/>
-    /// **Model:** `audra-core` — standard tier, voice mixing, SSML subset, designed voices.<br/>
-    /// **Commercial use:** Free trial is evaluation-only. After purchasing credits, send<br/>
-    /// `X-Audra-Commercial-Use: true` on production renders. Paid accounts receive<br/>
-    /// `X-Commercial-Allowed: true` on successful speech responses.<br/>
-    /// **Legacy v1:** `/v1/*` remains available with `Deprecation` and `Sunset` headers until sunset.<br/>
-    /// See `/docs/v2` and `docs/MIGRATION_V1_V2.md`.<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
-    public sealed partial class AudraClient : global::Audra.IAudraClient, global::System.IDisposable
+    public sealed partial class LexiconClient : global::Audra.ILexiconClient, global::System.IDisposable
     {
         /// <summary>
         /// Production
@@ -53,72 +46,6 @@ namespace Audra
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; } = global::Audra.SourceGenerationContext.Default;
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public AuthClient Auth => new AuthClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            CreateIdempotencyKey = CreateIdempotencyKey,
-            JsonSerializerContext = JsonSerializerContext,
-            AutoSDKServerConfiguration = AutoSDKServerConfiguration,
-        };
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BillingClient Billing => new BillingClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            CreateIdempotencyKey = CreateIdempotencyKey,
-            JsonSerializerContext = JsonSerializerContext,
-            AutoSDKServerConfiguration = AutoSDKServerConfiguration,
-        };
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LexiconClient Lexicon => new LexiconClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            CreateIdempotencyKey = CreateIdempotencyKey,
-            JsonSerializerContext = JsonSerializerContext,
-            AutoSDKServerConfiguration = AutoSDKServerConfiguration,
-        };
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public MetaClient Meta => new MetaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            CreateIdempotencyKey = CreateIdempotencyKey,
-            JsonSerializerContext = JsonSerializerContext,
-            AutoSDKServerConfiguration = AutoSDKServerConfiguration,
-        };
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public SpeechClient Speech => new SpeechClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            CreateIdempotencyKey = CreateIdempotencyKey,
-            JsonSerializerContext = JsonSerializerContext,
-            AutoSDKServerConfiguration = AutoSDKServerConfiguration,
-        };
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public VoicesClient Voices => new VoicesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            CreateIdempotencyKey = CreateIdempotencyKey,
-            JsonSerializerContext = JsonSerializerContext,
-            AutoSDKServerConfiguration = AutoSDKServerConfiguration,
-        };
-
 
         private static readonly global::Audra.AutoSDKServer[] s_availableServers = new global::Audra.AutoSDKServer[]
         {            new global::Audra.AutoSDKServer(
@@ -148,7 +75,7 @@ namespace Audra
         }
 
         /// <summary>
-        /// Creates a new instance of the AudraClient.
+        /// Creates a new instance of the LexiconClient.
         /// If no httpClient is provided, a new one will be created.
         /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
         /// </summary>
@@ -156,7 +83,7 @@ namespace Audra
         /// <param name="baseUri">The base URL for the API. If not provided, the default baseUri from OpenAPI spec will be used.</param>
         /// <param name="authorizations">The authorizations to use for the requests.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
-        public AudraClient(
+        public LexiconClient(
             global::System.Net.Http.HttpClient? httpClient = null,
             global::System.Uri? baseUri = null,
             global::System.Collections.Generic.List<global::Audra.EndPointAuthorization>? authorizations = null,
@@ -170,14 +97,14 @@ namespace Audra
         }
 
         /// <summary>
-        /// Creates a new instance of the AudraClient with explicit options but no base URL override.
+        /// Creates a new instance of the LexiconClient with explicit options but no base URL override.
         /// Skips passing <c>baseUri</c> so the default base URL from the OpenAPI spec applies.
         /// </summary>
         /// <param name="httpClient">The HttpClient instance. If not provided, a new one will be created.</param>
         /// <param name="authorizations">The authorizations to use for the requests.</param>
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
-        public AudraClient(
+        public LexiconClient(
             global::System.Net.Http.HttpClient? httpClient,
             global::System.Collections.Generic.List<global::Audra.EndPointAuthorization>? authorizations,
             global::Audra.AutoSDKClientOptions? options,
@@ -191,7 +118,7 @@ namespace Audra
         }
 
         /// <summary>
-        /// Creates a new instance of the AudraClient.
+        /// Creates a new instance of the LexiconClient.
         /// If no httpClient is provided, a new one will be created.
         /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
         /// </summary>
@@ -200,7 +127,7 @@ namespace Audra
         /// <param name="authorizations">The authorizations to use for the requests.</param>
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
-        public AudraClient(
+        public LexiconClient(
             global::System.Net.Http.HttpClient? httpClient,
             global::System.Uri? baseUri,
             global::System.Collections.Generic.List<global::Audra.EndPointAuthorization>? authorizations,

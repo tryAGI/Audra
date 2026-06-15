@@ -1082,7 +1082,7 @@ namespace Audra
         /// Default Value: audra-core
         /// </param>
         /// <param name="text">
-        /// Plain text, SSML subset, Kokoro-style pause tags (`[pause:1.5s]`),<br/>
+        /// Plain text, SSML subset, Audra pause tags (`[pause:1.5s]`),<br/>
         /// or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         /// </param>
         /// <param name="voice">
