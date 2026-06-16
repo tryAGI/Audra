@@ -40,6 +40,13 @@ using Audra;
 using var client = new AudraClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global Audra.CLI --prerelease
+audra api --help
+```
+
 Audra also exposes an OpenAI-compatible `/v1/audio/speech` path for drop-in
 migrations. This SDK targets Audra's native `/v2` API, which includes provider
 specific features such as batch speech jobs, voice metadata, usage, billing, and

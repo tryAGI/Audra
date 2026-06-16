@@ -56,3 +56,22 @@ autosdk generate openapi.yaml \
   --api-key-env AUDRA_API_KEY \
   --ignore-openapi-errors \
   --exclude-deprecated-operations
+
+rm -rf ../../cli/Audra.CLI
+
+autosdk cli-project openapi.yaml \
+  --output ../../cli/Audra.CLI \
+  --sdk-project ../../libs/Audra/Audra.csproj \
+  --targetFramework net10.0 \
+  --namespace Audra \
+  --clientClassName AudraClient \
+  --package-id Audra.CLI \
+  --tool-command-name audra \
+  --user-secrets-id Audra.CLI \
+  --api-key-env-var AUDRA_API_KEY \
+  --base-url-env-var AUDRA_BASE_URL \
+  --cli-credential-file \
+  --cli-keep-api-group \
+  --exclude-deprecated-operations \
+  --security-scheme Http:Header:Bearer \
+  --ignore-openapi-errors
