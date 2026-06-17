@@ -24,14 +24,12 @@ internal static class CliRuntime
             ? new global::System.Collections.Generic.List<global::Audra.EndPointAuthorization>()
             : new global::System.Collections.Generic.List<global::Audra.EndPointAuthorization>
             {
-        new global::Audra.EndPointAuthorization
-        {
-            Type = "Http",
-            SchemeId = "HttpBearer",
-            Location = "Header",
-            Name = "Bearer",
-            Value = apiKey,
-        },
+        CreateAuthorization(
+            type: "Http",
+            schemeId: "HttpBearer",
+            location: "Header",
+            name: "Bearer",
+            value: apiKey),
             };
         var baseUri = ResolveBaseUri(parseResult);
 
@@ -40,6 +38,30 @@ internal static class CliRuntime
             baseUri: baseUri,
             authorizations: authorizations,
             disposeHttpClient: true);
+    }
+
+    private static global::Audra.EndPointAuthorization CreateAuthorization(
+        string type,
+        string schemeId,
+        string location,
+        string name,
+        string value)
+    {
+        var authorization = new global::Audra.EndPointAuthorization
+        {
+            Type = type,
+            Location = location,
+            Name = name,
+            Value = value,
+        };
+
+        var schemeIdProperty = typeof(global::Audra.EndPointAuthorization).GetProperty("SchemeId");
+        if (schemeIdProperty?.CanWrite == true)
+        {
+            schemeIdProperty.SetValue(authorization, schemeId);
+        }
+
+        return authorization;
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
