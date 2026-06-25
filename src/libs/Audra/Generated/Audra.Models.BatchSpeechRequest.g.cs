@@ -9,7 +9,7 @@ namespace Audra
     public sealed partial class BatchSpeechRequest
     {
         /// <summary>
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
@@ -65,7 +65,7 @@ namespace Audra
         /// </summary>
         /// <param name="segments"></param>
         /// <param name="model">
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </param>
         /// <param name="voice">
         /// Default Value: june

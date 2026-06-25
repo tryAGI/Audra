@@ -5,7 +5,8 @@ info:
   description: |
     Audra-native text-to-speech API with credit-based billing.
 
-    **Model:** `audra-core` — standard tier, voice mixing, SSML subset, designed voices.
+    **Models:** `audra-essential` (Essential), `audra-plus` (Plus), `audra-pro` (Pro), `audra-conversations` (Conversations).
+    Legacy ids (`audra-essential`, `audra-studio-lite`, `audra-studio`, `audra-studio-dialogue`) remain accepted and resolve to the canonical ids above.
 
     **Commercial use:** Free trial is evaluation-only. After purchasing credits, send
     `X-Audra-Commercial-Use: true` on production renders. Paid accounts receive
@@ -129,7 +130,7 @@ paths:
                       properties:
                         id:
                           type: string
-                          example: audra-core
+                          example: audra-essential
                         tier:
                           type: string
                           example: standard
@@ -241,7 +242,7 @@ paths:
             X-Audra-Model:
               schema:
                 type: string
-                example: audra-core
+                example: audra-essential
             X-Audra-Voice:
               schema:
                 type: string
@@ -541,7 +542,7 @@ components:
       properties:
         model:
           type: string
-          default: audra-core
+          default: audra-essential
         text:
           type: string
           maxLength: 500000
@@ -586,7 +587,7 @@ components:
       properties:
         model:
           type: string
-          default: audra-core
+          default: audra-essential
         text:
           type: string
           maxLength: 50000
@@ -705,7 +706,7 @@ components:
       properties:
         model:
           type: string
-          default: audra-core
+          default: audra-essential
         voice:
           type: string
           default: june
