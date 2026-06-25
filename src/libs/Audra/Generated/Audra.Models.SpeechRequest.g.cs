@@ -9,7 +9,7 @@ namespace Audra
     public sealed partial class SpeechRequest
     {
         /// <summary>
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
@@ -80,7 +80,7 @@ namespace Audra
         /// or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
         /// </param>
         /// <param name="model">
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </param>
         /// <param name="voice">
         /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>

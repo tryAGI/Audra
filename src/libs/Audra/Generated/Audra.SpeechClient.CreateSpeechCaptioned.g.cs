@@ -993,7 +993,7 @@ namespace Audra
         /// </summary>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="model">
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </param>
         /// <param name="text"></param>
         /// <param name="voice">

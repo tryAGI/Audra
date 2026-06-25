@@ -66,7 +66,7 @@ namespace Audra
         /// </param>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="model">
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </param>
         /// <param name="voice">
         /// Default Value: june

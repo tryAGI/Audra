@@ -9,7 +9,7 @@ namespace Audra
     public sealed partial class CaptionedSpeechRequest
     {
         /// <summary>
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
@@ -71,7 +71,7 @@ namespace Audra
         /// </summary>
         /// <param name="text"></param>
         /// <param name="model">
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </param>
         /// <param name="voice">
         /// Default Value: june

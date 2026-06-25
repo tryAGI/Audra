@@ -66,7 +66,7 @@ namespace Audra
         /// </param>
         /// <param name="xAudraCommercialUse"></param>
         /// <param name="model">
-        /// Default Value: audra-core
+        /// Default Value: audra-essential
         /// </param>
         /// <param name="text">
         /// Plain text, SSML subset, Audra pause tags (`[pause:1.5s]`),<br/>

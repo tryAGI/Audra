@@ -9,9 +9,9 @@ namespace Audra
     public sealed partial class GetModelsResponseDataItem
     {
         /// <summary>
-        /// Example: audra-core
+        /// Example: audra-essential
         /// </summary>
-        /// <example>audra-core</example>
+        /// <example>audra-essential</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("id")]
         public string? Id { get; set; }
 
@@ -38,7 +38,7 @@ namespace Audra
         /// Initializes a new instance of the <see cref="GetModelsResponseDataItem" /> class.
         /// </summary>
         /// <param name="id">
-        /// Example: audra-core
+        /// Example: audra-essential
         /// </param>
         /// <param name="tier">
         /// Example: standard

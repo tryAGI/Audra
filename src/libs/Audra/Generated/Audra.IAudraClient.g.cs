@@ -5,7 +5,8 @@ namespace Audra
 {
     /// <summary>
     /// Audra-native text-to-speech API with credit-based billing.<br/>
-    /// **Model:** `audra-core` — standard tier, voice mixing, SSML subset, designed voices.<br/>
+    /// **Models:** `audra-essential` (Essential), `audra-plus` (Plus), `audra-pro` (Pro), `audra-conversations` (Conversations).<br/>
+    /// Legacy ids (`audra-essential`, `audra-studio-lite`, `audra-studio`, `audra-studio-dialogue`) remain accepted and resolve to the canonical ids above.<br/>
     /// **Commercial use:** Free trial is evaluation-only. After purchasing credits, send<br/>
     /// `X-Audra-Commercial-Use: true` on production renders. Paid accounts receive<br/>
     /// `X-Commercial-Allowed: true` on successful speech responses.<br/>
