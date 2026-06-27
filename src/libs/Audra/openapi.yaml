@@ -566,7 +566,7 @@ components:
           default: mp3
         delivery_profile:
           type: string
-          enum: [legacy, podcast_v2, podcast_v3]
+          enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
           description: Podcast pacing profile (slower speed + paragraph/sentence pauses)
         normalize:
           type: boolean
@@ -605,7 +605,7 @@ components:
           default: mp3
         delivery_profile:
           type: string
-          enum: [legacy, podcast_v2, podcast_v3]
+          enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
         normalize:
           type: boolean
           default: true
@@ -666,12 +666,20 @@ components:
       properties:
         input:
           type: string
-          description: Text after normalization and pronunciation lexicon
+          description: |
+            Text after normalization and pronunciation lexicon — what synthesis speaks from.
+            When is_phonemes is true, this is the IPA phoneme string passed to Kokoro.
         phonemes:
           type: string
           nullable: true
+          description: |
+            IPA phoneme string when is_phonemes is true. Null on the text path — G2P still runs
+            inside synthesis; null does not mean phonemization was skipped.
         is_phonemes:
           type: boolean
+          description: |
+            True when input is an IPA phoneme string for direct synthesis. False when input is
+            normalized text and G2P runs during render.
         backend:
           type: string
           description: Active G2P backend (e.g. audra-phonetics)
@@ -682,6 +690,16 @@ components:
           nullable: true
         supports_ipa_markup:
           type: boolean
+          description: True when Kokoro v1 inline [word](/ipa/) markup is supported on this worker.
+        has_ipa_markup:
+          type: boolean
+          description: True when input contains inline IPA markup from the pronunciation lexicon.
+        synthesis_path:
+          type: string
+          enum: [phonemes, ipa_markup, text]
+          description: |
+            phonemes — direct IPA synthesis; ipa_markup — lexicon [word](/ipa/) in input;
+            text — normalized speakable text with runtime G2P.
 
     BatchSegment:
       type: object
@@ -729,7 +747,7 @@ components:
           default: mp3
         delivery_profile:
           type: string
-          enum: [legacy, podcast_v2, podcast_v3]
+          enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
         segments:
           type: array
           minItems: 1
@@ -785,6 +803,8 @@ components:
           nullable: true
         render_backend:
           type: string
+          description: Tier that rendered audio (`audra-essential`, `audra-plus`, `audra-pro`, `audra-conversations`).
+          example: audra-essential
         code:
           type: string
         message:

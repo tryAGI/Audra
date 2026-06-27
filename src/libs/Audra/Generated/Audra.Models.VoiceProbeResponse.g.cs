@@ -33,8 +33,10 @@ namespace Audra
         public bool? QaPassed { get; set; }
 
         /// <summary>
-        /// 
+        /// Tier that rendered audio (`audra-essential`, `audra-plus`, `audra-pro`, `audra-conversations`).<br/>
+        /// Example: audra-essential
         /// </summary>
+        /// <example>audra-essential</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("render_backend")]
         public string? RenderBackend { get; set; }
 
@@ -63,7 +65,10 @@ namespace Audra
         /// <param name="ok"></param>
         /// <param name="durationMs"></param>
         /// <param name="qaPassed"></param>
-        /// <param name="renderBackend"></param>
+        /// <param name="renderBackend">
+        /// Tier that rendered audio (`audra-essential`, `audra-plus`, `audra-pro`, `audra-conversations`).<br/>
+        /// Example: audra-essential
+        /// </param>
         /// <param name="code"></param>
         /// <param name="message"></param>
 #if NET7_0_OR_GREATER

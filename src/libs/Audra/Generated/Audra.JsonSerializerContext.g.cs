@@ -41,6 +41,10 @@ namespace Audra
 
             typeof(global::Audra.JsonConverters.PhonemizeRequestRenderModeNullableJsonConverter),
 
+            typeof(global::Audra.JsonConverters.PhonemizeResponseSynthesisPathJsonConverter),
+
+            typeof(global::Audra.JsonConverters.PhonemizeResponseSynthesisPathNullableJsonConverter),
+
             typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatJsonConverter),
 
             typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatNullableJsonConverter),
@@ -88,6 +92,7 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionsPayload))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Audra.WordTimestamp>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeResponseSynthesisPath), TypeInfoPropertyName = "PhonemizeResponseSynthesisPath2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSegment))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequestFormat), TypeInfoPropertyName = "BatchSpeechRequestFormat2")]
