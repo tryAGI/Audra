@@ -20,6 +20,10 @@ namespace Audra
         /// 
         /// </summary>
         PodcastV3,
+        /// <summary>
+        /// 
+        /// </summary>
+        PodcastV4,
     }
 
     /// <summary>
@@ -37,6 +41,7 @@ namespace Audra
                 CaptionedSpeechRequestDeliveryProfile.Legacy => "legacy",
                 CaptionedSpeechRequestDeliveryProfile.PodcastV2 => "podcast_v2",
                 CaptionedSpeechRequestDeliveryProfile.PodcastV3 => "podcast_v3",
+                CaptionedSpeechRequestDeliveryProfile.PodcastV4 => "podcast_v4",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -50,6 +55,7 @@ namespace Audra
                 "legacy" => CaptionedSpeechRequestDeliveryProfile.Legacy,
                 "podcast_v2" => CaptionedSpeechRequestDeliveryProfile.PodcastV2,
                 "podcast_v3" => CaptionedSpeechRequestDeliveryProfile.PodcastV3,
+                "podcast_v4" => CaptionedSpeechRequestDeliveryProfile.PodcastV4,
                 _ => null,
             };
         }
