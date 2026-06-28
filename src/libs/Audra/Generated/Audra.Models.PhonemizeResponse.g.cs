@@ -60,6 +60,13 @@ namespace Audra
         public bool? HasIpaMarkup { get; set; }
 
         /// <summary>
+        /// True when Misaki G2P emitted an unknown-token marker (❓). When true, do not ship<br/>
+        /// audio until lexicon or script is fixed; synthesis may fall back to espeak.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("has_unknown_phonemes")]
+        public bool? HasUnknownPhonemes { get; set; }
+
+        /// <summary>
         /// phonemes — direct IPA synthesis; ipa_markup — lexicon [word](/ipa/) in input;<br/>
         /// text — normalized speakable text with runtime G2P.
         /// </summary>
@@ -99,6 +106,10 @@ namespace Audra
         /// <param name="hasIpaMarkup">
         /// True when input contains inline IPA markup from the pronunciation lexicon.
         /// </param>
+        /// <param name="hasUnknownPhonemes">
+        /// True when Misaki G2P emitted an unknown-token marker (❓). When true, do not ship<br/>
+        /// audio until lexicon or script is fixed; synthesis may fall back to espeak.
+        /// </param>
         /// <param name="synthesisPath">
         /// phonemes — direct IPA synthesis; ipa_markup — lexicon [word](/ipa/) in input;<br/>
         /// text — normalized speakable text with runtime G2P.
@@ -115,6 +126,7 @@ namespace Audra
             string? voiceKey,
             bool? supportsIpaMarkup,
             bool? hasIpaMarkup,
+            bool? hasUnknownPhonemes,
             global::Audra.PhonemizeResponseSynthesisPath? synthesisPath)
         {
             this.Input = input;
@@ -125,6 +137,7 @@ namespace Audra
             this.VoiceKey = voiceKey;
             this.SupportsIpaMarkup = supportsIpaMarkup;
             this.HasIpaMarkup = hasIpaMarkup;
+            this.HasUnknownPhonemes = hasUnknownPhonemes;
             this.SynthesisPath = synthesisPath;
         }
 

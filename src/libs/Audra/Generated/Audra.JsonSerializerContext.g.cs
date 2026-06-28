@@ -45,6 +45,10 @@ namespace Audra
 
             typeof(global::Audra.JsonConverters.PhonemizeResponseSynthesisPathNullableJsonConverter),
 
+            typeof(global::Audra.JsonConverters.BatchSegmentEnergyJsonConverter),
+
+            typeof(global::Audra.JsonConverters.BatchSegmentEnergyNullableJsonConverter),
+
             typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatJsonConverter),
 
             typeof(global::Audra.JsonConverters.BatchSpeechRequestFormatNullableJsonConverter),
@@ -94,6 +98,7 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.PhonemizeResponseSynthesisPath), TypeInfoPropertyName = "PhonemizeResponseSynthesisPath2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSegment))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSegmentEnergy), TypeInfoPropertyName = "BatchSegmentEnergy2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequestFormat), TypeInfoPropertyName = "BatchSpeechRequestFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.BatchSpeechRequestDeliveryProfile), TypeInfoPropertyName = "BatchSpeechRequestDeliveryProfile2")]

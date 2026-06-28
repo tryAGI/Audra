@@ -116,99 +116,103 @@ namespace Audra
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.BatchSpeechRequest? Type22 { get; set; }
+        public global::Audra.BatchSegmentEnergy? Type22 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.BatchSpeechRequestFormat? Type23 { get; set; }
+        public global::Audra.BatchSpeechRequest? Type23 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.BatchSpeechRequestDeliveryProfile? Type24 { get; set; }
+        public global::Audra.BatchSpeechRequestFormat? Type24 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Audra.BatchSegment>? Type25 { get; set; }
+        public global::Audra.BatchSpeechRequestDeliveryProfile? Type25 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.LexiconEntry? Type26 { get; set; }
+        public global::System.Collections.Generic.IList<global::Audra.BatchSegment>? Type26 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.LexiconPutRequest? Type27 { get; set; }
+        public global::Audra.LexiconEntry? Type27 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Audra.LexiconEntry>? Type28 { get; set; }
+        public global::Audra.LexiconPutRequest? Type28 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.LexiconResponse? Type29 { get; set; }
+        public global::System.Collections.Generic.IList<global::Audra.LexiconEntry>? Type29 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.VoiceProbeResponse? Type30 { get; set; }
+        public global::Audra.LexiconResponse? Type30 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.PublicStats? Type31 { get; set; }
+        public global::Audra.VoiceProbeResponse? Type31 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateAccountsRequest? Type32 { get; set; }
+        public global::Audra.PublicStats? Type32 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateBillingCheckoutRequest? Type33 { get; set; }
+        public global::Audra.CreateAccountsRequest? Type33 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateBillingCheckoutRequestPack? Type34 { get; set; }
+        public global::Audra.CreateBillingCheckoutRequest? Type34 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechXAudraCommercialUse? Type35 { get; set; }
+        public global::Audra.CreateBillingCheckoutRequestPack? Type35 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechCaptionedXAudraCommercialUse? Type36 { get; set; }
+        public global::Audra.CreateSpeechXAudraCommercialUse? Type36 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateSpeechBatchXAudraCommercialUse? Type37 { get; set; }
+        public global::Audra.CreateSpeechCaptionedXAudraCommercialUse? Type37 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetHealthResponse? Type38 { get; set; }
+        public global::Audra.CreateSpeechBatchXAudraCommercialUse? Type38 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public object? Type39 { get; set; }
+        public global::Audra.GetHealthResponse? Type39 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetModelsResponse? Type40 { get; set; }
+        public object? Type40 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Audra.GetModelsResponseDataItem>? Type41 { get; set; }
+        public global::Audra.GetModelsResponse? Type41 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.GetModelsResponseDataItem? Type42 { get; set; }
+        public global::System.Collections.Generic.IList<global::Audra.GetModelsResponseDataItem>? Type42 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<string>? Type43 { get; set; }
+        public global::Audra.GetModelsResponseDataItem? Type43 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Audra.CreateBillingCheckoutResponse? Type44 { get; set; }
+        public global::System.Collections.Generic.IList<string>? Type44 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public byte[]? Type45 { get; set; }
+        public global::Audra.CreateBillingCheckoutResponse? Type45 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public byte[]? Type46 { get; set; }
 
         /// <summary>
         /// 
