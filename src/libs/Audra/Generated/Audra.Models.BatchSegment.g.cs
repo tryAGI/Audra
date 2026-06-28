@@ -28,6 +28,15 @@ namespace Audra
         public int? PauseAfterMs { get; set; }
 
         /// <summary>
+        /// Per-segment delivery energy. Maps to a small speed multiplier on the segment<br/>
+        /// (e.g. high ≈ +8% speed). Omit or use neutral for default pacing.<br/>
+        /// Default Value: neutral
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("energy")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.BatchSegmentEnergyJsonConverter))]
+        public global::Audra.BatchSegmentEnergy? Energy { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -41,17 +50,24 @@ namespace Audra
         /// <param name="pauseAfterMs">
         /// Default Value: 0
         /// </param>
+        /// <param name="energy">
+        /// Per-segment delivery energy. Maps to a small speed multiplier on the segment<br/>
+        /// (e.g. high ≈ +8% speed). Omit or use neutral for default pacing.<br/>
+        /// Default Value: neutral
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public BatchSegment(
             string text,
             double? speed,
-            int? pauseAfterMs)
+            int? pauseAfterMs,
+            global::Audra.BatchSegmentEnergy? energy)
         {
             this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
             this.Speed = speed;
             this.PauseAfterMs = pauseAfterMs;
+            this.Energy = energy;
         }
 
         /// <summary>
