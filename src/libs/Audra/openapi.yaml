@@ -668,7 +668,7 @@ components:
           type: string
           description: |
             Text after normalization and pronunciation lexicon — what synthesis speaks from.
-            When is_phonemes is true, this is the IPA phoneme string passed to Kokoro.
+            When is_phonemes is true, this is the IPA phoneme string passed to the Essential engine.
         phonemes:
           type: string
           nullable: true
@@ -690,14 +690,14 @@ components:
           nullable: true
         supports_ipa_markup:
           type: boolean
-          description: True when Kokoro v1 inline [word](/ipa/) markup is supported on this worker.
+          description: True when Essential inline [word](/ipa/) markup is supported on this worker.
         has_ipa_markup:
           type: boolean
           description: True when input contains inline IPA markup from the pronunciation lexicon.
         has_unknown_phonemes:
           type: boolean
           description: |
-            True when Misaki G2P emitted an unknown-token marker (❓). When true, do not ship
+            True when Audra phonetics G2P emitted an unknown-token marker (❓). When true, do not ship
             audio until lexicon or script is fixed; synthesis may fall back to espeak.
         synthesis_path:
           type: string

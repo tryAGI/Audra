@@ -10,7 +10,7 @@ namespace Audra
     {
         /// <summary>
         /// Text after normalization and pronunciation lexicon — what synthesis speaks from.<br/>
-        /// When is_phonemes is true, this is the IPA phoneme string passed to Kokoro.
+        /// When is_phonemes is true, this is the IPA phoneme string passed to the Essential engine.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("input")]
         public string? Input { get; set; }
@@ -48,7 +48,7 @@ namespace Audra
         public string? VoiceKey { get; set; }
 
         /// <summary>
-        /// True when Kokoro v1 inline [word](/ipa/) markup is supported on this worker.
+        /// True when Essential inline [word](/ipa/) markup is supported on this worker.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("supports_ipa_markup")]
         public bool? SupportsIpaMarkup { get; set; }
@@ -60,7 +60,7 @@ namespace Audra
         public bool? HasIpaMarkup { get; set; }
 
         /// <summary>
-        /// True when Misaki G2P emitted an unknown-token marker (❓). When true, do not ship<br/>
+        /// True when Audra phonetics G2P emitted an unknown-token marker (❓). When true, do not ship<br/>
         /// audio until lexicon or script is fixed; synthesis may fall back to espeak.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("has_unknown_phonemes")]
@@ -85,7 +85,7 @@ namespace Audra
         /// </summary>
         /// <param name="input">
         /// Text after normalization and pronunciation lexicon — what synthesis speaks from.<br/>
-        /// When is_phonemes is true, this is the IPA phoneme string passed to Kokoro.
+        /// When is_phonemes is true, this is the IPA phoneme string passed to the Essential engine.
         /// </param>
         /// <param name="phonemes">
         /// IPA phoneme string when is_phonemes is true. Null on the text path — G2P still runs<br/>
@@ -101,13 +101,13 @@ namespace Audra
         /// <param name="british"></param>
         /// <param name="voiceKey"></param>
         /// <param name="supportsIpaMarkup">
-        /// True when Kokoro v1 inline [word](/ipa/) markup is supported on this worker.
+        /// True when Essential inline [word](/ipa/) markup is supported on this worker.
         /// </param>
         /// <param name="hasIpaMarkup">
         /// True when input contains inline IPA markup from the pronunciation lexicon.
         /// </param>
         /// <param name="hasUnknownPhonemes">
-        /// True when Misaki G2P emitted an unknown-token marker (❓). When true, do not ship<br/>
+        /// True when Audra phonetics G2P emitted an unknown-token marker (❓). When true, do not ship<br/>
         /// audio until lexicon or script is fixed; synthesis may fall back to espeak.
         /// </param>
         /// <param name="synthesisPath">
