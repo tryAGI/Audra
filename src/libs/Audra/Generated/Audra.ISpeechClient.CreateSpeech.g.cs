@@ -95,6 +95,13 @@ namespace Audra
         /// `fast` (default) = Modal GPU. `standard` = Modal CPU.<br/>
         /// Aliases `gpu` / `cpu` accepted.
         /// </param>
+        /// <param name="mode">
+        /// `standard` — default queue placement. `fast` — queue priority, 1.25× credits.<br/>
+        /// `economy` (0.75× credits, deferred) exists but is **not valid here** — it is<br/>
+        /// only accepted on `POST /v2/speech/jobs` (async). Sending `mode: "economy"`<br/>
+        /// or `economy: true` on this synchronous endpoint returns 400.<br/>
+        /// Default Value: standard
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -109,6 +116,7 @@ namespace Audra
             global::Audra.SpeechRequestDeliveryProfile? deliveryProfile = default,
             bool? normalize = default,
             global::Audra.SpeechRequestRenderMode? renderMode = default,
+            global::Audra.SpeechRequestMode? mode = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

@@ -73,6 +73,16 @@ Set false to pass text through unchanged (except pronunciation lexicon).
 Aliases `gpu` / `cpu` accepted.
 ",
     };
+
+    private static Option<global::Audra.SpeechRequestMode?> Mode { get; } = new(
+        name: @"--mode")
+    {
+        Description = @"`standard` — default queue placement. `fast` — queue priority, 1.25× credits.
+`economy` (0.75× credits, deferred) exists but is **not valid here** — it is
+only accepted on `POST /v2/speech/jobs` (async). Sending `mode: ""economy""`
+or `economy: true` on this synchronous endpoint returns 400.
+",
+    };
       private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
@@ -103,6 +113,7 @@ Aliases `gpu` / `cpu` accepted.
                         command.Options.Add(DeliveryProfile);
                         command.Options.Add(Normalize);
                         command.Options.Add(RenderMode);
+                        command.Options.Add(Mode);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
           command.Options.Add(RequestFile);
@@ -138,6 +149,7 @@ Aliases `gpu` / `cpu` accepted.
                         var deliveryProfile = CliRuntime.WasSpecified(parseResult, DeliveryProfile) ? parseResult.GetValue(DeliveryProfile) : (__requestBase is { } __DeliveryProfileBaseValue ? __DeliveryProfileBaseValue.DeliveryProfile : default);
                         var normalize = CliRuntime.WasSpecified(parseResult, Normalize) ? parseResult.GetValue(Normalize) : (__requestBase is { } __NormalizeBaseValue ? __NormalizeBaseValue.Normalize : default);
                         var renderMode = CliRuntime.WasSpecified(parseResult, RenderMode) ? parseResult.GetValue(RenderMode) : (__requestBase is { } __RenderModeBaseValue ? __RenderModeBaseValue.RenderMode : default);
+                        var mode = CliRuntime.WasSpecified(parseResult, Mode) ? parseResult.GetValue(Mode) : (__requestBase is { } __ModeBaseValue ? __ModeBaseValue.Mode : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
@@ -152,6 +164,7 @@ Aliases `gpu` / `cpu` accepted.
                                     deliveryProfile: deliveryProfile,
                                     normalize: normalize,
                                     renderMode: renderMode,
+                                    mode: mode,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);

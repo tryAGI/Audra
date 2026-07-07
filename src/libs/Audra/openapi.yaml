@@ -436,6 +436,94 @@ paths:
         '502':
           description: TTS worker unavailable
 
+  /v2/speech/jobs:
+    post:
+      tags: [Speech]
+      summary: Create an async speech render job
+      description: |
+        Queues text for background rendering — poll `status_url` until `status`
+        is `completed`, then download `audio_url`. Use for long-form text where a
+        synchronous response would time out (auto-triggered above ~8k chars on
+        `POST /v2/speech` unless `X-Audra-Sync: true` is set).
+
+        Supports three delivery modes via `mode` (or the `fast_mode`/`priority`/`economy`
+        boolean aliases): `standard` (default), `fast` (queue priority, 1.25× credits),
+        and `economy` (deferred/best-effort, 0.75× credits — see `SpeechJobRequest.mode`).
+        `economy` is **only** available on this async endpoint; `POST /v2/speech` and
+        other synchronous endpoints reject it with 400.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpeechJobRequest'
+      responses:
+        '202':
+          description: Job queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeechJobResponse'
+        '400':
+          description: 'Invalid request, or mode "economy" requested on a sync-only endpoint'
+        '402':
+          description: Insufficient credits
+        '413':
+          description: Text exceeds 500k chars
+
+  /v2/speech/jobs/{id}:
+    get:
+      tags: [Speech]
+      summary: Poll async speech job status
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeechJobStatusResponse'
+        '404':
+          description: Job not found
+
+  /v2/speech/jobs/{id}/audio:
+    get:
+      tags: [Speech]
+      summary: Download completed async speech job audio
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audio stream
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Job not found or audio unavailable
+        '409':
+          description: Job not yet completed
+
   /v2/speech/batch:
     post:
       tags: [Speech]
@@ -580,6 +668,140 @@ components:
           description: |
             `fast` (default) = Modal GPU. `standard` = Modal CPU.
             Aliases `gpu` / `cpu` accepted.
+        mode:
+          type: string
+          enum: [standard, fast]
+          default: standard
+          description: |
+            `standard` — default queue placement. `fast` — queue priority, 1.25× credits.
+            `economy` (0.75× credits, deferred) exists but is **not valid here** — it is
+            only accepted on `POST /v2/speech/jobs` (async). Sending `mode: "economy"`
+            or `economy: true` on this synchronous endpoint returns 400.
+
+    SpeechJobRequest:
+      type: object
+      required: [text]
+      properties:
+        model:
+          type: string
+          default: audra-essential
+        text:
+          type: string
+          maxLength: 500000
+        voice:
+          type: string
+          default: june
+        speed:
+          type: number
+          default: 1.0
+          minimum: 0.5
+          maximum: 2.0
+        format:
+          type: string
+          enum: [mp3, wav]
+          default: mp3
+        webhook_url:
+          type: string
+          format: uri
+          description: Optional callback POSTed with `{ job_id, status, chars }` on completion or failure.
+        mode:
+          type: string
+          enum: [standard, fast, economy]
+          default: standard
+          description: |
+            `standard` — default queue placement, 1.0× credits.
+            `fast` — queue priority, 1.25× credits.
+            `economy` — deferred/best-effort, 0.75× credits (25% discount). Runs on the
+            next scheduled sweep (default every 12h) or sooner if a worker for the
+            requested model is already warm from other traffic. Async jobs only —
+            rejected with 400 on synchronous endpoints (`POST /v2/speech` and similar).
+        fast_mode:
+          type: boolean
+          description: 'Alias for mode: "fast".'
+        priority:
+          type: boolean
+          deprecated: true
+          description: '@deprecated use mode: "fast".'
+        economy:
+          type: boolean
+          description: 'Alias for mode: "economy".'
+        delivery_profile:
+          type: string
+          enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
+        script_enhance:
+          type: string
+          enum: [off, auto, podcast]
+        audio_post:
+          type: string
+          enum: [off, auto, broadcast, warm, podcast]
+
+    SpeechJobResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+          example: queued
+        chars:
+          type: integer
+          description: Billable characters after model and delivery-mode multipliers.
+        input_chars:
+          type: integer
+        model:
+          type: string
+        mode:
+          type: string
+          enum: [standard, fast, economy]
+        billing_multiplier:
+          type: number
+        status_url:
+          type: string
+          format: uri
+        audio_url:
+          type: string
+          format: uri
+        message:
+          type: string
+          description: |
+            Human-readable timing guidance. Economy jobs get a sweep-interval-aware
+            message instead of the standard/fast "typical N minutes" estimate.
+
+    SpeechJobStatusResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+          enum: [queued, processing, completed, failed]
+        chars:
+          type: integer
+        input_chars:
+          type: integer
+        model:
+          type: string
+        mode:
+          type: string
+          enum: [standard, fast, economy]
+        voice:
+          type: string
+        format:
+          type: string
+        error:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        audio_url:
+          type: string
+          format: uri
+          nullable: true
 
     CaptionedSpeechRequest:
       type: object

@@ -67,6 +67,17 @@ namespace Audra
         public global::Audra.SpeechRequestRenderMode? RenderMode { get; set; }
 
         /// <summary>
+        /// `standard` — default queue placement. `fast` — queue priority, 1.25× credits.<br/>
+        /// `economy` (0.75× credits, deferred) exists but is **not valid here** — it is<br/>
+        /// only accepted on `POST /v2/speech/jobs` (async). Sending `mode: "economy"`<br/>
+        /// or `economy: true` on this synchronous endpoint returns 400.<br/>
+        /// Default Value: standard
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("mode")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechRequestModeJsonConverter))]
+        public global::Audra.SpeechRequestMode? Mode { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -105,6 +116,13 @@ namespace Audra
         /// `fast` (default) = Modal GPU. `standard` = Modal CPU.<br/>
         /// Aliases `gpu` / `cpu` accepted.
         /// </param>
+        /// <param name="mode">
+        /// `standard` — default queue placement. `fast` — queue priority, 1.25× credits.<br/>
+        /// `economy` (0.75× credits, deferred) exists but is **not valid here** — it is<br/>
+        /// only accepted on `POST /v2/speech/jobs` (async). Sending `mode: "economy"`<br/>
+        /// or `economy: true` on this synchronous endpoint returns 400.<br/>
+        /// Default Value: standard
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -116,7 +134,8 @@ namespace Audra
             global::Audra.SpeechRequestFormat? format,
             global::Audra.SpeechRequestDeliveryProfile? deliveryProfile,
             bool? normalize,
-            global::Audra.SpeechRequestRenderMode? renderMode)
+            global::Audra.SpeechRequestRenderMode? renderMode,
+            global::Audra.SpeechRequestMode? mode)
         {
             this.Model = model;
             this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
@@ -126,6 +145,7 @@ namespace Audra
             this.DeliveryProfile = deliveryProfile;
             this.Normalize = normalize;
             this.RenderMode = renderMode;
+            this.Mode = mode;
         }
 
         /// <summary>
