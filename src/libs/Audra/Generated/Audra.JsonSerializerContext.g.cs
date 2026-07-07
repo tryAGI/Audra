@@ -25,6 +25,42 @@ namespace Audra
 
             typeof(global::Audra.JsonConverters.SpeechRequestRenderModeNullableJsonConverter),
 
+            typeof(global::Audra.JsonConverters.SpeechRequestModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechRequestModeNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestFormatJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestFormatNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestModeNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestDeliveryProfileJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestDeliveryProfileNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestScriptEnhanceJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestScriptEnhanceNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestAudioPostJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobRequestAudioPostNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobResponseModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobResponseModeNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobStatusResponseStatusJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobStatusResponseStatusNullableJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobStatusResponseModeJsonConverter),
+
+            typeof(global::Audra.JsonConverters.SpeechJobStatusResponseModeNullableJsonConverter),
+
             typeof(global::Audra.JsonConverters.CaptionedSpeechRequestFormatJsonConverter),
 
             typeof(global::Audra.JsonConverters.CaptionedSpeechRequestFormatNullableJsonConverter),
@@ -86,6 +122,19 @@ namespace Audra
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestFormat), TypeInfoPropertyName = "SpeechRequestFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestDeliveryProfile), TypeInfoPropertyName = "SpeechRequestDeliveryProfile2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestRenderMode), TypeInfoPropertyName = "SpeechRequestRenderMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechRequestMode), TypeInfoPropertyName = "SpeechRequestMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobRequestFormat), TypeInfoPropertyName = "SpeechJobRequestFormat2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobRequestMode), TypeInfoPropertyName = "SpeechJobRequestMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobRequestDeliveryProfile), TypeInfoPropertyName = "SpeechJobRequestDeliveryProfile2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobRequestScriptEnhance), TypeInfoPropertyName = "SpeechJobRequestScriptEnhance2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobRequestAudioPost), TypeInfoPropertyName = "SpeechJobRequestAudioPost2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobResponseMode), TypeInfoPropertyName = "SpeechJobResponseMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobStatusResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobStatusResponseStatus), TypeInfoPropertyName = "SpeechJobStatusResponseStatus2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.SpeechJobStatusResponseMode), TypeInfoPropertyName = "SpeechJobStatusResponseMode2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.DateTime))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequestFormat), TypeInfoPropertyName = "CaptionedSpeechRequestFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Audra.CaptionedSpeechRequestDeliveryProfile), TypeInfoPropertyName = "CaptionedSpeechRequestDeliveryProfile2")]

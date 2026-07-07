@@ -6,7 +6,7 @@ namespace Audra
     public partial class SpeechClient
     {
 
-        private static readonly global::Audra.AutoSDKServer[] s_CreateSpeechServers = new global::Audra.AutoSDKServer[]
+        private static readonly global::Audra.AutoSDKServer[] s_GetSpeechJobsByIdAudioServers = new global::Audra.AutoSDKServer[]
         {            new global::Audra.AutoSDKServer(
                 id: "https-audratalks-com",
                 name: "Production",
@@ -20,7 +20,7 @@ namespace Audra
         };
 
 
-        private static readonly global::Audra.EndPointSecurityRequirement s_CreateSpeechSecurityRequirement0 =
+        private static readonly global::Audra.EndPointSecurityRequirement s_GetSpeechJobsByIdAudioSecurityRequirement0 =
             new global::Audra.EndPointSecurityRequirement
             {
                 Authorizations = new global::Audra.EndPointAuthorizationRequirement[]
@@ -34,54 +34,40 @@ namespace Audra
                     },
                 },
             };
-        private static readonly global::Audra.EndPointSecurityRequirement[] s_CreateSpeechSecurityRequirements =
+        private static readonly global::Audra.EndPointSecurityRequirement[] s_GetSpeechJobsByIdAudioSecurityRequirements =
             new global::Audra.EndPointSecurityRequirement[]
-            {                s_CreateSpeechSecurityRequirement0,
+            {                s_GetSpeechJobsByIdAudioSecurityRequirement0,
             };
-        partial void PrepareCreateSpeechArguments(
+        partial void PrepareGetSpeechJobsByIdAudioArguments(
             global::System.Net.Http.HttpClient httpClient,
-            ref string? idempotencyKey,
-            ref global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse,
-            global::Audra.SpeechRequest request);
-        partial void PrepareCreateSpeechRequest(
+            ref string id);
+        partial void PrepareGetSpeechJobsByIdAudioRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            string? idempotencyKey,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse,
-            global::Audra.SpeechRequest request);
-        partial void ProcessCreateSpeechResponse(
+            string id);
+        partial void ProcessGetSpeechJobsByIdAudioResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessCreateSpeechResponseContent(
+        partial void ProcessGetSpeechJobsByIdAudioResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref byte[] content);
 
         /// <summary>
-        /// Synthesize speech
+        /// Download completed async speech job audio
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
-        /// <param name="xAudraCommercialUse"></param>
-        /// <param name="request"></param>
+        /// <param name="id"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<byte[]> CreateSpeechAsync(
-
-            global::Audra.SpeechRequest request,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+        public async global::System.Threading.Tasks.Task<byte[]> GetSpeechJobsByIdAudioAsync(
+            string id,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await CreateSpeechAsResponseAsync(
-
-                request: request,
-                idempotencyKey: idempotencyKey,
-                xAudraCommercialUse: xAudraCommercialUse,
+            var __response = await GetSpeechJobsByIdAudioAsResponseAsync(
+                id: id,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -89,39 +75,28 @@ namespace Audra
             return __response.Body;
         }
         /// <summary>
-        /// Synthesize speech
+        /// Download completed async speech job audio
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
-        /// <param name="xAudraCommercialUse"></param>
-        /// <param name="request"></param>
+        /// <param name="id"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> CreateSpeechAsStreamAsync(
-
-            global::Audra.SpeechRequest request,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetSpeechJobsByIdAudioAsStreamAsync(
+            string id,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            request = request ?? throw new global::System.ArgumentNullException(nameof(request));
-
             PrepareArguments(
                 client: HttpClient);
-            PrepareCreateSpeechArguments(
+            PrepareGetSpeechJobsByIdAudioArguments(
                 httpClient: HttpClient,
-                idempotencyKey: ref idempotencyKey,
-                xAudraCommercialUse: ref xAudraCommercialUse,
-                request: request);
+                id: ref id);
 
 
             var __authorizations = global::Audra.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_CreateSpeechSecurityRequirements,
-                operationName: "CreateSpeechAsync");
+                securityRequirements: s_GetSpeechJobsByIdAudioSecurityRequirements,
+                operationName: "GetSpeechJobsByIdAudioAsync");
 
             using var __timeoutCancellationTokenSource = global::Audra.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -141,9 +116,9 @@ namespace Audra
             {
 
                             var __pathBuilder = new global::Audra.PathBuilder(
-                                path: "/v2/speech",
+                                path: $"/v2/speech/jobs/{id}/audio",
                                 baseUri: ResolveBaseUri(
-                                servers: s_CreateSpeechServers,
+                                servers: s_GetSpeechJobsByIdAudioServers,
                                 defaultBaseUrl: "https://audratalks.com/"));
                             var __path = __pathBuilder.ToString();
                 __path = global::Audra.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -151,7 +126,7 @@ namespace Audra
                     clientParameters: Options.QueryParameters,
                     requestParameters: requestOptions?.QueryParameters);
                 var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
-                    method: global::System.Net.Http.HttpMethod.Post,
+                    method: global::System.Net.Http.HttpMethod.Get,
                     requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
 #if NET6_0_OR_GREATER
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
@@ -174,22 +149,6 @@ namespace Audra
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
-
-            if (xAudraCommercialUse != default)
-            {
-                __httpRequest.Headers.TryAddWithoutValidation("X-Audra-Commercial-Use", xAudraCommercialUse?.ToValueString() ?? string.Empty);
-            }
-            var __idempotencyKey = global::System.String.IsNullOrWhiteSpace(idempotencyKey)
-                ? CreateIdempotencyKey()
-                : idempotencyKey;
-            __httpRequest.Headers.TryAddWithoutValidation("Idempotency-Key", __idempotencyKey);
-
-                            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
-                            var __httpRequestContent = new global::System.Net.Http.StringContent(
-                                content: __httpRequestContentBody,
-                                encoding: global::System.Text.Encoding.UTF8,
-                                mediaType: "application/json");
-                            __httpRequest.Content = __httpRequestContent;
                 global::Audra.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
                     clientHeaders: Options.Headers,
@@ -198,12 +157,10 @@ namespace Audra
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareCreateSpeechRequest(
+                PrepareGetSpeechJobsByIdAudioRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    idempotencyKey: idempotencyKey,
-                    xAudraCommercialUse: xAudraCommercialUse,
-                    request: request);
+                    id: id!);
 
                 return __httpRequest;
             }
@@ -220,10 +177,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -254,10 +211,10 @@ namespace Audra
                         await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -295,10 +252,10 @@ namespace Audra
                         await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -335,7 +292,7 @@ namespace Audra
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessCreateSpeechResponse(
+                ProcessGetSpeechJobsByIdAudioResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -343,10 +300,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -365,10 +322,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -383,128 +340,64 @@ namespace Audra
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
-                            if ((int)__response.StatusCode == 402)
+                            if ((int)__response.StatusCode == 404)
                             {
-                                string? __content_402 = null;
-                                global::System.Exception? __exception_402 = null;
+                                string? __content_404 = null;
+                                global::System.Exception? __exception_404 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
-                                        __content_402 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                     else
                                     {
-                                        __content_402 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    __exception_402 = __ex;
+                                    __exception_404 = __ex;
                                 }
 
 
                                 throw global::Audra.ApiException.Create(
                                     statusCode: __response.StatusCode,
-                                    message: __content_402 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_402,
-                                    responseBody: __content_402,
+                                    message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_404,
+                                    responseBody: __content_404,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
                                         h => h.Value));
                             }
                             // 
-                            if ((int)__response.StatusCode == 403)
+                            if ((int)__response.StatusCode == 409)
                             {
-                                string? __content_403 = null;
-                                global::System.Exception? __exception_403 = null;
+                                string? __content_409 = null;
+                                global::System.Exception? __exception_409 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_409 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                     else
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_409 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    __exception_403 = __ex;
+                                    __exception_409 = __ex;
                                 }
 
 
                                 throw global::Audra.ApiException.Create(
                                     statusCode: __response.StatusCode,
-                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_403,
-                                    responseBody: __content_403,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // 
-                            if ((int)__response.StatusCode == 413)
-                            {
-                                string? __content_413 = null;
-                                global::System.Exception? __exception_413 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_413 = __ex;
-                                }
-
-
-                                throw global::Audra.ApiException.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_413 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_413,
-                                    responseBody: __content_413,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // 
-                            if ((int)__response.StatusCode == 422)
-                            {
-                                string? __content_422 = null;
-                                global::System.Exception? __exception_422 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_422 = __ex;
-                                }
-
-
-                                throw global::Audra.ApiException.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_422 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_422,
-                                    responseBody: __content_422,
+                                    message: __content_409 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_409,
+                                    responseBody: __content_409,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -562,39 +455,28 @@ namespace Audra
             }
         }
         /// <summary>
-        /// Synthesize speech
+        /// Download completed async speech job audio
         /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
-        /// <param name="xAudraCommercialUse"></param>
-        /// <param name="request"></param>
+        /// <param name="id"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<byte[]>> CreateSpeechAsResponseAsync(
-
-            global::Audra.SpeechRequest request,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
+        public async global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<byte[]>> GetSpeechJobsByIdAudioAsResponseAsync(
+            string id,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            request = request ?? throw new global::System.ArgumentNullException(nameof(request));
-
             PrepareArguments(
                 client: HttpClient);
-            PrepareCreateSpeechArguments(
+            PrepareGetSpeechJobsByIdAudioArguments(
                 httpClient: HttpClient,
-                idempotencyKey: ref idempotencyKey,
-                xAudraCommercialUse: ref xAudraCommercialUse,
-                request: request);
+                id: ref id);
 
 
             var __authorizations = global::Audra.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_CreateSpeechSecurityRequirements,
-                operationName: "CreateSpeechAsync");
+                securityRequirements: s_GetSpeechJobsByIdAudioSecurityRequirements,
+                operationName: "GetSpeechJobsByIdAudioAsync");
 
             using var __timeoutCancellationTokenSource = global::Audra.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -614,9 +496,9 @@ namespace Audra
             {
 
                             var __pathBuilder = new global::Audra.PathBuilder(
-                                path: "/v2/speech",
+                                path: $"/v2/speech/jobs/{id}/audio",
                                 baseUri: ResolveBaseUri(
-                                servers: s_CreateSpeechServers,
+                                servers: s_GetSpeechJobsByIdAudioServers,
                                 defaultBaseUrl: "https://audratalks.com/"));
                             var __path = __pathBuilder.ToString();
                 __path = global::Audra.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -624,7 +506,7 @@ namespace Audra
                     clientParameters: Options.QueryParameters,
                     requestParameters: requestOptions?.QueryParameters);
                 var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
-                    method: global::System.Net.Http.HttpMethod.Post,
+                    method: global::System.Net.Http.HttpMethod.Get,
                     requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
 #if NET6_0_OR_GREATER
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
@@ -647,22 +529,6 @@ namespace Audra
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
-
-            if (xAudraCommercialUse != default)
-            {
-                __httpRequest.Headers.TryAddWithoutValidation("X-Audra-Commercial-Use", xAudraCommercialUse?.ToValueString() ?? string.Empty);
-            }
-            var __idempotencyKey = global::System.String.IsNullOrWhiteSpace(idempotencyKey)
-                ? CreateIdempotencyKey()
-                : idempotencyKey;
-            __httpRequest.Headers.TryAddWithoutValidation("Idempotency-Key", __idempotencyKey);
-
-                            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
-                            var __httpRequestContent = new global::System.Net.Http.StringContent(
-                                content: __httpRequestContentBody,
-                                encoding: global::System.Text.Encoding.UTF8,
-                                mediaType: "application/json");
-                            __httpRequest.Content = __httpRequestContent;
                 global::Audra.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
                     clientHeaders: Options.Headers,
@@ -671,12 +537,10 @@ namespace Audra
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareCreateSpeechRequest(
+                PrepareGetSpeechJobsByIdAudioRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    idempotencyKey: idempotencyKey,
-                    xAudraCommercialUse: xAudraCommercialUse,
-                    request: request);
+                    id: id!);
 
                 return __httpRequest;
             }
@@ -693,10 +557,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -727,10 +591,10 @@ namespace Audra
                         await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -768,10 +632,10 @@ namespace Audra
                         await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -808,7 +672,7 @@ namespace Audra
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessCreateSpeechResponse(
+                ProcessGetSpeechJobsByIdAudioResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -816,10 +680,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -838,10 +702,10 @@ namespace Audra
                     await global::Audra.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Audra.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "createSpeech",
-                                methodName: "CreateSpeechAsync",
-                                pathTemplate: "\"/v2/speech\"",
-                                httpMethod: "POST",
+                                operationId: "getSpeechJobsByIdAudio",
+                                methodName: "GetSpeechJobsByIdAudioAsync",
+                                pathTemplate: "$\"/v2/speech/jobs/{id}/audio\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -856,128 +720,64 @@ namespace Audra
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
-                            if ((int)__response.StatusCode == 402)
+                            if ((int)__response.StatusCode == 404)
                             {
-                                string? __content_402 = null;
-                                global::System.Exception? __exception_402 = null;
+                                string? __content_404 = null;
+                                global::System.Exception? __exception_404 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
-                                        __content_402 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                     else
                                     {
-                                        __content_402 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    __exception_402 = __ex;
+                                    __exception_404 = __ex;
                                 }
 
 
                                 throw global::Audra.ApiException.Create(
                                     statusCode: __response.StatusCode,
-                                    message: __content_402 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_402,
-                                    responseBody: __content_402,
+                                    message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_404,
+                                    responseBody: __content_404,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
                                         h => h.Value));
                             }
                             // 
-                            if ((int)__response.StatusCode == 403)
+                            if ((int)__response.StatusCode == 409)
                             {
-                                string? __content_403 = null;
-                                global::System.Exception? __exception_403 = null;
+                                string? __content_409 = null;
+                                global::System.Exception? __exception_409 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_409 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                     else
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_409 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    __exception_403 = __ex;
+                                    __exception_409 = __ex;
                                 }
 
 
                                 throw global::Audra.ApiException.Create(
                                     statusCode: __response.StatusCode,
-                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_403,
-                                    responseBody: __content_403,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // 
-                            if ((int)__response.StatusCode == 413)
-                            {
-                                string? __content_413 = null;
-                                global::System.Exception? __exception_413 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_413 = __ex;
-                                }
-
-
-                                throw global::Audra.ApiException.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_413 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_413,
-                                    responseBody: __content_413,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // 
-                            if ((int)__response.StatusCode == 422)
-                            {
-                                string? __content_422 = null;
-                                global::System.Exception? __exception_422 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_422 = __ex;
-                                }
-
-
-                                throw global::Audra.ApiException.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_422 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_422,
-                                    responseBody: __content_422,
+                                    message: __content_409 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_409,
+                                    responseBody: __content_409,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -992,7 +792,7 @@ namespace Audra
                 #endif
                                 ).ConfigureAwait(false);
 
-                                ProcessCreateSpeechResponseContent(
+                                ProcessGetSpeechJobsByIdAudioResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -1070,88 +870,6 @@ namespace Audra
             {
                 __httpRequest?.Dispose();
             }
-        }
-        /// <summary>
-        /// Synthesize speech
-        /// </summary>
-        /// <param name="idempotencyKey">
-        /// Optional idempotency key. When omitted, the SDK generates one for this request.
-        /// </param>
-        /// <param name="xAudraCommercialUse"></param>
-        /// <param name="model">
-        /// Default Value: audra-essential
-        /// </param>
-        /// <param name="text">
-        /// Plain text, SSML subset, Audra pause tags (`[pause:1.5s]`),<br/>
-        /// or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
-        /// </param>
-        /// <param name="voice">
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
-        /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
-        /// Default Value: june
-        /// </param>
-        /// <param name="speed">
-        /// Default Value: 1.0
-        /// </param>
-        /// <param name="format">
-        /// Default Value: mp3
-        /// </param>
-        /// <param name="deliveryProfile">
-        /// Podcast pacing profile (slower speed + paragraph/sentence pauses)
-        /// </param>
-        /// <param name="normalize">
-        /// When true (default), normalize URLs, emails, currency, and percent signs before synthesis.<br/>
-        /// Set false to pass text through unchanged (except pronunciation lexicon).<br/>
-        /// Default Value: true
-        /// </param>
-        /// <param name="renderMode">
-        /// `fast` (default) = Modal GPU. `standard` = Modal CPU.<br/>
-        /// Aliases `gpu` / `cpu` accepted.
-        /// </param>
-        /// <param name="mode">
-        /// `standard` — default queue placement. `fast` — queue priority, 1.25× credits.<br/>
-        /// `economy` (0.75× credits, deferred) exists but is **not valid here** — it is<br/>
-        /// only accepted on `POST /v2/speech/jobs` (async). Sending `mode: "economy"`<br/>
-        /// or `economy: true` on this synchronous endpoint returns 400.<br/>
-        /// Default Value: standard
-        /// </param>
-        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
-        /// <param name="cancellationToken">The token to cancel the operation with</param>
-        /// <exception cref="global::System.InvalidOperationException"></exception>
-        public async global::System.Threading.Tasks.Task<byte[]> CreateSpeechAsync(
-            string text,
-            string? idempotencyKey = default,
-            global::Audra.CreateSpeechXAudraCommercialUse? xAudraCommercialUse = default,
-            string? model = default,
-            string? voice = default,
-            double? speed = default,
-            global::Audra.SpeechRequestFormat? format = default,
-            global::Audra.SpeechRequestDeliveryProfile? deliveryProfile = default,
-            bool? normalize = default,
-            global::Audra.SpeechRequestRenderMode? renderMode = default,
-            global::Audra.SpeechRequestMode? mode = default,
-            global::Audra.AutoSDKRequestOptions? requestOptions = default,
-            global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            var __request = new global::Audra.SpeechRequest
-            {
-                Model = model,
-                Text = text,
-                Voice = voice,
-                Speed = speed,
-                Format = format,
-                DeliveryProfile = deliveryProfile,
-                Normalize = normalize,
-                RenderMode = renderMode,
-                Mode = mode,
-            };
-
-            return await CreateSpeechAsync(
-                idempotencyKey: idempotencyKey,
-                xAudraCommercialUse: xAudraCommercialUse,
-                request: __request,
-                requestOptions: requestOptions,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }
