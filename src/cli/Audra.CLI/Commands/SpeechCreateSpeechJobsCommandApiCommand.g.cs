@@ -64,14 +64,17 @@ rejected with 400 on synchronous endpoints (`POST /v2/speech` and similar).
         name: @"--economy",
         description: @"Alias for mode: ""economy"".");
 
-    private static Option<global::Audra.SpeechJobRequestDeliveryProfile?> DeliveryProfile { get; } = new(
-        name: @"--delivery-profile")
+    private static Option<string?> Language { get; } = new(
+        name: @"--language")
     {
-        Description = @"",
+        Description = @"BCP-47 language code. When omitted the service infers the language from
+the voice slug prefix. Provide this field explicitly for designed voices
+or to force a specific G2P backend.
+",
     };
 
-    private static Option<global::Audra.SpeechJobRequestScriptEnhance?> ScriptEnhance { get; } = new(
-        name: @"--script-enhance")
+    private static Option<global::Audra.SpeechJobRequestDeliveryProfile?> DeliveryProfile { get; } = new(
+        name: @"--delivery-profile")
     {
         Description = @"",
     };
@@ -141,8 +144,8 @@ other synchronous endpoints reject it with 400.
                         command.Options.Add(Mode);
                         command.Options.Add(FastMode);
                         command.Options.Add(Economy);
+                        command.Options.Add(Language);
                         command.Options.Add(DeliveryProfile);
-                        command.Options.Add(ScriptEnhance);
                         command.Options.Add(AudioPost);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
@@ -178,8 +181,8 @@ other synchronous endpoints reject it with 400.
                         var mode = CliRuntime.WasSpecified(parseResult, Mode) ? parseResult.GetValue(Mode) : (__requestBase is { } __ModeBaseValue ? __ModeBaseValue.Mode : default);
                         var fastMode = CliRuntime.WasSpecified(parseResult, FastMode) ? parseResult.GetValue(FastMode) : (__requestBase is { } __FastModeBaseValue ? __FastModeBaseValue.FastMode : default);
                         var economy = CliRuntime.WasSpecified(parseResult, Economy) ? parseResult.GetValue(Economy) : (__requestBase is { } __EconomyBaseValue ? __EconomyBaseValue.Economy : default);
+                        var language = CliRuntime.WasSpecified(parseResult, Language) ? parseResult.GetValue(Language) : (__requestBase is { } __LanguageBaseValue ? __LanguageBaseValue.Language : default);
                         var deliveryProfile = CliRuntime.WasSpecified(parseResult, DeliveryProfile) ? parseResult.GetValue(DeliveryProfile) : (__requestBase is { } __DeliveryProfileBaseValue ? __DeliveryProfileBaseValue.DeliveryProfile : default);
-                        var scriptEnhance = CliRuntime.WasSpecified(parseResult, ScriptEnhance) ? parseResult.GetValue(ScriptEnhance) : (__requestBase is { } __ScriptEnhanceBaseValue ? __ScriptEnhanceBaseValue.ScriptEnhance : default);
                         var audioPost = CliRuntime.WasSpecified(parseResult, AudioPost) ? parseResult.GetValue(AudioPost) : (__requestBase is { } __AudioPostBaseValue ? __AudioPostBaseValue.AudioPost : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
@@ -194,8 +197,8 @@ other synchronous endpoints reject it with 400.
                                     mode: mode,
                                     fastMode: fastMode,
                                     economy: economy,
+                                    language: language,
                                     deliveryProfile: deliveryProfile,
-                                    scriptEnhance: scriptEnhance,
                                     audioPost: audioPost,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
