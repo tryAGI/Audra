@@ -662,6 +662,15 @@ components:
           description: |
             When true (default), normalize URLs, emails, currency, and percent signs before synthesis.
             Set false to pass text through unchanged (except pronunciation lexicon).
+        language:
+          type: string
+          description: |
+            BCP-47 language code for the requested voice. When omitted the service
+            infers the language from the voice slug prefix (en-us, en-gb, ja, zh,
+            es, pt-br, hi, it, fr-fr, de, nl). Provide this field explicitly when
+            using designed/community voices that don't carry an unambiguous prefix,
+            or when you want to force a specific G2P backend regardless of voice name.
+          example: "fr-fr"
         render_mode:
           type: string
           enum: [fast, standard, gpu, cpu]
@@ -725,10 +734,14 @@ components:
         economy:
           type: boolean
           description: 'Alias for mode: "economy".'
-        delivery_profile:
+        language:
           type: string
-          enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
-        script_enhance:
+          description: |
+            BCP-47 language code. When omitted the service infers the language from
+            the voice slug prefix. Provide this field explicitly for designed voices
+            or to force a specific G2P backend.
+          example: "fr-fr"
+        delivery_profile:
           type: string
           enum: [off, auto, podcast]
         audio_post:

@@ -66,6 +66,17 @@ Premium packs use product slugs (e.g. aurora-lead) when enabled.
 Set false to pass text through unchanged (except pronunciation lexicon).
 ");
 
+    private static Option<string?> Language { get; } = new(
+        name: @"--language")
+    {
+        Description = @"BCP-47 language code for the requested voice. When omitted the service
+infers the language from the voice slug prefix (en-us, en-gb, ja, zh,
+es, pt-br, hi, it, fr-fr, de, nl). Provide this field explicitly when
+using designed/community voices that don't carry an unambiguous prefix,
+or when you want to force a specific G2P backend regardless of voice name.
+",
+    };
+
     private static Option<global::Audra.SpeechRequestRenderMode?> RenderMode { get; } = new(
         name: @"--render-mode")
     {
@@ -112,6 +123,7 @@ or `economy: true` on this synchronous endpoint returns 400.
                         command.Options.Add(Format);
                         command.Options.Add(DeliveryProfile);
                         command.Options.Add(Normalize);
+                        command.Options.Add(Language);
                         command.Options.Add(RenderMode);
                         command.Options.Add(Mode);
           command.Options.Add(Input);
@@ -148,6 +160,7 @@ or `economy: true` on this synchronous endpoint returns 400.
                         var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : (__requestBase is { } __FormatBaseValue ? __FormatBaseValue.Format : default);
                         var deliveryProfile = CliRuntime.WasSpecified(parseResult, DeliveryProfile) ? parseResult.GetValue(DeliveryProfile) : (__requestBase is { } __DeliveryProfileBaseValue ? __DeliveryProfileBaseValue.DeliveryProfile : default);
                         var normalize = CliRuntime.WasSpecified(parseResult, Normalize) ? parseResult.GetValue(Normalize) : (__requestBase is { } __NormalizeBaseValue ? __NormalizeBaseValue.Normalize : default);
+                        var language = CliRuntime.WasSpecified(parseResult, Language) ? parseResult.GetValue(Language) : (__requestBase is { } __LanguageBaseValue ? __LanguageBaseValue.Language : default);
                         var renderMode = CliRuntime.WasSpecified(parseResult, RenderMode) ? parseResult.GetValue(RenderMode) : (__requestBase is { } __RenderModeBaseValue ? __RenderModeBaseValue.RenderMode : default);
                         var mode = CliRuntime.WasSpecified(parseResult, Mode) ? parseResult.GetValue(Mode) : (__requestBase is { } __ModeBaseValue ? __ModeBaseValue.Mode : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
@@ -163,6 +176,7 @@ or `economy: true` on this synchronous endpoint returns 400.
                                     format: format,
                                     deliveryProfile: deliveryProfile,
                                     normalize: normalize,
+                                    language: language,
                                     renderMode: renderMode,
                                     mode: mode,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);

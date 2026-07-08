@@ -59,6 +59,18 @@ namespace Audra
         public bool? Normalize { get; set; }
 
         /// <summary>
+        /// BCP-47 language code for the requested voice. When omitted the service<br/>
+        /// infers the language from the voice slug prefix (en-us, en-gb, ja, zh,<br/>
+        /// es, pt-br, hi, it, fr-fr, de, nl). Provide this field explicitly when<br/>
+        /// using designed/community voices that don't carry an unambiguous prefix,<br/>
+        /// or when you want to force a specific G2P backend regardless of voice name.<br/>
+        /// Example: fr-fr
+        /// </summary>
+        /// <example>fr-fr</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("language")]
+        public string? Language { get; set; }
+
+        /// <summary>
         /// `fast` (default) = Modal GPU. `standard` = Modal CPU.<br/>
         /// Aliases `gpu` / `cpu` accepted.
         /// </summary>
@@ -112,6 +124,14 @@ namespace Audra
         /// Set false to pass text through unchanged (except pronunciation lexicon).<br/>
         /// Default Value: true
         /// </param>
+        /// <param name="language">
+        /// BCP-47 language code for the requested voice. When omitted the service<br/>
+        /// infers the language from the voice slug prefix (en-us, en-gb, ja, zh,<br/>
+        /// es, pt-br, hi, it, fr-fr, de, nl). Provide this field explicitly when<br/>
+        /// using designed/community voices that don't carry an unambiguous prefix,<br/>
+        /// or when you want to force a specific G2P backend regardless of voice name.<br/>
+        /// Example: fr-fr
+        /// </param>
         /// <param name="renderMode">
         /// `fast` (default) = Modal GPU. `standard` = Modal CPU.<br/>
         /// Aliases `gpu` / `cpu` accepted.
@@ -134,6 +154,7 @@ namespace Audra
             global::Audra.SpeechRequestFormat? format,
             global::Audra.SpeechRequestDeliveryProfile? deliveryProfile,
             bool? normalize,
+            string? language,
             global::Audra.SpeechRequestRenderMode? renderMode,
             global::Audra.SpeechRequestMode? mode)
         {
@@ -144,6 +165,7 @@ namespace Audra
             this.Format = format;
             this.DeliveryProfile = deliveryProfile;
             this.Normalize = normalize;
+            this.Language = language;
             this.RenderMode = renderMode;
             this.Mode = mode;
         }

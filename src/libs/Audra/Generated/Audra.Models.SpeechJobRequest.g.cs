@@ -81,18 +81,21 @@ namespace Audra
         public bool? Economy { get; set; }
 
         /// <summary>
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix. Provide this field explicitly for designed voices<br/>
+        /// or to force a specific G2P backend.<br/>
+        /// Example: fr-fr
+        /// </summary>
+        /// <example>fr-fr</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("language")]
+        public string? Language { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delivery_profile")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechJobRequestDeliveryProfileJsonConverter))]
         public global::Audra.SpeechJobRequestDeliveryProfile? DeliveryProfile { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("script_enhance")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechJobRequestScriptEnhanceJsonConverter))]
-        public global::Audra.SpeechJobRequestScriptEnhance? ScriptEnhance { get; set; }
 
         /// <summary>
         /// 
@@ -141,8 +144,13 @@ namespace Audra
         /// <param name="economy">
         /// Alias for mode: "economy".
         /// </param>
+        /// <param name="language">
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix. Provide this field explicitly for designed voices<br/>
+        /// or to force a specific G2P backend.<br/>
+        /// Example: fr-fr
+        /// </param>
         /// <param name="deliveryProfile"></param>
-        /// <param name="scriptEnhance"></param>
         /// <param name="audioPost"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -157,8 +165,8 @@ namespace Audra
             global::Audra.SpeechJobRequestMode? mode,
             bool? fastMode,
             bool? economy,
+            string? language,
             global::Audra.SpeechJobRequestDeliveryProfile? deliveryProfile,
-            global::Audra.SpeechJobRequestScriptEnhance? scriptEnhance,
             global::Audra.SpeechJobRequestAudioPost? audioPost)
         {
             this.Model = model;
@@ -170,8 +178,8 @@ namespace Audra
             this.Mode = mode;
             this.FastMode = fastMode;
             this.Economy = economy;
+            this.Language = language;
             this.DeliveryProfile = deliveryProfile;
-            this.ScriptEnhance = scriptEnhance;
             this.AudioPost = audioPost;
         }
 

@@ -11,19 +11,15 @@ namespace Audra
         /// <summary>
         /// 
         /// </summary>
-        Legacy,
+        Auto,
         /// <summary>
         /// 
         /// </summary>
-        PodcastV2,
+        Off,
         /// <summary>
         /// 
         /// </summary>
-        PodcastV3,
-        /// <summary>
-        /// 
-        /// </summary>
-        PodcastV4,
+        Podcast,
     }
 
     /// <summary>
@@ -38,10 +34,9 @@ namespace Audra
         {
             return value switch
             {
-                SpeechJobRequestDeliveryProfile.Legacy => "legacy",
-                SpeechJobRequestDeliveryProfile.PodcastV2 => "podcast_v2",
-                SpeechJobRequestDeliveryProfile.PodcastV3 => "podcast_v3",
-                SpeechJobRequestDeliveryProfile.PodcastV4 => "podcast_v4",
+                SpeechJobRequestDeliveryProfile.Auto => "auto",
+                SpeechJobRequestDeliveryProfile.Off => "off",
+                SpeechJobRequestDeliveryProfile.Podcast => "podcast",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -52,10 +47,9 @@ namespace Audra
         {
             return value switch
             {
-                "legacy" => SpeechJobRequestDeliveryProfile.Legacy,
-                "podcast_v2" => SpeechJobRequestDeliveryProfile.PodcastV2,
-                "podcast_v3" => SpeechJobRequestDeliveryProfile.PodcastV3,
-                "podcast_v4" => SpeechJobRequestDeliveryProfile.PodcastV4,
+                "auto" => SpeechJobRequestDeliveryProfile.Auto,
+                "off" => SpeechJobRequestDeliveryProfile.Off,
+                "podcast" => SpeechJobRequestDeliveryProfile.Podcast,
                 _ => null,
             };
         }
