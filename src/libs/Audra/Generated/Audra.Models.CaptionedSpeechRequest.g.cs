@@ -54,6 +54,16 @@ namespace Audra
         public bool? Normalize { get; set; }
 
         /// <summary>
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix. Provide explicitly for designed voices or to force<br/>
+        /// a specific G2P backend.<br/>
+        /// Example: fr-fr
+        /// </summary>
+        /// <example>fr-fr</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("language")]
+        public string? Language { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("render_mode")]
@@ -86,6 +96,12 @@ namespace Audra
         /// <param name="normalize">
         /// Default Value: true
         /// </param>
+        /// <param name="language">
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix. Provide explicitly for designed voices or to force<br/>
+        /// a specific G2P backend.<br/>
+        /// Example: fr-fr
+        /// </param>
         /// <param name="renderMode"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -98,6 +114,7 @@ namespace Audra
             global::Audra.CaptionedSpeechRequestFormat? format,
             global::Audra.CaptionedSpeechRequestDeliveryProfile? deliveryProfile,
             bool? normalize,
+            string? language,
             global::Audra.CaptionedSpeechRequestRenderMode? renderMode)
         {
             this.Model = model;
@@ -107,6 +124,7 @@ namespace Audra
             this.Format = format;
             this.DeliveryProfile = deliveryProfile;
             this.Normalize = normalize;
+            this.Language = language;
             this.RenderMode = renderMode;
         }
 

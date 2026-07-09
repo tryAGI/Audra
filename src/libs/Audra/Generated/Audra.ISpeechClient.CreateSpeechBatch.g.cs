@@ -82,6 +82,11 @@ namespace Audra
         /// Default Value: mp3
         /// </param>
         /// <param name="deliveryProfile"></param>
+        /// <param name="language">
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix.<br/>
+        /// Example: es
+        /// </param>
         /// <param name="segments"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -96,6 +101,7 @@ namespace Audra
             int? crossfadeMs = default,
             global::Audra.BatchSpeechRequestFormat? format = default,
             global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile = default,
+            string? language = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

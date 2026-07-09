@@ -23,7 +23,8 @@ namespace Audra
         public required string Text { get; set; }
 
         /// <summary>
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
+        /// Voice slug from the catalog (150 voices / 10 Essential languages — list with<br/>
+        /// `GET /v2/voices`) or weighted mix e.g. `june(2)+wren(1)`.<br/>
         /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
         /// Default Value: june
         /// </summary>
@@ -106,7 +107,8 @@ namespace Audra
         /// Default Value: audra-essential
         /// </param>
         /// <param name="voice">
-        /// Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.<br/>
+        /// Voice slug from the catalog (150 voices / 10 Essential languages — list with<br/>
+        /// `GET /v2/voices`) or weighted mix e.g. `june(2)+wren(1)`.<br/>
         /// Premium packs use product slugs (e.g. aurora-lead) when enabled.<br/>
         /// Default Value: june
         /// </param>

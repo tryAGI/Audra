@@ -37,7 +37,8 @@ or inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
     private static Option<string?> Voice { get; } = new(
         name: @"--voice")
     {
-        Description = @"Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.
+        Description = @"Voice slug from the catalog (150 voices / 10 Essential languages — list with
+`GET /v2/voices`) or weighted mix e.g. `june(2)+wren(1)`.
 Premium packs use product slugs (e.g. aurora-lead) when enabled.
 ",
     };

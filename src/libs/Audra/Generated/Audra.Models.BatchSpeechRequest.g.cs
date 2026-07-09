@@ -48,6 +48,15 @@ namespace Audra
         public global::Audra.BatchSpeechRequestDeliveryProfile? DeliveryProfile { get; set; }
 
         /// <summary>
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix.<br/>
+        /// Example: es
+        /// </summary>
+        /// <example>es</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("language")]
+        public string? Language { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("segments")]
@@ -81,6 +90,11 @@ namespace Audra
         /// Default Value: mp3
         /// </param>
         /// <param name="deliveryProfile"></param>
+        /// <param name="language">
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix.<br/>
+        /// Example: es
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -91,7 +105,8 @@ namespace Audra
             double? speed,
             int? crossfadeMs,
             global::Audra.BatchSpeechRequestFormat? format,
-            global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile)
+            global::Audra.BatchSpeechRequestDeliveryProfile? deliveryProfile,
+            string? language)
         {
             this.Model = model;
             this.Voice = voice;
@@ -99,6 +114,7 @@ namespace Audra
             this.CrossfadeMs = crossfadeMs;
             this.Format = format;
             this.DeliveryProfile = deliveryProfile;
+            this.Language = language;
             this.Segments = segments ?? throw new global::System.ArgumentNullException(nameof(segments));
         }
 
