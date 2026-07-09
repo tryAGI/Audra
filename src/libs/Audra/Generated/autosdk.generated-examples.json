@@ -1,0 +1,26 @@
+{
+  "Examples": [
+    {
+      "Order": 1,
+      "Title": "Synthesize speech",
+      "Slug": "synthesize-speech",
+      "Description": "Generated from OpenAPI examples.",
+      "Language": "csharp",
+      "Code": "using var client = AudraClient.CreateFromEnvironment();\n\nvar request = global::System.Text.Json.JsonSerializer.Deserialize\u003Cglobal::Audra.SpeechRequest\u003E(\n    @\u0022{\n  \u0022\u0022model\u0022\u0022: \u0022\u0022audra-essential\u0022\u0022,\n  \u0022\u0022voice\u0022\u0022: \u0022\u0022june\u0022\u0022,\n  \u0022\u0022text\u0022\u0022: \u0022\u0022Hello world\u0022\u0022,\n  \u0022\u0022format\u0022\u0022: \u0022\u0022mp3\u0022\u0022,\n  \u0022\u0022speed\u0022\u0022: 1.0\n}\u0022)!;\n\nvar response = await client.Speech.CreateSpeechAsync(\n    request: request\n);",
+      "Format": "sdk",
+      "OperationId": "createSpeech",
+      "Setup": "This example assumes \u0060using Audra;\u0060 is in scope and a configured credential environment variable is set: \u0060AUDRA_API_KEY\u0060."
+    },
+    {
+      "Order": 2,
+      "Title": "Create an async speech render job",
+      "Slug": "create-an-async-speech-render-job",
+      "Description": "Queues text for background rendering \u2014 poll \u0060status_url\u0060 until \u0060status\u0060\nis \u0060completed\u0060, then download \u0060audio_url\u0060. Use for long-form text where a\nsynchronous response would time out (auto-triggered above ~8k chars on\n\u0060POST /v2/speech\u0060 unless \u0060X-Audra-Sync: true\u0060 is set).\n\nSupports three delivery modes via \u0060mode\u0060 (or the \u0060fast_mode\u0060/\u0060priority\u0060/\u0060economy\u0060\nboolean aliases): \u0060standard\u0060 (default), \u0060fast\u0060 (queue priority, 1.25\u00D7 credits),\nand \u0060economy\u0060 (deferred/best-effort, 0.75\u00D7 credits \u2014 see \u0060SpeechJobRequest.mode\u0060).\n\u0060economy\u0060 is **only** available on this async endpoint; \u0060POST /v2/speech\u0060 and\nother synchronous endpoints reject it with 400.",
+      "Language": "csharp",
+      "Code": "using var client = AudraClient.CreateFromEnvironment();\n\nvar request = global::System.Text.Json.JsonSerializer.Deserialize\u003Cglobal::Audra.SpeechJobRequest\u003E(\n    @\u0022{\n  \u0022\u0022text\u0022\u0022: \u0022\u0022Hola, \\u00BFqu\\u00E9 tal?\u0022\u0022,\n  \u0022\u0022voice\u0022\u0022: \u0022\u0022lucia\u0022\u0022,\n  \u0022\u0022language\u0022\u0022: \u0022\u0022es\u0022\u0022,\n  \u0022\u0022format\u0022\u0022: \u0022\u0022mp3\u0022\u0022\n}\u0022)!;\n\nvar response = await client.Speech.CreateSpeechJobsAsync(\n    request: request\n);",
+      "Format": "sdk",
+      "OperationId": "createSpeechJobs",
+      "Setup": "This example assumes \u0060using Audra;\u0060 is in scope and a configured credential environment variable is set: \u0060AUDRA_API_KEY\u0060."
+    }
+  ]
+}

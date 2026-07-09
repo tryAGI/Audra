@@ -56,6 +56,14 @@ internal static partial class SpeechCreateSpeechBatchCommandApiCommand
         Description = @"",
     };
 
+    private static Option<string?> Language { get; } = new(
+        name: @"--language")
+    {
+        Description = @"BCP-47 language code. When omitted the service infers the language from
+the voice slug prefix.
+",
+    };
+
     private static Option<global::System.Collections.Generic.IList<global::Audra.BatchSegment>> Segments { get; } = new(
         name: @"--segments")
     {
@@ -90,6 +98,7 @@ internal static partial class SpeechCreateSpeechBatchCommandApiCommand
                         command.Options.Add(CrossfadeMs);
                         command.Options.Add(Format);
                         command.Options.Add(DeliveryProfile);
+                        command.Options.Add(Language);
                         command.Options.Add(Segments);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
@@ -124,6 +133,7 @@ internal static partial class SpeechCreateSpeechBatchCommandApiCommand
                         var crossfadeMs = CliRuntime.WasSpecified(parseResult, CrossfadeMs) ? parseResult.GetValue(CrossfadeMs) : (__requestBase is { } __CrossfadeMsBaseValue ? __CrossfadeMsBaseValue.CrossfadeMs : default);
                         var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : (__requestBase is { } __FormatBaseValue ? __FormatBaseValue.Format : default);
                         var deliveryProfile = CliRuntime.WasSpecified(parseResult, DeliveryProfile) ? parseResult.GetValue(DeliveryProfile) : (__requestBase is { } __DeliveryProfileBaseValue ? __DeliveryProfileBaseValue.DeliveryProfile : default);
+                        var language = CliRuntime.WasSpecified(parseResult, Language) ? parseResult.GetValue(Language) : (__requestBase is { } __LanguageBaseValue ? __LanguageBaseValue.Language : default);
                         var segments = parseResult.GetRequiredValue(Segments);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
@@ -137,6 +147,7 @@ internal static partial class SpeechCreateSpeechBatchCommandApiCommand
                                     crossfadeMs: crossfadeMs,
                                     format: format,
                                     deliveryProfile: deliveryProfile,
+                                    language: language,
                                     segments: segments,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 

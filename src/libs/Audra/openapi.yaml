@@ -5,8 +5,10 @@ info:
   description: |
     Audra-native text-to-speech API with credit-based billing.
 
+    **Catalog:** 150 voices across four engines and 10 Essential languages. List slugs with `GET /v2/voices`.
+
     **Models:** `audra-essential` (Essential), `audra-plus` (Plus), `audra-pro` (Pro), `audra-conversations` (Conversations).
-    Legacy ids (`audra-essential`, `audra-studio-lite`, `audra-studio`, `audra-studio-dialogue`) remain accepted and resolve to the canonical ids above.
+    Legacy ids (`audra-core`, `audra-studio-lite`, `audra-studio`, `audra-studio-dialogue`) remain accepted and resolve to the canonical ids above.
 
     **Commercial use:** Free trial is evaluation-only. After purchasing credits, send
     `X-Audra-Commercial-Use: true` on production renders. Paid accounts receive
@@ -232,6 +234,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SpeechRequest'
+            examples:
+              english:
+                summary: English Essential
+                value:
+                  model: audra-essential
+                  voice: june
+                  text: Hello world
+                  format: mp3
+                  speed: 1.0
+              multilingual:
+                summary: Spanish Essential
+                value:
+                  text: "Hola, ¿qué tal?"
+                  voice: lucia
+                  language: es
+                  format: mp3
       responses:
         '200':
           description: Audio stream
@@ -459,6 +477,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SpeechJobRequest'
+            examples:
+              multilingual:
+                summary: Spanish async job
+                value:
+                  text: "Hola, ¿qué tal?"
+                  voice: lucia
+                  language: es
+                  format: mp3
       responses:
         '202':
           description: Job queued
@@ -641,7 +667,8 @@ components:
           type: string
           default: june
           description: |
-            Voice slug (june, clara, arthur, …) or weighted mix e.g. `june(2)+wren(1)`.
+            Voice slug from the catalog (150 voices / 10 Essential languages — list with
+            `GET /v2/voices`) or weighted mix e.g. `june(2)+wren(1)`.
             Premium packs use product slugs (e.g. aurora-lead) when enabled.
         speed:
           type: number
@@ -844,6 +871,13 @@ components:
         normalize:
           type: boolean
           default: true
+        language:
+          type: string
+          description: |
+            BCP-47 language code. When omitted the service infers the language from
+            the voice slug prefix. Provide explicitly for designed voices or to force
+            a specific G2P backend.
+          example: "fr-fr"
         render_mode:
           type: string
           enum: [fast, standard, gpu, cpu]
@@ -995,6 +1029,12 @@ components:
         delivery_profile:
           type: string
           enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
+        language:
+          type: string
+          description: |
+            BCP-47 language code. When omitted the service infers the language from
+            the voice slug prefix.
+          example: "es"
         segments:
           type: array
           minItems: 1

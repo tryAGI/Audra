@@ -54,6 +54,15 @@ internal static partial class SpeechCreateSpeechCaptionedCommandApiCommand
         name: @"--normalize",
         description: @"");
 
+    private static Option<string?> Language { get; } = new(
+        name: @"--language")
+    {
+        Description = @"BCP-47 language code. When omitted the service infers the language from
+the voice slug prefix. Provide explicitly for designed voices or to force
+a specific G2P backend.
+",
+    };
+
     private static Option<global::Audra.CaptionedSpeechRequestRenderMode?> RenderMode { get; } = new(
         name: @"--render-mode")
     {
@@ -90,6 +99,7 @@ Timestamps are duration-weighted estimates (not forced alignment). Max **50,000*
                         command.Options.Add(Format);
                         command.Options.Add(DeliveryProfile);
                         command.Options.Add(Normalize);
+                        command.Options.Add(Language);
                         command.Options.Add(RenderMode);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
@@ -124,6 +134,7 @@ Timestamps are duration-weighted estimates (not forced alignment). Max **50,000*
                         var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : (__requestBase is { } __FormatBaseValue ? __FormatBaseValue.Format : default);
                         var deliveryProfile = CliRuntime.WasSpecified(parseResult, DeliveryProfile) ? parseResult.GetValue(DeliveryProfile) : (__requestBase is { } __DeliveryProfileBaseValue ? __DeliveryProfileBaseValue.DeliveryProfile : default);
                         var normalize = CliRuntime.WasSpecified(parseResult, Normalize) ? parseResult.GetValue(Normalize) : (__requestBase is { } __NormalizeBaseValue ? __NormalizeBaseValue.Normalize : default);
+                        var language = CliRuntime.WasSpecified(parseResult, Language) ? parseResult.GetValue(Language) : (__requestBase is { } __LanguageBaseValue ? __LanguageBaseValue.Language : default);
                         var renderMode = CliRuntime.WasSpecified(parseResult, RenderMode) ? parseResult.GetValue(RenderMode) : (__requestBase is { } __RenderModeBaseValue ? __RenderModeBaseValue.RenderMode : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
@@ -137,6 +148,7 @@ Timestamps are duration-weighted estimates (not forced alignment). Max **50,000*
                                     format: format,
                                     deliveryProfile: deliveryProfile,
                                     normalize: normalize,
+                                    language: language,
                                     renderMode: renderMode,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 

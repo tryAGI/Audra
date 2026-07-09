@@ -1009,6 +1009,12 @@ namespace Audra
         /// <param name="normalize">
         /// Default Value: true
         /// </param>
+        /// <param name="language">
+        /// BCP-47 language code. When omitted the service infers the language from<br/>
+        /// the voice slug prefix. Provide explicitly for designed voices or to force<br/>
+        /// a specific G2P backend.<br/>
+        /// Example: fr-fr
+        /// </param>
         /// <param name="renderMode"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -1022,6 +1028,7 @@ namespace Audra
             global::Audra.CaptionedSpeechRequestFormat? format = default,
             global::Audra.CaptionedSpeechRequestDeliveryProfile? deliveryProfile = default,
             bool? normalize = default,
+            string? language = default,
             global::Audra.CaptionedSpeechRequestRenderMode? renderMode = default,
             global::Audra.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
@@ -1035,6 +1042,7 @@ namespace Audra
                 Format = format,
                 DeliveryProfile = deliveryProfile,
                 Normalize = normalize,
+                Language = language,
                 RenderMode = renderMode,
             };
 
