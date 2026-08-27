@@ -9,19 +9,19 @@ namespace Audra
     public enum SpeechRequestDeliveryProfile
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Legacy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PodcastV2,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PodcastV3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PodcastV4,
     }

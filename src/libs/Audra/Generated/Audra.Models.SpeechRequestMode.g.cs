@@ -13,11 +13,11 @@ namespace Audra
     public enum SpeechRequestMode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Standard,
     }

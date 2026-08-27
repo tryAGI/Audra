@@ -4,20 +4,20 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum CreateSpeechCaptionedXAudraCommercialUse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         True,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Yes,
     }

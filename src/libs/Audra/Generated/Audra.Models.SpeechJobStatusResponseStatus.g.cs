@@ -4,24 +4,24 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum SpeechJobStatusResponseStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Completed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Failed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Processing,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Queued,
     }

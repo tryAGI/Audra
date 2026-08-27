@@ -4,24 +4,24 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum BatchSpeechRequestDeliveryProfile
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Legacy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PodcastV2,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PodcastV3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PodcastV4,
     }

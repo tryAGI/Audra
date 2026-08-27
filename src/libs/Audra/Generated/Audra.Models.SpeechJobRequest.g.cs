@@ -6,7 +6,7 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class SpeechJobRequest
     {
@@ -17,7 +17,7 @@ namespace Audra
         public string? Model { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("text")]
         [global::System.Text.Json.Serialization.JsonRequired]
@@ -91,14 +91,14 @@ namespace Audra
         public string? Language { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delivery_profile")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechJobRequestDeliveryProfileJsonConverter))]
         public global::Audra.SpeechJobRequestDeliveryProfile? DeliveryProfile { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("audio_post")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechJobRequestAudioPostJsonConverter))]

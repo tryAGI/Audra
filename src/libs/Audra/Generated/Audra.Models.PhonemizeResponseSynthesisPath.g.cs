@@ -10,15 +10,15 @@ namespace Audra
     public enum PhonemizeResponseSynthesisPath
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         IpaMarkup,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Phonemes,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Text,
     }

@@ -10,19 +10,19 @@ namespace Audra
     public enum SpeechRequestRenderMode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Cpu,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gpu,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Standard,
     }

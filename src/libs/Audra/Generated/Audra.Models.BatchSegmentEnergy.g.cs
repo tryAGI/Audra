@@ -11,15 +11,15 @@ namespace Audra
     public enum BatchSegmentEnergy
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         High,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Low,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Neutral,
     }

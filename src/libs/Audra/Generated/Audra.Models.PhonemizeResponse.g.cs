@@ -4,7 +4,7 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class PhonemizeResponse
     {
@@ -36,13 +36,13 @@ namespace Audra
         public string? Backend { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("british")]
         public bool? British { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("voice_key")]
         public string? VoiceKey { get; set; }

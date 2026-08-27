@@ -4,12 +4,12 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class LexiconResponse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("entries")]
         public global::System.Collections.Generic.IList<global::Audra.LexiconEntry>? Entries { get; set; }

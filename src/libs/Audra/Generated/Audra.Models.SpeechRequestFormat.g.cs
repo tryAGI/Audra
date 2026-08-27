@@ -9,11 +9,11 @@ namespace Audra
     public enum SpeechRequestFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Mp3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Wav,
     }

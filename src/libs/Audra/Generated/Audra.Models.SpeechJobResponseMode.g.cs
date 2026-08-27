@@ -4,20 +4,20 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum SpeechJobResponseMode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Economy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Standard,
     }

@@ -73,38 +73,38 @@ namespace Audra
         public global::System.Func<string> CreateIdempotencyKey { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public AuthClient Auth { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public BillingClient Billing { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public LexiconClient Lexicon { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public MetaClient Meta { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechClient Speech { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VoicesClient Voices { get; }
 

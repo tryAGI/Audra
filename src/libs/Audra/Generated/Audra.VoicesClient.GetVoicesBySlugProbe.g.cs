@@ -149,7 +149,7 @@ namespace Audra
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::Audra.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
@@ -341,7 +341,7 @@ namespace Audra
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -373,7 +373,7 @@ namespace Audra
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;
@@ -405,7 +405,7 @@ namespace Audra
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 422)
                             {
                                 string? __content_422 = null;
@@ -437,7 +437,7 @@ namespace Audra
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 502)
                             {
                                 string? __content_502 = null;

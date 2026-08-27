@@ -4,12 +4,12 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class PhonemizeRequest
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("text")]
         [global::System.Text.Json.Serialization.JsonRequired]
@@ -22,7 +22,7 @@ namespace Audra
         public string? Voice { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("render_mode")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.PhonemizeRequestRenderModeJsonConverter))]

@@ -9,11 +9,11 @@ namespace Audra
     public enum BatchSpeechRequestFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Mp3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Wav,
     }

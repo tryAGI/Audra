@@ -4,12 +4,12 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CreateBillingCheckoutRequest
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("pack")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.CreateBillingCheckoutRequestPackJsonConverter))]

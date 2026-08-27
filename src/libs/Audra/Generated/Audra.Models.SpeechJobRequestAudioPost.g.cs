@@ -4,28 +4,28 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum SpeechJobRequestAudioPost
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Broadcast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Off,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Podcast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Warm,
     }

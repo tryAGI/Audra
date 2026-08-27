@@ -4,7 +4,7 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CaptionedSpeechRequest
     {
@@ -15,7 +15,7 @@ namespace Audra
         public string? Model { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("text")]
         [global::System.Text.Json.Serialization.JsonRequired]
@@ -41,7 +41,7 @@ namespace Audra
         public global::Audra.CaptionedSpeechRequestFormat? Format { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delivery_profile")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.CaptionedSpeechRequestDeliveryProfileJsonConverter))]
@@ -64,7 +64,7 @@ namespace Audra
         public string? Language { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("render_mode")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.CaptionedSpeechRequestRenderModeJsonConverter))]
