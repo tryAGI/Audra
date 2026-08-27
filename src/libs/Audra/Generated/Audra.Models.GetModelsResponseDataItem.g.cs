@@ -4,7 +4,7 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class GetModelsResponseDataItem
     {
@@ -23,7 +23,7 @@ namespace Audra
         public string? Tier { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("features")]
         public global::System.Collections.Generic.IList<string>? Features { get; set; }

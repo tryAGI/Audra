@@ -4,20 +4,20 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum CreateBillingCheckoutRequestPack
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Credits100,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Credits20,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Credits5,
     }

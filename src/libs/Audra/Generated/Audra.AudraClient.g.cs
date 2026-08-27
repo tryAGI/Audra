@@ -53,7 +53,7 @@ namespace Audra
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Audra.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {
@@ -63,7 +63,7 @@ namespace Audra
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public AuthClient Auth => new AuthClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -74,7 +74,7 @@ namespace Audra
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public BillingClient Billing => new BillingClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -85,7 +85,7 @@ namespace Audra
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public LexiconClient Lexicon => new LexiconClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -96,7 +96,7 @@ namespace Audra
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public MetaClient Meta => new MetaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -107,7 +107,7 @@ namespace Audra
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechClient Speech => new SpeechClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -118,7 +118,7 @@ namespace Audra
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VoicesClient Voices => new VoicesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {

@@ -4,7 +4,7 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class BatchSpeechRequest
     {
@@ -41,7 +41,7 @@ namespace Audra
         public global::Audra.BatchSpeechRequestFormat? Format { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delivery_profile")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.BatchSpeechRequestDeliveryProfileJsonConverter))]
@@ -57,7 +57,7 @@ namespace Audra
         public string? Language { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("segments")]
         [global::System.Text.Json.Serialization.JsonRequired]

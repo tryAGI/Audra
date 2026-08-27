@@ -15,15 +15,15 @@ namespace Audra
     public enum SpeechJobRequestMode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Economy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Standard,
     }

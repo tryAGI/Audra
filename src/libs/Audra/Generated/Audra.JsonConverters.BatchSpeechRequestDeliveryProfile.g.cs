@@ -20,7 +20,7 @@ namespace Audra.JsonConverters
                     {
                         return global::Audra.BatchSpeechRequestDeliveryProfileExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

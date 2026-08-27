@@ -4,24 +4,24 @@
 namespace Audra
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum CaptionedSpeechRequestRenderMode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Cpu,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gpu,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Standard,
     }
