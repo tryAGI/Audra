@@ -49,6 +49,8 @@ internal static partial class BillingCreateBillingCheckoutCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-billing-checkout", @"Create Stripe Checkout session for credit pack");
@@ -94,6 +96,7 @@ internal static partial class BillingCreateBillingCheckoutCommandApiCommand
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

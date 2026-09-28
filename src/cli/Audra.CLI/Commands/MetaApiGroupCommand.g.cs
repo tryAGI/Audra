@@ -4,8 +4,10 @@ using System.CommandLine;
 
 namespace Audra.CLI.Commands;
 
-internal static class MetaApiGroupCommand
+internal static partial class MetaApiGroupCommand
 {
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"meta", @"Meta endpoint commands.");
@@ -13,6 +15,7 @@ internal static class MetaApiGroupCommand
                          command.Subcommands.Add(MetaGetModelsCommandApiCommand.Create());
                          command.Subcommands.Add(MetaGetStatsPublicCommandApiCommand.Create());
                          command.Subcommands.Add(MetaGetVoicesCommandApiCommand.Create());
+        CustomizeCommand(ref command);
         return command;
     }
 }

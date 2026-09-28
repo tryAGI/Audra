@@ -34,6 +34,8 @@ internal static partial class LexiconPutLexiconCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"put-lexicon", @"Replace per-account pronunciation overrides
@@ -68,6 +70,7 @@ Max 100 entries per account. Applied before shared finance lexicon on all speech
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

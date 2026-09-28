@@ -121,6 +121,8 @@ or to force a specific G2P backend.
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-speech-jobs", @"Create an async speech render job
@@ -210,6 +212,7 @@ other synchronous endpoints reject it with 400.
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

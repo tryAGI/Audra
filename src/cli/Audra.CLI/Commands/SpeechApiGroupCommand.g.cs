@@ -4,8 +4,10 @@ using System.CommandLine;
 
 namespace Audra.CLI.Commands;
 
-internal static class SpeechApiGroupCommand
+internal static partial class SpeechApiGroupCommand
 {
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"speech", @"Speech endpoint commands.");
@@ -16,6 +18,7 @@ internal static class SpeechApiGroupCommand
                          command.Subcommands.Add(SpeechCreateSpeechJobsCommandApiCommand.Create());
                          command.Subcommands.Add(SpeechGetSpeechJobsByIdCommandApiCommand.Create());
                          command.Subcommands.Add(SpeechGetSpeechJobsByIdAudioCommandApiCommand.Create());
+        CustomizeCommand(ref command);
         return command;
     }
 }

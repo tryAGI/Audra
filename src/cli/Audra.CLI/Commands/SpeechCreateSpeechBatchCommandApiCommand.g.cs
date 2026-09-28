@@ -87,6 +87,8 @@ the voice slug prefix.
           Hidden = true,
       };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-speech-batch", @"Synthesize speech from pre-chunked segments");
@@ -153,6 +155,7 @@ the voice slug prefix.
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

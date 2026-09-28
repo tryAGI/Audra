@@ -33,6 +33,8 @@ internal static partial class LexiconDeleteLexiconByTermCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"delete-lexicon-by-term", @"Delete one pronunciation override by term");
@@ -66,6 +68,7 @@ internal static partial class LexiconDeleteLexiconByTermCommandApiCommand
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

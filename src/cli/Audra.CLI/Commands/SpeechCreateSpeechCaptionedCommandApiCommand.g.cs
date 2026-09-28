@@ -85,6 +85,8 @@ a specific G2P backend.
           Hidden = true,
       };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-speech-captioned", @"Synthesize speech with word-level caption timestamps
@@ -154,6 +156,7 @@ Timestamps are duration-weighted estimates (not forced alignment). Max **50,000*
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
