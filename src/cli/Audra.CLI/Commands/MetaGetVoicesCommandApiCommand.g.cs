@@ -9,6 +9,8 @@ internal static partial class MetaGetVoicesCommandApiCommand
 {
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-voices", @"List available voices (slug IDs)");
@@ -28,6 +30,7 @@ internal static partial class MetaGetVoicesCommandApiCommand
 
                                 await CliRuntime.WriteSuccessAsync(parseResult, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

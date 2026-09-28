@@ -33,6 +33,8 @@ internal static partial class VoicesGetVoicesBySlugProbeCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-voices-by-slug-probe", @"Rate-limited voice health sample (no credits charged)
@@ -59,6 +61,7 @@ Renders a 50-character sample via CPU worker. Limited to 10 probes per account p
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

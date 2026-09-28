@@ -13,6 +13,8 @@ internal static partial class SpeechGetSpeechJobsByIdAudioCommandApiCommand
         Description = @"",
     };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-speech-jobs-by-id-audio", @"Download completed async speech job audio");
@@ -32,6 +34,7 @@ internal static partial class SpeechGetSpeechJobsByIdAudioCommandApiCommand
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

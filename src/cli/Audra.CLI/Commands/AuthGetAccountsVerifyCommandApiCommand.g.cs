@@ -14,6 +14,8 @@ internal static partial class AuthGetAccountsVerifyCommandApiCommand
         Required = true,
     };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-accounts-verify", @"Verify email from signup link");
@@ -33,6 +35,7 @@ internal static partial class AuthGetAccountsVerifyCommandApiCommand
 
                                 await CliRuntime.WriteSuccessAsync(parseResult, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

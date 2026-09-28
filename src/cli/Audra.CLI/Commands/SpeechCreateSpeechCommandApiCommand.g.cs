@@ -112,6 +112,8 @@ or `economy: true` on this synchronous endpoint returns 400.
           Hidden = true,
       };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-speech", @"Synthesize speech");
@@ -184,6 +186,7 @@ or `economy: true` on this synchronous endpoint returns 400.
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

@@ -62,6 +62,8 @@ internal static partial class SpeechCreatePhonemizeCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-phonemize", @"Preview phoneme output for text (debug / tuning)
@@ -117,6 +119,7 @@ Max **10,000** characters. Does not consume credits.
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
