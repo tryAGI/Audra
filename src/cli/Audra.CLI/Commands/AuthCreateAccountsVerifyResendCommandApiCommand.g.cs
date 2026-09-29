@@ -11,9 +11,9 @@ internal static partial class AuthCreateAccountsVerifyResendCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-accounts-verify-resend", @"Resend verification email");
+        var command = new Command(commandName ?? @"create-accounts-verify-resend", @"Resend verification email");
 
 
 

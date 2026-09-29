@@ -114,9 +114,9 @@ or `economy: true` on this synchronous endpoint returns 400.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-speech", @"Synthesize speech");
+        var command = new Command(commandName ?? @"create-speech", @"Synthesize speech");
                         command.Options.Add(IdempotencyKey);
                         command.Options.Add(XAudraCommercialUse);
                         command.Options.Add(Model);

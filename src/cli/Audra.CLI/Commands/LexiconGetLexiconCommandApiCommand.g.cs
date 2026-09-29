@@ -31,9 +31,9 @@ internal static partial class LexiconGetLexiconCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-lexicon", @"List per-account pronunciation overrides");
+        var command = new Command(commandName ?? @"get-lexicon", @"List per-account pronunciation overrides");
 
 
 

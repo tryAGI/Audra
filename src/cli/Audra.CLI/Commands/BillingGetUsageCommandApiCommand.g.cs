@@ -31,9 +31,9 @@ internal static partial class BillingGetUsageCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-usage", @"Account usage and balance");
+        var command = new Command(commandName ?? @"get-usage", @"Account usage and balance");
 
 
 

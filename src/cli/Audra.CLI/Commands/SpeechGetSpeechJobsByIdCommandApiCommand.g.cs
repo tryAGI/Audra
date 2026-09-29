@@ -35,9 +35,9 @@ internal static partial class SpeechGetSpeechJobsByIdCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-speech-jobs-by-id", @"Poll async speech job status");
+        var command = new Command(commandName ?? @"get-speech-jobs-by-id", @"Poll async speech job status");
                         command.Arguments.Add(Id);
 
 

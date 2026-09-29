@@ -123,9 +123,9 @@ or to force a specific G2P backend.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-speech-jobs", @"Create an async speech render job
+        var command = new Command(commandName ?? @"create-speech-jobs", @"Create an async speech render job
 Queues text for background rendering — poll `status_url` until `status`
 is `completed`, then download `audio_url`. Use for long-form text where a
 synchronous response would time out (auto-triggered above ~8k chars on

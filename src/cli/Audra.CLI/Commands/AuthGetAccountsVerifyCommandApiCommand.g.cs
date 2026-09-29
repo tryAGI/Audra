@@ -16,9 +16,9 @@ internal static partial class AuthGetAccountsVerifyCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-accounts-verify", @"Verify email from signup link");
+        var command = new Command(commandName ?? @"get-accounts-verify", @"Verify email from signup link");
                         command.Options.Add(Token);
 
 

@@ -36,9 +36,9 @@ internal static partial class LexiconPutLexiconCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"put-lexicon", @"Replace per-account pronunciation overrides
+        var command = new Command(commandName ?? @"put-lexicon", @"Replace per-account pronunciation overrides
 Max 100 entries per account. Applied before shared finance lexicon on all speech renders.");
                         command.Options.Add(Entries);
 

@@ -89,9 +89,9 @@ the voice slug prefix.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-speech-batch", @"Synthesize speech from pre-chunked segments");
+        var command = new Command(commandName ?? @"create-speech-batch", @"Synthesize speech from pre-chunked segments");
                         command.Options.Add(IdempotencyKey);
                         command.Options.Add(XAudraCommercialUse);
                         command.Options.Add(Model);

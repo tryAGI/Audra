@@ -31,9 +31,9 @@ internal static partial class MetaGetHealthCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-health", @"Health check");
+        var command = new Command(commandName ?? @"get-health", @"Health check");
 
 
 

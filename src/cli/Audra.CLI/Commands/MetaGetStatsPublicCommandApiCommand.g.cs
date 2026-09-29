@@ -31,9 +31,9 @@ internal static partial class MetaGetStatsPublicCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-stats-public", @"Public signup and usage counters
+        var command = new Command(commandName ?? @"get-stats-public", @"Public signup and usage counters
 Marketing-trust metrics for the landing page and agent crawlers.
 `accounts` and `chars_rendered` exclude automated test signups.
 `accounts_all` and `chars_rendered_all` include non-`@audra.dev` totals.
