@@ -11,9 +11,9 @@ internal static partial class MetaGetVoicesCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-voices", @"List available voices (slug IDs)");
+        var command = new Command(commandName ?? @"get-voices", @"List available voices (slug IDs)");
 
 
 

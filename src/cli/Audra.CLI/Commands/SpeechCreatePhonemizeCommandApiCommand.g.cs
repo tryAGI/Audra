@@ -64,9 +64,9 @@ internal static partial class SpeechCreatePhonemizeCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-phonemize", @"Preview phoneme output for text (debug / tuning)
+        var command = new Command(commandName ?? @"create-phonemize", @"Preview phoneme output for text (debug / tuning)
 Returns the phoneme string Audra Phonetics would use for the given voice.
 Supports inline IPA markup `[word](/ipa/)` when Audra Phonetics is active.
 Max **10,000** characters. Does not consume credits.

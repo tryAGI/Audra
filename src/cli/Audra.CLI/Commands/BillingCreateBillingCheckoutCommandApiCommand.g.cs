@@ -51,9 +51,9 @@ internal static partial class BillingCreateBillingCheckoutCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-billing-checkout", @"Create Stripe Checkout session for credit pack");
+        var command = new Command(commandName ?? @"create-billing-checkout", @"Create Stripe Checkout session for credit pack");
                         command.Options.Add(Pack);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);

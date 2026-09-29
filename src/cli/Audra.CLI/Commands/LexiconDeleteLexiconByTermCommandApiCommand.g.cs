@@ -35,9 +35,9 @@ internal static partial class LexiconDeleteLexiconByTermCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"delete-lexicon-by-term", @"Delete one pronunciation override by term");
+        var command = new Command(commandName ?? @"delete-lexicon-by-term", @"Delete one pronunciation override by term");
                         command.Arguments.Add(Term);
 
 

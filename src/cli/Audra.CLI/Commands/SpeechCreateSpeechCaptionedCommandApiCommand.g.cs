@@ -87,9 +87,9 @@ a specific G2P backend.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-speech-captioned", @"Synthesize speech with word-level caption timestamps
+        var command = new Command(commandName ?? @"create-speech-captioned", @"Synthesize speech with word-level caption timestamps
 Returns MP3/WAV plus estimated word timestamps in the `X-Captions-Json` response header.
 Timestamps are duration-weighted estimates (not forced alignment). Max **50,000** characters.
 ");
