@@ -76,7 +76,7 @@ or to force a specific G2P backend.
     private static Option<global::Audra.SpeechJobRequestDeliveryProfile?> DeliveryProfile { get; } = new(
         name: @"--delivery-profile")
     {
-        Description = @"",
+        Description = @"Optional pacing profile. The gateway does not assign a profile when omitted.",
     };
 
     private static Option<global::Audra.SpeechJobRequestAudioPost?> AudioPost { get; } = new(

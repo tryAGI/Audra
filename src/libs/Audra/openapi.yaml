@@ -770,7 +770,8 @@ components:
           example: "fr-fr"
         delivery_profile:
           type: string
-          enum: [off, auto, podcast]
+          enum: [legacy, podcast_v2, podcast_v3, podcast_v4]
+          description: Optional pacing profile. The gateway does not assign a profile when omitted.
         audio_post:
           type: string
           enum: [off, auto, broadcast, warm, podcast]
