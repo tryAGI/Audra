@@ -91,7 +91,7 @@ namespace Audra
         public string? Language { get; set; }
 
         /// <summary>
-        ///
+        /// Optional pacing profile. The gateway does not assign a profile when omitted.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delivery_profile")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Audra.JsonConverters.SpeechJobRequestDeliveryProfileJsonConverter))]
@@ -150,7 +150,9 @@ namespace Audra
         /// or to force a specific G2P backend.<br/>
         /// Example: fr-fr
         /// </param>
-        /// <param name="deliveryProfile"></param>
+        /// <param name="deliveryProfile">
+        /// Optional pacing profile. The gateway does not assign a profile when omitted.
+        /// </param>
         /// <param name="audioPost"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

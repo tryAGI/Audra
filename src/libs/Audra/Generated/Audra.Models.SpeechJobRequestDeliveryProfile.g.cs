@@ -4,22 +4,26 @@
 namespace Audra
 {
     /// <summary>
-    ///
+    /// Optional pacing profile. The gateway does not assign a profile when omitted.
     /// </summary>
     public enum SpeechJobRequestDeliveryProfile
     {
         /// <summary>
         ///
         /// </summary>
-        Auto,
+        Legacy,
         /// <summary>
         ///
         /// </summary>
-        Off,
+        PodcastV2,
         /// <summary>
         ///
         /// </summary>
-        Podcast,
+        PodcastV3,
+        /// <summary>
+        ///
+        /// </summary>
+        PodcastV4,
     }
 
     /// <summary>
@@ -34,9 +38,10 @@ namespace Audra
         {
             return value switch
             {
-                SpeechJobRequestDeliveryProfile.Auto => "auto",
-                SpeechJobRequestDeliveryProfile.Off => "off",
-                SpeechJobRequestDeliveryProfile.Podcast => "podcast",
+                SpeechJobRequestDeliveryProfile.Legacy => "legacy",
+                SpeechJobRequestDeliveryProfile.PodcastV2 => "podcast_v2",
+                SpeechJobRequestDeliveryProfile.PodcastV3 => "podcast_v3",
+                SpeechJobRequestDeliveryProfile.PodcastV4 => "podcast_v4",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -47,9 +52,10 @@ namespace Audra
         {
             return value switch
             {
-                "auto" => SpeechJobRequestDeliveryProfile.Auto,
-                "off" => SpeechJobRequestDeliveryProfile.Off,
-                "podcast" => SpeechJobRequestDeliveryProfile.Podcast,
+                "legacy" => SpeechJobRequestDeliveryProfile.Legacy,
+                "podcast_v2" => SpeechJobRequestDeliveryProfile.PodcastV2,
+                "podcast_v3" => SpeechJobRequestDeliveryProfile.PodcastV3,
+                "podcast_v4" => SpeechJobRequestDeliveryProfile.PodcastV4,
                 _ => null,
             };
         }

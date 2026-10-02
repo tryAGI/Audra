@@ -97,7 +97,9 @@ namespace Audra
         /// or to force a specific G2P backend.<br/>
         /// Example: fr-fr
         /// </param>
-        /// <param name="deliveryProfile"></param>
+        /// <param name="deliveryProfile">
+        /// Optional pacing profile. The gateway does not assign a profile when omitted.
+        /// </param>
         /// <param name="audioPost"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
