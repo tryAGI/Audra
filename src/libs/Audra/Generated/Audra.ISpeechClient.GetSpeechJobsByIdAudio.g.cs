@@ -30,6 +30,18 @@ namespace Audra
         /// Download completed async speech job audio
         /// </summary>
         /// <param name="id"></param>
+        /// <returns>The response metadata and an unbuffered body stream. The caller must dispose Body to release the HTTP response.</returns>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Audra.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Audra.AutoSDKHttpResponse<global::System.IO.Stream>> GetSpeechJobsByIdAudioAsStreamAsResponseAsync(
+            string id,
+            global::Audra.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Download completed async speech job audio
+        /// </summary>
+        /// <param name="id"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Audra.ApiException"></exception>
