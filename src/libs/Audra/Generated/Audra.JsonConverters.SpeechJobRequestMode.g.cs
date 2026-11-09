@@ -18,7 +18,7 @@ namespace Audra.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Audra.SpeechJobRequestModeExtensions.ToEnum(stringValue) ?? default;
+                        return global::Audra.SpeechJobRequestModeExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Audra.SpeechJobRequestMode.");
                     }
 
                     break;

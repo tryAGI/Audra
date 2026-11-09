@@ -18,7 +18,7 @@ namespace Audra.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Audra.BatchSegmentEnergyExtensions.ToEnum(stringValue) ?? default;
+                        return global::Audra.BatchSegmentEnergyExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Audra.BatchSegmentEnergy.");
                     }
 
                     break;

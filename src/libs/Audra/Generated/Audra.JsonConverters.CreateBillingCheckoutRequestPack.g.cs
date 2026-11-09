@@ -18,7 +18,7 @@ namespace Audra.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Audra.CreateBillingCheckoutRequestPackExtensions.ToEnum(stringValue) ?? default;
+                        return global::Audra.CreateBillingCheckoutRequestPackExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Audra.CreateBillingCheckoutRequestPack.");
                     }
 
                     break;
